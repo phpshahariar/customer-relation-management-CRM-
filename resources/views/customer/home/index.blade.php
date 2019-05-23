@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('customer.master')
 
 @section('content')
 
@@ -7,7 +7,7 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="#">Admin</a>
+                <a href="#">{{ Auth::user()->role }}</a>
             </li>
             <li class="breadcrumb-item active">Overview</li>
         </ol>

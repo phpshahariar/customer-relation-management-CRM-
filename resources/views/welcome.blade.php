@@ -73,9 +73,9 @@
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ url('/super/admin') }}">Super Admin</a>
 
-{{--                        @if (Route::has('register'))--}}
-{{--                            <a href="{{ route('register') }}">Register</a>--}}
-{{--                        @endif--}}
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}">Register</a>
+                        @endif
                     @endauth
                 </div>
             @endif

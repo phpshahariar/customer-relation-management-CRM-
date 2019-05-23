@@ -43,11 +43,7 @@
                             <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('User Role') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="role">
-                                    <option>--Select Your Role--</option>
-                                    <option value="customer">Customer</option>
-                                    <option value="reseller">Re-Seller</option>
-                                </select>
+                                <input id="role" type="text" readonly  class="form-control @error('role') is-invalid @enderror" name="role" value="customer" required autocomplete="role">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
