@@ -20,6 +20,11 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('/assets/') }}/css/sb-admin.css" rel="stylesheet">
 
+
+    <link rel="stylesheet" href="{{ asset('/date/') }}/css/bootstrap.css"/>
+    <link rel="stylesheet" href="{{ asset('/date/') }}/css/wickedpicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+
 </head>
 
 <body id="page-top">
@@ -87,6 +92,46 @@
 <!-- Demo scripts for this page-->
 <script src="{{ asset('/assets/') }}/js/demo/datatables-demo.js"></script>
 <script src="{{ asset('/assets/') }}/js/demo/chart-area-demo.js"></script>
+
+
+    <script src="{{ asset('/date/') }}/js/jquery-3.4.0.js"></script>
+    <script src="{{ asset('/date/') }}/js/bootstrap.bundle.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="{{ asset('/date/') }}/js/wickedpicker.min.js"></script>
+    <script src="{{ asset('/date/') }}/js/bootstrap.js"></script>
+
+    <script>
+        $('#start_date').daterangepicker({
+            singleDatePicker: true,
+            startDate: new Date(),
+            showDropdowns: true,
+            timePicker: true,
+            timePickerIncrement: 10,
+            autoUpdateInput: true,
+            locale: {
+                format: 'M/DD/Y'
+            }
+        });
+
+        $('#end_date').daterangepicker({
+            singleDatePicker: true,
+            startDate: new Date(),
+            showDropdowns: true,
+            timePicker: true,
+            timePickerIncrement: 10,
+            autoUpdateInput: true,
+            locale: {
+                format: 'M/DD/Y'
+            }
+        });
+
+
+    </script>
+
+
+
+
 
 </body>
 

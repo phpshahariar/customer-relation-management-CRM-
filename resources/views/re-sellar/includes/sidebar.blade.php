@@ -11,7 +11,7 @@
             <span>SMS System</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="login.html">Create</a>
+            <a class="dropdown-item" href="{{ url('/create/sms') }}">Create</a>
             <a class="dropdown-item" href="register.html">Inbox</a>
             <a class="dropdown-item" href="forgot-password.html">Send</a>
             <a class="dropdown-item" href="forgot-password.html">Draft</a>
@@ -23,11 +23,17 @@
             <span>Email System</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="emailDropdown">
-            <a class="dropdown-item" href="login.html">Create</a>
-            <a class="dropdown-item" href="register.html">Inbox</a>
-            <a class="dropdown-item" href="forgot-password.html">Send</a>
-            <a class="dropdown-item" href="forgot-password.html">Draft</a>
+            <a class="dropdown-item" href="{{ url('/create/email') }}">Create</a>
+            <a class="dropdown-item" href="#">Inbox</a>
+            <a class="dropdown-item" href="{{ url('/sent/email/store') }}">Send</a>
+            <a class="dropdown-item" href="{{ url('/draft/email/store') }}">Draft</a>
         </div>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="{{ url('/contact/list') }}">
+            <i class="far fa-user"></i>
+            <span>Contact List</span>
+        </a>
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="fbDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -35,10 +41,8 @@
             <span>Facebook</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="fbDropdown">
-            <a class="dropdown-item" href="login.html">Create</a>
-            <a class="dropdown-item" href="register.html">Inbox</a>
-            <a class="dropdown-item" href="forgot-password.html">Send</a>
-            <a class="dropdown-item" href="forgot-password.html">Draft</a>
+            <a class="dropdown-item" href="{{ url('facebook/boost') }}">Create Campaign</a>
+            <a class="dropdown-item" href="register.html">Campaign List</a>
         </div>
     </li>
     <li class="nav-item dropdown">

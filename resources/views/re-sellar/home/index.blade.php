@@ -68,7 +68,7 @@
                         <div class="card-body-icon">
                             <i class="fas fa-fw fa-life-ring"></i>
                         </div>
-                        <div class="mr-5">Total Balance : <span class="badge badge-warning">0.00</span></div>
+                        <div class="mr-5">Total Balance : <span class="badge badge-warning">0.00 TK</span></div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1" href="#">
                         <span class="float-left">View Details</span>
