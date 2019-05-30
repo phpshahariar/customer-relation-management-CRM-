@@ -9,7 +9,7 @@
             <li class="breadcrumb-item">
                 <a href="#">{{ Session::get('name') }}</a>
             </li>
-            <li class="breadcrumb-item active">Overview</li>
+            <li class="breadcrumb-item active">{{ Session::get('user_id') }}</li>
         </ol>
 
         <!-- Icon Cards-->
@@ -68,7 +68,7 @@
                         <div class="card-body-icon">
                             <i class="fas fa-fw fa-life-ring"></i>
                         </div>
-                        <div class="mr-5">Total Balance : <span class="badge badge-warning">0.00 TK</span></div>
+                        <div class="mr-5">Total : <span class="badge badge-warning">TK. {{ number_format($totalCash,2) }}</span></div>
                     </div>
                     <a class="card-footer text-white clearfix small z-1" href="#">
                         <span class="float-left">View Details</span>

@@ -10,5 +10,10 @@ class Contact extends Model
     use Notifiable;
 
 
-    public $fillable = ['group_name','name','phone','email'];
+    public $fillable = ['group_id','name','phone','email'];
+
+
+    public function group(){
+        return $this->belongsTo(Group::class);
+    }
 }

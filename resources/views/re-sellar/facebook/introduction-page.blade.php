@@ -28,11 +28,11 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label>Start Date : </label>
-                                                <input type="text" class="form-control" name="start_date" id="start_date">
+                                                <input type="date" class="form-control" name="start_date" id="start_date">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>End Date : </label>
-                                                <input type="text" class="form-control" name="end_date" id="end_date">
+                                                <input type="date" class="form-control" name="end_date" id="end_date">
                                             </div>
                                         </div>
                                         <div class="form-row">

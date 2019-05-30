@@ -34,6 +34,13 @@ Route::post('/reseller/dashboard', 'SuperAdminController@reseller_dashboard');
 Route::get('/login/reseller', 'SuperAdminController@login_reseller');
 Route::get('/reseller/logout', 'SuperAdminController@logout_reseller');
 
+Route::get('/reseller/campaign', 'SuperAdminController@campaign_reseller');
+Route::get('/accept/request/{id}', 'SuperAdminController@reseller_campaign_accept');
+Route::get('/reject/request/{id}', 'SuperAdminController@reseller_campaign_reject');
+
+Route::get('/reseller/recharge', 'SuperAdminController@reseller_recharge');
+Route::post('/cash/recharge', 'SuperAdminController@reseller_recharge_send');
+
 Route::get('/admin/logout', 'SuperAdminController@admin_logout');
 
 
@@ -45,6 +52,11 @@ Route::get('/sent/email/store', 'ResellerController@send_mail_store');
 Route::post('/group/mail', 'ResellerController@group_mail');
 Route::get('/draft/email/store', 'ResellerController@save_mail');
 Route::post('/save/email', 'ResellerController@store_mail');
+Route::get('/create/group', 'ResellerController@create_group');
+Route::post('/save/group', 'ResellerController@save_group');
+Route::get('/active/group/{id}', 'ResellerController@active_group');
+Route::get('/pending/group/{id}', 'ResellerController@pending_group');
+Route::get('/delete/group/{id}', 'ResellerController@delete_group');
 
 // Reseller Point SMS//
 
@@ -57,10 +69,12 @@ Route::post('/send/sms', 'ResellerController@send_sms');
 
 Route::get('/facebook/boost', 'ResellerController@introduction');
 Route::post('/add/campaign', 'ResellerController@save_capmaign');
+Route::get('/manage/campaign', 'ResellerController@manage_capmaign');
 
+// Cash In
 
-
-
+Route::get('/cash/in', 'ResellerController@cash_in');
+Route::post('/cash/save', 'ResellerController@cash_save');
 
 
 // File Upload//
@@ -69,6 +83,28 @@ Route::post('import', 'ResellerController@import')->name('import');
 Route::get('export', 'ResellerController@export')->name('export');
 
 
+
+// Api Route
+
+Route::get('/group-data/{id}', function ($id){
+    $output = '';
+    $i = 0;
+    $apps = App\Contact::with('group')->where('group_id', $id)->get();
+    if($apps)
+    {
+        foreach ($apps as $key => $app) {
+            $output.='<tr>'.
+                '<td>'.$i++.'</td>'.
+                '<td>'.$app->group->group_name.'</td>'.
+                '<td>'.$app->name.'</td>'.
+                '<td>'.$app->phone.'</td>'.
+                '<td>'.$app->email.'</td>'.
+                '</tr>';
+        }
+        return response()->json($output);
+    }
+
+});
 
 
 

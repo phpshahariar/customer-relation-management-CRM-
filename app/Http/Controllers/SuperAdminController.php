@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\AdminLogin;
+use App\Campaign;
+use App\CashIn;
+use App\Recharge;
 use App\Reseller;
 use Illuminate\Http\Request;
 use Session;
@@ -71,14 +74,20 @@ class SuperAdminController extends Controller
     }
 
     public function dashboard_reseller(){
-        return view('re-sellar.home.index');
+        $cash_show = Recharge::where('reseller_account_id', Session::get('resellar_id'))->get();
+        $totalCash = 0;
+        foreach ($cash_show as $key => $cash){
+            $totalCash = ($totalCash + ($cash->amount));
+
+        }
+        return view('re-sellar.home.index', compact('totalCash'));
     }
 
     public function reseller_dashboard(Request $request){
         $customer = Reseller::where('email', $request->email)->first();
         if ($customer){
             if (password_verify($request->password, $customer->password)){
-                Session::put('id', $customer->id);
+                Session::put('resellar_id', $customer->id);
                 Session::put('name', $customer->name);
                 return redirect('/dashboard/reseller');
             }else{
@@ -94,29 +103,77 @@ class SuperAdminController extends Controller
         $this->validate($request,[
             'name'  => 'required|string|max:255',
             'email' => 'required|unique:resellers|string|max:255|email',
-            'password' =>'required|string|min:8|confirmed'
+            'password' =>'required|string|min:8|confirmed',
+            'account_number' =>'required|string|unique:resellers|min:3'
         ]);
 
         $create_reseller = new Reseller();
         $create_reseller->name = $request->name;
         $create_reseller->email = $request->email;
         $create_reseller->role = $request->role;
+        $create_reseller->account_number = $request->account_number;
         $create_reseller->password = bcrypt($request->password);
         $create_reseller->save();
         if ($create_reseller){
-            Session::put('id', $create_reseller->id);
+            Session::put('resellar_id', $create_reseller->id);
             Session::put('name', $create_reseller->name);
             Session::put('email', $create_reseller->email);
+            Session::put('account_number', $create_reseller->account_number);
         }
-        return redirect('/dashboard/reseller');
+        return redirect()->back()->with('message', 'Reseller Account Create Successfully');
     }
 
     public function logout_reseller(){
-        Session::forget('id');
+        Session::forget('resellar_id');
         Session::forget('email');
         Session::forget('password');
         return redirect('/login/reseller');
     }
+
+
+    // Reseller Campaign Request
+
+
+    public function campaign_reseller(){
+        $campaign_request = Campaign::orderBy('id', 'desc')->get();
+        return view('admin.Campaign.campaign-request', compact('campaign_request'));
+    }
+
+
+    public function reseller_campaign_accept($id){
+        $campaign_request_accept = Campaign::find($id);
+        $campaign_request_accept->status =1;
+        $campaign_request_accept->save();
+        return redirect()->back()->with('message', 'Campaign Request Accepted');
+    }
+
+
+    public function reseller_campaign_reject($id){
+        $campaign_request_reject = Campaign::find($id);
+        $campaign_request_reject->status =0;
+        $campaign_request_reject->save();
+        return redirect()->back()->with('message', 'Campaign Request Rejected');
+    }
+
+
+    // ReSeller Recharge
+
+    public function reseller_recharge(){
+        $all_recharge = Recharge::all();
+        $all_reseller = Reseller::all();
+        return view('admin.recharge.reseller-recharge', compact('all_recharge', 'all_reseller'));
+    }
+
+
+    public function reseller_recharge_send(Request $request){
+        $reseller_recharge = new Recharge();
+        $reseller_recharge->amount = $request->amount;
+        $reseller_recharge->reseller_account_id = $request->reseller_account_id;
+//        $reseller_recharge->reseller_id = Session::get('resellar_id');
+        $reseller_recharge->save();
+        return redirect()->back()->with('message', 'ReSeller Recharge Successfully Done');
+    }
+
 
 
 }

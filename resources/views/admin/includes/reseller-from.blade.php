@@ -1,7 +1,10 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <div class="container">
+        @if(Session::get('message'))
+            <h3 class="alert alert-success">{{ Session::get('message') }}</h3>
+        @endif
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -44,12 +47,15 @@
 
                                 <div class="col-md-6">
                                     <input id="role" type="text" readonly  class="form-control @error('role') is-invalid @enderror" name="role" value="reseller" required autocomplete="role">
+                                </div>
+                            </div>
 
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                            <div class="form-group row">
+                                <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Account Number') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="account_number" type="text"  class="form-control @error('account_number') is-invalid @enderror" name="account_number" required autocomplete="account_number">
+                                    <span style="color: red"> {{ $errors->has('account_number') ? $errors->first('account_number') : ' ' }}</span>
                                 </div>
                             </div>
 

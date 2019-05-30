@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Campaign;
+use App\CashIn;
 use App\Contact;
 use App\Email;
 use App\Exports\UsersExport;
+use App\Group;
 use App\Imports\UsersImport;
 use App\Notifications\GroupMail;
 use App\ResellerMail;
@@ -36,6 +38,7 @@ class ResellerController extends Controller
         $send_mail = new ResellerMail();
         $send_mail->email = $request->email;
         $send_mail->message = $request->message;
+        $send_mail->user_id = Session::get('resellar_id');
         $send_mail->save();
         Session::put('message', $send_mail->message);
 
@@ -51,14 +54,14 @@ class ResellerController extends Controller
 
     public function save_mail()
     {
-        $send_mail = ResellerMail::orderBy('id', 'desc')->get();
+        $send_mail = ResellerMail::where('user_id', Session::get('resellar_id'))->orderBy('id', 'desc')->get();
         return view('re-sellar.Email.save', compact('send_mail'));
     }
 
 
     public function send_mail_store()
     {
-        $send_mail = ResellerMail::orderBy('id', 'desc')->get();
+        $send_mail = ResellerMail::where('user_id', Session::get('resellar_id'))->orderBy('id', 'desc')->get();
         return view('re-sellar.Email.sent-mail', compact('send_mail'));
     }
 
@@ -78,10 +81,59 @@ class ResellerController extends Controller
         return redirect()->back()->with('message', 'Group Mail Send Successfully');
     }
 
+
+    // Create Group
+
+    public function create_group(){
+        $all_group = Group::where('user_id', Session::get('resellar_id'))->get();
+        return view('re-sellar.group.group', compact('all_group'));
+    }
+
+
+    public function save_group(Request $request){
+
+        $this->validate($request,[
+            'group_name' => 'required|alpha|max:255',
+            'status' => 'required',
+        ]);
+        
+        
+        $save_group = new Group();
+        $save_group->group_name = $request->group_name;
+        $save_group->status = $request->status;
+        $save_group->user_id = Session::get('resellar_id');
+        $save_group->save();
+        return redirect()->back()->with('message', 'Group Create Successfully');
+    }
+
+
+    public function active_group($id){
+        $active_group = Group::find($id);
+        $active_group->status = 0;
+        $active_group->save();
+        return redirect()->back()->with('message', 'Group Pending Successfully');
+    }
+
+    public function pending_group($id){
+        $pending_group = Group::find($id);
+        $pending_group->status = 1;
+        $pending_group->save();
+        return redirect()->back()->with('message', 'Group Active Successfully');
+    }
+
+    public function delete_group($id){
+        $delete_group = Group::find($id);
+        $delete_group->delete();
+        return redirect()->back()->with('message', 'Group Delete Successfully');
+    }
+
+    // Contact List
+
     public function contact_list()
     {
-        $show_contact = Contact::all();
-        return view('re-sellar.Email.contact', compact('show_contact'));
+        $show_contact = Contact::get();
+        $show_group = Group::where('user_id', Session::get('resellar_id'))->get();
+        return view('re-sellar.Email.contact', compact('show_contact', 'show_group'));
     }
 
     public function export()
@@ -89,10 +141,12 @@ class ResellerController extends Controller
         return Excel::download(new UsersExport, 'users.xlsx');
     }
 
-    public function import()
+    public function import(Request $request)
     {
+       $name = $request->input('group_id');
 
-        Excel::import(new UsersImport, request()->file('upload_file'));
+       $file = $request->file('upload_file');
+        Excel::import(new UsersImport($name), $file);
 
         return back()->with('message', 'Contact File Upload Successfully');
     }
@@ -163,7 +217,38 @@ class ResellerController extends Controller
         $save_campaign->link = $request->link;
         $save_campaign->amount = $request->amount;
         $save_campaign->filtering = $request->filtering;
+        $save_campaign->user_id = Session::get('resellar_id');
         $save_campaign->save();
         return redirect()->back()->with('message', 'Your Campaign Added');
     }
+
+    public function manage_capmaign(){
+        $reseller_info = Campaign::where('user_id', Session::get('resellar_id'))->get();
+        return view('re-sellar.facebook.campaign-list', compact('reseller_info'));
+    }
+
+
+
+//    Cash In Information
+
+//    public function cash_in(){
+//        $cash_show = CashIn::where('user_id', Session::get('resellar_id'))->get();
+//
+//        $totalCash = 0;
+//        foreach ($cash_show as $key => $cash){
+//            $totalCash = ($totalCash + ($cash->amount));
+//
+//        }
+//
+//
+//        return view('re-sellar.cash.cash-in', compact('cash_show', 'totalCash'));
+//    }
+
+//    public function cash_save(Request $request){
+//        $cash_in = new CashIn();
+//        $cash_in->amount = $request->amount;
+//        $cash_in->user_id = Session::get('resellar_id');
+//        $cash_in->save();
+//        return redirect()->back()->with('message', 'Your Cash Added');
+//    }
 }
