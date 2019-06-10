@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
+use Session;
 class RegisterController extends Controller
 {
     /*
@@ -68,8 +68,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'role' => $data['role'],
-            'user_id' => $data['id'],
+            'account_number' => $data['account_number'],
             'password' => Hash::make($data['password']),
         ]);
     }
+
 }

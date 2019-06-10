@@ -13,7 +13,7 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="{{ url('/reseller/campaign') }}">Campaign Request</a>
             <a class="dropdown-item" href="#">Send SMS List</a>
-            <a class="dropdown-item" href="#">Send Email List</a>
+            <a class="dropdown-item" href="{{ url('/reseller/send/mail') }}">Send Email List</a>
             <a class="dropdown-item" href="{{ url('/reseller/recharge') }}">Re-Seller Recharge</a>
             <a class="dropdown-item" href="blank.html">Money Transfer</a>
         </div>

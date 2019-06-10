@@ -7,6 +7,7 @@ use App\Campaign;
 use App\CashIn;
 use App\Recharge;
 use App\Reseller;
+use App\ResellerMail;
 use Illuminate\Http\Request;
 use Session;
 use DB;
@@ -159,9 +160,17 @@ class SuperAdminController extends Controller
     // ReSeller Recharge
 
     public function reseller_recharge(){
-        $all_recharge = Recharge::all();
+        $all_recharge = Recharge::get();
+
+        $totalrecharge = 0;
+        foreach ($all_recharge as $recharge){
+            $totalrecharge = ($totalrecharge + ($recharge->amount));
+
+        }
+
+
         $all_reseller = Reseller::all();
-        return view('admin.recharge.reseller-recharge', compact('all_recharge', 'all_reseller'));
+        return view('admin.recharge.reseller-recharge', compact('all_recharge', 'all_reseller', 'totalrecharge'));
     }
 
 
@@ -172,6 +181,12 @@ class SuperAdminController extends Controller
 //        $reseller_recharge->reseller_id = Session::get('resellar_id');
         $reseller_recharge->save();
         return redirect()->back()->with('message', 'ReSeller Recharge Successfully Done');
+    }
+
+
+    public function reseller_send_mail(){
+        $send_mail = ResellerMail::get();
+        return view('admin.email.mail-list', compact('send_mail'));
     }
 
 

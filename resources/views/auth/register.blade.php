@@ -54,6 +54,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Account Number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="account_number" type="number" readonly  class="form-control @error('account_number') is-invalid @enderror" name="account_number" value="<?php echo mt_rand(15, 5000000);?>" required>
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

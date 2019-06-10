@@ -22,7 +22,7 @@ class ResellerController extends Controller
 {
     public function create()
     {
-        return view('re-sellar.email.create-email');
+        return view('re-sellar.Email.create-email');
     }
 
     public function send_mail(Request $request)
@@ -63,6 +63,12 @@ class ResellerController extends Controller
     {
         $send_mail = ResellerMail::where('user_id', Session::get('resellar_id'))->orderBy('id', 'desc')->get();
         return view('re-sellar.Email.sent-mail', compact('send_mail'));
+    }
+
+    public function send_mail_delete($id){
+        $mail_delete = ResellerMail::find($id);
+        $mail_delete->delete();
+        return redirect()->back()->with('message', 'Store Mail Delete Successfully');
     }
 
 
@@ -131,6 +137,7 @@ class ResellerController extends Controller
 
     public function contact_list()
     {
+
         $show_contact = Contact::get();
         $show_group = Group::where('user_id', Session::get('resellar_id'))->get();
         return view('re-sellar.Email.contact', compact('show_contact', 'show_group'));
@@ -143,11 +150,10 @@ class ResellerController extends Controller
 
     public function import(Request $request)
     {
-       $name = $request->input('group_id');
 
+       $name = $request->input('group_id');
        $file = $request->file('upload_file');
         Excel::import(new UsersImport($name), $file);
-
         return back()->with('message', 'Contact File Upload Successfully');
     }
 

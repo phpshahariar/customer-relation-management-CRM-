@@ -12,7 +12,7 @@ class UsersImport implements ToModel
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-
+    public $id;
     public function __construct($name)
     {
         $this->name = $name;

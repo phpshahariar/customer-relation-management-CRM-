@@ -7,10 +7,19 @@
         @endif
         <div class="card-body">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#recharge">
-                Recharge
-            </button>
-
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#recharge">
+                            Recharge
+                        </button>
+                    </div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-2 bg-success" style="border-radius: 8px;">
+                        <div style="margin-top: 5px; color: white;">Total : <span class="badge badge-warning" style="text-align: right;">TK. {{ number_format($totalrecharge,2) }}</span></div>
+                    </div>
+                </div>
+            </div>
             <!-- Modal -->
             <div class="modal fade" id="recharge" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -55,7 +64,8 @@
         <div class="card mb-3">
             <div class="card-header">
                 <i class="fas fa-table"></i>
-                Cash In Table</div>
+                Cash In Table
+            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -83,6 +93,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection

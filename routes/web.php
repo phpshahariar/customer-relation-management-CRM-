@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+
+
 Route::get('/super/admin', function () {
     return view('admin');
 });
@@ -39,6 +41,7 @@ Route::get('/accept/request/{id}', 'SuperAdminController@reseller_campaign_accep
 Route::get('/reject/request/{id}', 'SuperAdminController@reseller_campaign_reject');
 
 Route::get('/reseller/recharge', 'SuperAdminController@reseller_recharge');
+Route::get('/reseller/send/mail', 'SuperAdminController@reseller_send_mail');
 Route::post('/cash/recharge', 'SuperAdminController@reseller_recharge_send');
 
 Route::get('/admin/logout', 'SuperAdminController@admin_logout');
@@ -49,6 +52,7 @@ Route::get('/admin/logout', 'SuperAdminController@admin_logout');
 Route::get('/create/email', 'ResellerController@create');
 Route::post('/send/email', 'ResellerController@send_mail');
 Route::get('/sent/email/store', 'ResellerController@send_mail_store');
+Route::get('/send/delete/{id}', 'ResellerController@send_mail_delete');
 Route::post('/group/mail', 'ResellerController@group_mail');
 Route::get('/draft/email/store', 'ResellerController@save_mail');
 Route::post('/save/email', 'ResellerController@store_mail');
@@ -81,6 +85,20 @@ Route::post('/cash/save', 'ResellerController@cash_save');
 Route::get('/contact/list', 'ResellerController@contact_list');
 Route::post('import', 'ResellerController@import')->name('import');
 Route::get('export', 'ResellerController@export')->name('export');
+
+
+// Customer Information
+
+Route::get('/create/mail', 'CustomerController@create_mail');
+Route::post('/email/send', 'CustomerController@send_mail');
+Route::get('/send/list', 'CustomerController@send_list');
+Route::get('/create/customer/group', 'CustomerController@customer_group');
+Route::post('/save/customer/group', 'CustomerController@save_customer_group');
+
+
+
+
+
 
 
 

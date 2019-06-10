@@ -1,4 +1,4 @@
-@extends('re-sellar.master')
+@extends('customer.master')
 
 
 @section('content')
@@ -6,7 +6,7 @@
         <div class="card mb-3">
             <div class="card-header">
                 <i class="fas fa-table"></i>
-                All Send Mail</div>
+                All Save Mail</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -15,17 +15,18 @@
                             <th>SL NO</th>
                             <th>E-mail</th>
                             <th>Message</th>
-                            <th>Action</th>
+                            <th width="25%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($send_mail as $key => $send)
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td>{!! substr($send->email,0,50) !!}......</td>
-                                <td>{!! substr($send->message,0,50) !!}.....</td>
-                                <td>
-                                    <a href="{{ url('/send/delete/'.$send->id) }}" onclick="return confirm('Are you Sure Delete This?')" class="badge badge-danger" value="">Delete</a>
+                                <td>{!! substr($send->email,0,80) !!}</td>
+                                <td>{!! substr($send->message,0,80) !!}</td>
+                                <td width="25%">
+                                    <a href="#" class="badge badge-info" value="">Edit</a>
+                                    <a href="#" class="badge badge-danger" value="">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -34,6 +35,5 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
