@@ -6,14 +6,14 @@
         <div class="card mb-3">
             <div class="card-header">
                 <i class="fas fa-table"></i>
-                Campaign Request</div>
+                Customer Campaign Request</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                        <tr>
+                        <tr style="text-align: center;">
                             <th>SL NO</th>
-                            <th>ReSeller Name</th>
+                            <th>Customer Name</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Link</th>
@@ -24,21 +24,21 @@
                         </thead>
                         <tbody>
                         @foreach($campaign_request as $key => $info)
-                            <tr>
+                            <tr style="text-align: center;">
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $info->reseller->name }}</td>
+                                <td>{{ $info->customer_name->name }}</td>
                                 <td>{{ $info->start_date }}</td>
                                 <td>{{ $info->end_date }}</td>
                                 <td>{{ $info->link }}</td>
-                                <td>{{ substr($info->filtering,0,100) }}....</td>
+                                <td>{{ substr($info->filtering,0,30) }}....</td>
                                 <td>Tk. {{ number_format($info->amount,2) }}</td>
                                 <td>
                                     @if($info->status ==0)
-                                        <a href="{{ url('/accept/request/'.$info->id) }}" class="badge badge-success">Accept</a>
+                                        <a href="{{ url('/accept/customer/request/'.$info->id) }}" class="badge badge-success">Accept</a>
                                     @else
                                         <p class="badge badge-warning">Accepted</p>
                                     @endif
-                                        <a href="{!! url('view/reseller/campaign/data') !!}" data-id="{!! $info->id !!}" id="view" class="badge badge-info">View</a>
+                                        <a href="{!! url('view/campaign/data') !!}" data-id="{!! $info->id !!}" id="view" class="badge badge-info">View</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -49,12 +49,13 @@
         </div>
     </div>
 
+{{--    Modal View--}}
 
     <div class="modal fade" id="viewCampaign" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="CustomerName">ReSeller Campaign Data</h5>
+                    <h5 class="modal-title" id="CustomerName">Customer Campaign Data</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -107,6 +108,5 @@
             })
         })
     </script>
-
 
 @endsection

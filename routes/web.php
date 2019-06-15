@@ -11,6 +11,8 @@
 |
 */
 
+use App\CustomerContact;
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -45,6 +47,24 @@ Route::get('/reseller/send/mail', 'SuperAdminController@reseller_send_mail');
 Route::post('/cash/recharge', 'SuperAdminController@reseller_recharge_send');
 
 Route::get('/admin/logout', 'SuperAdminController@admin_logout');
+Route::get('/view/reseller/campaign/data', 'SuperAdminController@reseller_campaign_data');
+Route::get('/view/reseller/mail/data', 'SuperAdminController@reseller_mail_data');
+
+// Customer Request to Admin
+
+Route::get('/customer/cashin', 'SuperAdminController@cashin_customer');
+Route::get('/accept/cashin/request/{id}', 'SuperAdminController@cashin_customer_approve');
+Route::get('/reject/cashin/request/{id}', 'SuperAdminController@cashin_customer_reject');
+Route::get('/customer/mail/list', 'SuperAdminController@customer_mail_list');
+Route::get('/customer/campaign', 'SuperAdminController@customer_campaign_list');
+Route::get('/accept/customer/request/{id}', 'SuperAdminController@customer_campaign_accept');
+//Route::get('/delete/customer/request/{id}', 'SuperAdminController@customer_campaign_delete');
+Route::get('/customer/access/power', 'SuperAdminController@customer_access_power');
+Route::post('/access/power', 'SuperAdminController@customer_access_save');
+Route::get('/access/permitted/{id}', 'SuperAdminController@customer_permitted');
+Route::get('/access/denied/{id}', 'SuperAdminController@customer_denied');
+Route::get('/view/campaign/data', 'SuperAdminController@customer_campaign_view');
+Route::get('/view/mail/send', 'SuperAdminController@customer_mail_view');
 
 
 // Reseller Point email//
@@ -92,17 +112,43 @@ Route::get('export', 'ResellerController@export')->name('export');
 Route::get('/create/mail', 'CustomerController@create_mail');
 Route::post('/email/send', 'CustomerController@send_mail');
 Route::get('/send/list', 'CustomerController@send_list');
+Route::post('/customer/group/mail', 'CustomerController@group_mail');
 Route::get('/create/customer/group', 'CustomerController@customer_group');
 Route::post('/save/customer/group', 'CustomerController@save_customer_group');
+Route::get('/active/customer/group/{id}', 'CustomerController@active_customer_group');
+Route::get('/pending/customer/group/{id}', 'CustomerController@pending_customer_group');
+Route::get('/delete/customer/group/{id}', 'CustomerController@delete_customer_group');
+Route::get('/contact/customer/list', 'CustomerController@upload_customer_data');
+Route::get('/create/customer/sms', 'CustomerController@create_customer_sms');
+Route::post('/group/sms/send', 'CustomerController@group_customer_sms');
+Route::post('/send/customer/sms', 'CustomerController@sms_customer');
+Route::get('/send/customer/sms/list', 'CustomerController@send_sms_customer_list');
+Route::get('/send/customer/group/list', 'CustomerController@send_sms_customer_group');
+
+// Customer File Upload
+
+Route::post('import-customer', 'CustomerController@customer_import')->name('import-customer');
+Route::get('export-customer', 'CustomerController@customer_export')->name('export-customer');
+Route::get('/phoneNumber/sms', 'CustomerController@phoneNumberSms');
 
 
 
+// Customer facebook marketing
+
+Route::get('/customer/facebook/boost', 'CustomerController@create_customer_fb_marketing');
+Route::post('/add/customer/campaign', 'CustomerController@customer_campaign_add');
+Route::get('/customer/manage/campaign', 'CustomerController@customer_campaign_manage');
+
+// Customer CashIn Information
+
+Route::get('/cashin/request', 'CustomerController@customer_cashin');
+Route::post('/request/customer/cashin', 'CustomerController@customer_cashin_request');
+Route::get('/delete/customer/cashin/{id}', 'CustomerController@customer_cashin_delete');
+Route::get('/send/money', 'CustomerController@customer_send_money');
+Route::post('/customer/send/money', 'CustomerController@send_money');
 
 
-
-
-
-// Api Route
+//Reseller Api Route
 
 Route::get('/group-data/{id}', function ($id){
     $output = '';
@@ -120,6 +166,50 @@ Route::get('/group-data/{id}', function ($id){
                 '</tr>';
         }
         return response()->json($output);
+    }
+
+});
+
+
+
+// Customer Panel
+
+Route::get('/customer-data/{id}', function ($id){
+    $output = '';
+    $i = 0;
+    $apps = App\CustomerContact::with('customer_group')->where('group_id', $id)->get();
+    if($apps)
+    {
+        foreach ($apps as $key => $app) {
+            $output.='<tr>'.
+                '<td>'.$i++.'</td>'.
+                '<td>'.$app->customer_group->group_name.'</td>'.
+                '<td>'.$app->name.'</td>'.
+                '<td>'.$app->phone.'</td>'.
+                '<td>'.$app->email.'</td>'.
+                '</tr>';
+        }
+        return response()->json($output);
+    }
+
+});
+
+Route::get('/customer-sms/{id}', function ($id){
+    $outputsms = '';
+    $i = 0;
+    $apps = App\CustomerContact::with('customer_group')->where('group_id', $id)->get();
+    if($apps)
+    {
+        foreach ($apps as $key => $app) {
+            $outputsms.=
+                '<tr>'.
+                    '<td>'.$i++.'</td>'.
+                    '<td>'.$app->customer_group->group_name.'</td>'.
+                    '<td>'.$app->name.'</td>'.
+                    '<td>'.$app->phone.'</td>'.
+                '</tr>';
+        }
+        return response()->json($outputsms);
     }
 
 });

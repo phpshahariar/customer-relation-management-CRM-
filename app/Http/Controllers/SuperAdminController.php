@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use App\AdminLogin;
 use App\Campaign;
 use App\CashIn;
+use App\CustomerAccess;
+use App\CustomerCampaign;
+use App\CustomerCashIn;
+use App\CustomerMail;
 use App\Recharge;
 use App\Reseller;
 use App\ResellerMail;
+use App\User;
 use Illuminate\Http\Request;
 use Session;
 use DB;
@@ -189,6 +194,117 @@ class SuperAdminController extends Controller
         return view('admin.email.mail-list', compact('send_mail'));
     }
 
+
+    // Customer Information
+
+    public function cashin_customer(){
+        $customer_cash_in = CustomerCashIn::get();
+        return view('admin.customer.customer-cashin', compact('customer_cash_in'));
+    }
+
+
+    public function cashin_customer_approve($id){
+        $customer_cashin_approve = CustomerCashIn::find($id);
+        $customer_cashin_approve->status = 1;
+        $customer_cashin_approve->save();
+        return redirect()->back()->with('message', 'CashIn Request Approved');
+    }
+
+    public function cashin_customer_reject($id){
+        $customer_cashin_reject = CustomerCashIn::find($id);
+        $customer_cashin_reject->status = 0;
+        $customer_cashin_reject->save();
+        return redirect()->back()->with('message', 'CashIn Request Pending');
+    }
+
+
+    public function customer_mail_list(){
+        $all_customer_mail = CustomerMail::get();
+        return view('admin.customer.mail-view', compact('all_customer_mail'));
+    }
+
+
+    public function customer_campaign_list(){
+        $campaign_request = CustomerCampaign::get();
+        return view('admin.customer.customer-campaign', compact('campaign_request'));
+    }
+
+
+    public function customer_campaign_accept($id){
+        $accept_customer_campaign = CustomerCampaign::find($id);
+        $accept_customer_campaign->status = 1;
+        $accept_customer_campaign->save();
+        return redirect()->back()->with('message', 'Customer Campaign Accepted');
+    }
+
+
+//    public function customer_campaign_delete($id){
+//        $accept_customer_campaign = CustomerCampaign::find($id);
+//        $accept_customer_campaign->status = 1;
+//        $accept_customer_campaign->update();
+//        return redirect()->back()->with('message', 'Customer Campaign Deleted');
+//    }
+
+    public function customer_access_power(){
+        $all_customers = User::get();
+        $all_access = CustomerAccess::OrderBy('id', 'desc')->get();
+        return view('admin.customer.customer-access', compact('all_customers', 'all_access'));
+    }
+
+    public function customer_access_save(Request $request){
+        $this->validate($request,[
+            'user_id' => 'required',
+            'money_transfer' => 'required',
+            'crm' => 'required',
+            ]);
+
+        $customer_access = new CustomerAccess();
+        $customer_access->user_id = $request->user_id;
+        $customer_access->money_transfer = $request->money_transfer;
+        $customer_access->crm = $request->crm;
+        $customer_access->save();
+        return redirect()->back()->with('message', 'Customer Access Successfully');
+    }
+
+    public function customer_permitted($id){
+        $customer_permitted = CustomerAccess::find($id);
+        $customer_permitted->status = 0;
+        $customer_permitted->save();
+        return redirect()->back()->with('message', 'Customer Denied Successfully');
+    }
+
+    public function customer_denied($id){
+        $customer_permitted = CustomerAccess::find($id);
+        $customer_permitted->status = 1;
+        $customer_permitted->save();
+        return redirect()->back()->with('message', 'Customer Permitted Successfully');
+    }
+
+
+    public function customer_campaign_view(Request $get){
+        $id = $get->id;
+        $view = CustomerCampaign::find($id);
+        return $view;
+    }
+
+    public function customer_mail_view(Request $get){
+        $id = $get->id;
+        $mail = CustomerMail::find($id);
+        return $mail;
+    }
+
+
+    public function reseller_campaign_data(Request $get){
+        $id = $get->id;
+        $view = Campaign::find($id);
+        return $view;
+    }
+
+    public function reseller_mail_data(Request $get){
+        $id = $get->id;
+        $mail = ResellerMail::find($id);
+        return $mail;
+    }
 
 
 }

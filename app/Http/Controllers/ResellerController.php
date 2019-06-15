@@ -137,7 +137,6 @@ class ResellerController extends Controller
 
     public function contact_list()
     {
-
         $show_contact = Contact::get();
         $show_group = Group::where('user_id', Session::get('resellar_id'))->get();
         return view('re-sellar.Email.contact', compact('show_contact', 'show_group'));
@@ -165,14 +164,19 @@ class ResellerController extends Controller
 
     public function send_sms(Request $request)
     {
+        $new_sms = new SMS();
+        $new_sms->number = $request->number;
+        $new_sms->message = $request->message;
+        $new_sms->save();
 
-        $url = 'http://powersms.banglaphone.net.bd/httpapi/sendsms';
+        $url = 'http://banglakingssoft.powersms.net.bd/httpapi/sendsms';
         $fields = array(
             'userId' => urlencode('banglakings'),
             'password' => urlencode('bksoft2018'),
             'smsText' => urlencode($request->input('message')),
             'commaSeperatedReceiverNumbers' => $request->input('number'),
         );
+
         $fields_string = '';
         foreach ($fields as $key => $value) {
             $fields_string .= $key . '=' . $value . '&';
@@ -200,16 +204,11 @@ class ResellerController extends Controller
         }
         curl_close($ch);
 
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Your Message Send Your Customer');
     }
 
 
-//        $new_sms = new SMS();
-//        $new_sms->number = $request->number;
-//        $new_sms->message = $request->message;
-//        $new_sms->save();
-//        return redirect()->back()->with('message', 'Your SMS Send to Customer');
-//    }
+
 
 
     public function introduction(){

@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CustomerMail extends Model
+class CustomerSendMoney extends Model
 {
     public function customer_name(){
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo('App\User', 'account_number', 'id');
     }
 }

@@ -107,7 +107,7 @@
                             </table>
                             <form action="{{ url('/group/mail') }}" method="post">
                                 @csrf
-                                <input type="submit" class="btn btn-danger" value="Group Mail Send">
+                                <input type="submit" name="btn" class="btn btn-danger" value="Group Mail Send">
                             </form>
                     </div>
                 </div>

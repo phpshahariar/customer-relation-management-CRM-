@@ -1,4 +1,4 @@
-@extends('re-sellar.master')
+@extends('customer.master')
 
 @section('content')
     <div class="container">
@@ -12,20 +12,20 @@
                     <h2>SMS Send</h2>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/send/sms') }}" method="POST">
+                    <form action="{{ url('/send/customer/sms') }}" method="POST" name="smsForm" onsubmit="return validateForm()">
                         @csrf
                         <div class="form-group">
                             <label>Enter Phone Number : </label>
-                            <input type="text" required name="number" class="form-control" placeholder="Enter Valid Phone Number....">
+                            <input type="text"  name="number" class="form-control" placeholder="Enter Valid Phone Number....">
                             <span style="color: red"> {{ $errors->has('sms') ? $errors->first('sms') : ' ' }}</span>
                         </div>
                         <div class="form-group">
                             <label>Enter Your Message : </label>
-                            <textarea name="message" required rows="5" class="form-control" placeholder="Enter Your Message"></textarea>
+                            <textarea name="message"  rows="5" class="form-control" placeholder="Enter Your Message"></textarea>
                             <span style="color: red"> {{ $errors->has('message') ? $errors->first('message') : ' ' }}</span>
                         </div>
                         <div class="form-group">
-                            <input type="submit" name="btn" class="btn btn-success" value="Send">
+                            <input type="submit" name="btn" class="btn btn-success" value="Send" >
                         </div>
                     </form>
                 </div>
@@ -35,5 +35,19 @@
     <script src="//cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( 'editor1' );
+    </script>
+
+    <script>
+        function validateForm() {
+            var x = document.forms["smsForm"]["number"].value;
+            var y = document.forms["smsForm"]["message"].value;
+            if (x == "") {
+                alert("Number Must be Filled out");
+                return false;
+            }else if (y == "") {
+                alert("Message Must be Filled out");
+                return false;
+            }
+        }
     </script>
 @endsection

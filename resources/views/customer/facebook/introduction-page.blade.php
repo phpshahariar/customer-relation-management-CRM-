@@ -1,4 +1,4 @@
-@extends('re-sellar.master')
+@extends('customer.master')
 
 @section('content')
 
@@ -8,6 +8,9 @@
                 <div class="card-header">
                     <h2 style="text-align: center; color: darkgreen">Introduction for Product Marketing</h2>
                 </div>
+                @if(Session::get('message'))
+                    <h4 class="alert alert-success" style="color: red;">{{ Session::get('message') }}</h4>
+                @endif
                 <br>
                 <div class="col-md-12">
                     <div class="row">
@@ -23,7 +26,7 @@
                                     </p>
                                 </div>
                                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                    <form action="{{ url('/add/campaign') }}" method="POST">
+                                    <form action="{{ url('/add/customer/campaign') }}" method="POST">
                                         @csrf
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
@@ -43,6 +46,7 @@
                                             <div class="form-group col-md-6">
                                                 <label>Amount : </label>
                                                 <input type="number" class="form-control" name="amount" id="amount">
+                                                <input type="hidden" class="form-control" value="{{ Auth::user()->id }}" name="user_id" id="user_id">
                                             </div>
                                         </div>
                                         <div class="form-group">

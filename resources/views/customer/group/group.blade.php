@@ -1,4 +1,4 @@
-@extends('re-sellar.master')
+@extends('customer.master')
 
 @section('content')
 
@@ -59,28 +59,28 @@
                         </tr>
                     </thead>
                     <tbody>
-{{--                    @foreach($all_group as $key => $group)--}}
-{{--                        <tr style="text-align: center">--}}
-{{--                            <td>{{ $key+1 }}</td>--}}
-{{--                            <td>{{ $group->group_name }}</td>--}}
-{{--                            <span style="color: red"> {{ $errors->has('group_name') ? $errors->first('group_name') : ' ' }}</span>--}}
-{{--                            <td>{{ $group->status ==1 ? 'Active' : 'Pending' }}</td>--}}
-{{--                            <td width="15%">--}}
-{{--                                @if($group->status ==1)--}}
-{{--                                <a href="{{ url('/active/group/'.$group->id) }}" class="badge badge-info">--}}
-{{--                                    <span class="fa fa-arrow-alt-circle-up"></span>--}}
-{{--                                </a>--}}
-{{--                                @else--}}
-{{--                                <a href="{{ url('/pending/group/'.$group->id) }}" class="badge badge-warning">--}}
-{{--                                    <span class="fa fa-arrow-alt-circle-down"></span>--}}
-{{--                                </a>--}}
-{{--                                @endif--}}
-{{--                                <a href="{{ url('/delete/group/'.$group->id) }}" onclick="return confirm('Are You Sure This Group?')" class="badge badge-danger">--}}
-{{--                                    <span class="fa fa-trash"></span>--}}
-{{--                                </a>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-{{--                     @endforeach--}}
+                    @foreach($all_group as $key => $group)
+                        <tr style="text-align: center">
+                            <td>{{ $key+1 }}</td>
+                            <td>{{ $group->group_name }}</td>
+                            <span style="color: red"> {{ $errors->has('group_name') ? $errors->first('group_name') : ' ' }}</span>
+                            <td>{{ $group->status ==1 ? 'Active' : 'Pending' }}</td>
+                            <td width="15%">
+                                @if($group->status ==1)
+                                <a href="{{ url('/active/customer/group/'.$group->id) }}" class="badge badge-info">
+                                    <span class="fa fa-arrow-alt-circle-up"></span>
+                                </a>
+                                @else
+                                <a href="{{ url('/pending/customer/group/'.$group->id) }}" class="badge badge-warning">
+                                    <span class="fa fa-arrow-alt-circle-down"></span>
+                                </a>
+                                @endif
+                                <a href="{{ url('/delete/customer/group/'.$group->id) }}" onclick="return confirm('Are You Sure This Group?')" class="badge badge-danger">
+                                    <span class="fa fa-trash"></span>
+                                </a>
+                            </td>
+                        </tr>
+                     @endforeach
                     </tbody>
                 </table>
             </div>

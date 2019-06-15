@@ -15,7 +15,7 @@
             <a class="dropdown-item" href="#">Send SMS List</a>
             <a class="dropdown-item" href="{{ url('/reseller/send/mail') }}">Send Email List</a>
             <a class="dropdown-item" href="{{ url('/reseller/recharge') }}">Re-Seller Recharge</a>
-            <a class="dropdown-item" href="blank.html">Money Transfer</a>
+            <a class="dropdown-item" href="#">Money Transfer</a>
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -24,11 +24,11 @@
             <span>Customer Point</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="customerDropdown">
-            <a class="dropdown-item" href="{{ url('/reseller/campaign') }}">Campaign Request</a>
+            <a class="dropdown-item" href="{{ url('/customer/campaign') }}">Campaign Request</a>
             <a class="dropdown-item" href="#">Send SMS List</a>
-            <a class="dropdown-item" href="#">Send Email List</a>
-            <a class="dropdown-item" href="404.html">CashIn</a>
-            <a class="dropdown-item" href="blank.html">Money Transfer</a>
+            <a class="dropdown-item" href="{{ url('/customer/mail/list') }}">Send Email List</a>
+            <a class="dropdown-item" href="{{ url('/customer/cashin') }}">CashIn Request</a>
+            <a class="dropdown-item" href="{{ url('/customer/access/power') }}">Access Power</a>
         </div>
     </li>
     <li class="nav-item">

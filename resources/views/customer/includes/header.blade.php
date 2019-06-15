@@ -9,15 +9,18 @@
     <!-- Navbar Search -->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
+            <h3 id="clock" style="color: white"></h3>
+            <div class="input-group-append"></div>
         </div>
     </form>
 
+    <script>
+        var myVar = setInterval(myTimer ,1000);
+        function myTimer() {
+            var d = new Date();
+            document.getElementById("clock").innerHTML = d.toLocaleTimeString();
+        }
+    </script>
 
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
@@ -47,11 +50,11 @@
         </li>
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-user-circle fa-fw"></i>
+                {{ Auth::user()->name }} <i class="fas fa-user-circle fa-fw"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">Settings</a>
-                <a class="dropdown-item" href="#">Activity Log</a>
+                <a class="dropdown-item"></a>
 {{--                @if (Route::has('register'))--}}
 {{--                    <a class="dropdown-item" href="{{ route('register') }}">Register</a>--}}
 {{--                @endif--}}

@@ -1,4 +1,4 @@
-@extends('re-sellar.master')
+@extends('customer.master')
 
 @section('content')
 
@@ -22,13 +22,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach($reseller_info as $key => $info)
+                            @foreach($customer_campaign as $key => $info)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $info->start_date }}</td>
                                     <td>{{ $info->end_date }}</td>
                                     <td>{{ $info->link }}</td>
-                                    <td>{{ $info->filtering }}</td>
+                                    <td>{{ substr($info->filtering,0,30) }}...</td>
                                     <td>Tk. {{ number_format($info->amount,2) }}</td>
                                     <td>
                                         @if($info->status ==0)
@@ -45,7 +45,5 @@
             </div>
         </div>
     </div>
-
-
 
 @endsection

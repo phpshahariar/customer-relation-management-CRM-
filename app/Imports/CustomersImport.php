@@ -2,37 +2,30 @@
 
 namespace App\Imports;
 
-use App\Contact;
+use App\CustomerContact;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Session;
 
-class UsersImport implements ToModel
+class CustomersImport implements ToModel
 {
     /**
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+
     public $id;
     public function __construct($name)
     {
         $this->name = $name;
     }
 
-
-
-
     public function model(array $row)
     {
-        return new Contact([
+        return new CustomerContact([
             'group_id'     => $this->name,
             'name'     => $row[1],
             'phone'     => $row[2],
             'email'    => $row[3],
-            'user_id'    => Session::get('resellar_id'),
-
-
-
         ]);
     }
 }
