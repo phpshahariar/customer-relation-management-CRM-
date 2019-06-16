@@ -2,36 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82150ec8-d0c3-4796-95b4-53d06476ad2d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/customer/customer-access.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/customer/customer-campaign.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/customer/customer-cashin.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/customer/mail-view.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/cash/cash-in.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/cash/send-money.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/group/customer-contact.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/mail/email.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/sms/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/sms/group-sms.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/sms/send-list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/customer/sms/sms.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CustomerMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CustomerMail.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ResellerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ResellerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/UsersImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/UsersImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/Campaign/campaign-request.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/Campaign/campaign-request.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/email/mail-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/email/mail-list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/includes/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/includes/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/customer/facebook/campaign-list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/facebook/campaign-list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/customer/facebook/introduction-page.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/facebook/introduction-page.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/customer/group/group.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/group/group.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/customer/home/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/home/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/customer/includes/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/includes/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/customer/includes/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/includes/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/re-sellar/Email/contact.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/re-sellar/Email/contact.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/re-sellar/sms/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/re-sellar/sms/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/customer/sms/group-sms.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/sms/group-sms.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,8 +24,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="131" column="28" lean-forward="true" selection-start-line="131" selection-start-column="28" selection-end-line="131" selection-end-column="28" />
+            <state relative-caret-position="153">
+              <caret line="213" column="45" selection-start-line="213" selection-start-column="45" selection-end-line="213" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -60,10 +33,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CustomerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="283" column="9" selection-start-line="283" selection-start-column="9" selection-end-line="283" selection-end-column="9" />
+            <state relative-caret-position="339">
+              <caret line="360" column="48" lean-forward="true" selection-start-line="360" selection-start-column="48" selection-end-line="360" selection-end-column="48" />
               <folding>
                 <element signature="e#40#63#0#PHP" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
               </folding>
@@ -74,30 +50,14 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/customer/sms/group-sms.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="51" column="57" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="57" />
+            <state relative-caret-position="186">
+              <caret line="31" column="46" lean-forward="true" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
               <folding>
-                <element signature="e#435#459#0#HTML" expanded="true" />
-                <element signature="e#826#853#0#HTML" expanded="true" />
+                <element signature="e#442#466#0#HTML" expanded="true" />
+                <element signature="e#732#759#0#HTML" expanded="true" />
+                <element signature="e#1081#1108#0#HTML" expanded="true" />
+                <element signature="e#2119#2141#0#HTML" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/customer/sms/create.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="413">
-              <caret line="27" column="93" selection-start-line="27" selection-start-column="93" selection-end-line="27" selection-end-column="93" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/customer/includes/sidebar.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="77" />
             </state>
           </provider>
         </entry>
@@ -126,6 +86,9 @@
       <find>upload_customer_data</find>
       <find>customer/group/list</find>
       <find>customer-data</find>
+      <find>customer-sms</find>
+      <find>group/list</find>
+      <find>send/customer/group/list</find>
       <find>send_sms_customer_group</find>
     </findStrings>
   </component>
@@ -292,6 +255,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -370,7 +334,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -434,18 +397,19 @@
       <workItem from="1560227208575" duration="23053000" />
       <workItem from="1560312924634" duration="26551000" />
       <workItem from="1560400593814" duration="23998000" />
-      <workItem from="1560572240714" duration="26281000" />
+      <workItem from="1560572240714" duration="26989000" />
+      <workItem from="1560658248959" duration="14340000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="268678000" />
+    <option name="totallyTimeSpent" value="283726000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20801815" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21104388" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -571,13 +535,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="35" column="32" lean-forward="true" selection-start-line="35" selection-start-column="32" selection-end-line="35" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="31" column="31" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -739,16 +696,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/includes/header.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="11" column="48" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
-          <folding>
-            <element signature="n#style#0;n#h3#0;n#div#0;n#form#0;n#nav#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/customer/includes/sidebar.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -763,13 +710,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/customer/mail/email.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/sms/send-list.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="31" column="32" lean-forward="true" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/CustomerGroup.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -822,6 +762,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/includes/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="22" column="13" lean-forward="true" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="72" selection-start-line="72" selection-end-line="72" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/sms/send-list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="31" column="32" lean-forward="true" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/customer/sms/sms.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -831,35 +792,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/customer/sms/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="27" column="93" selection-start-line="27" selection-start-column="93" selection-end-line="27" selection-end-column="93" />
+        <state relative-caret-position="22">
+          <caret line="4" column="8" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="6" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="131" column="28" lean-forward="true" selection-start-line="131" selection-start-column="28" selection-end-line="131" selection-end-column="28" />
+        <state relative-caret-position="153">
+          <caret line="213" column="45" selection-start-line="213" selection-start-column="45" selection-end-line="213" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/customer/sms/group-sms.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="51" column="57" selection-start-line="51" selection-start-column="52" selection-end-line="51" selection-end-column="57" />
+        <state relative-caret-position="186">
+          <caret line="31" column="46" lean-forward="true" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
           <folding>
-            <element signature="e#435#459#0#HTML" expanded="true" />
-            <element signature="e#826#853#0#HTML" expanded="true" />
+            <element signature="e#442#466#0#HTML" expanded="true" />
+            <element signature="e#732#759#0#HTML" expanded="true" />
+            <element signature="e#1081#1108#0#HTML" expanded="true" />
+            <element signature="e#2119#2141#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CustomerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="283" column="9" selection-start-line="283" selection-start-column="9" selection-end-line="283" selection-end-column="9" />
+        <state relative-caret-position="339">
+          <caret line="360" column="48" lean-forward="true" selection-start-line="360" selection-start-column="48" selection-end-line="360" selection-end-column="48" />
           <folding>
             <element signature="e#40#63#0#PHP" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#p#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
           </folding>

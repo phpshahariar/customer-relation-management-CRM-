@@ -13,6 +13,9 @@
 
 use App\CustomerContact;
 
+
+Route::group(['middleware' => ['auth']], function () {
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -124,6 +127,7 @@ Route::post('/group/sms/send', 'CustomerController@group_customer_sms');
 Route::post('/send/customer/sms', 'CustomerController@sms_customer');
 Route::get('/send/customer/sms/list', 'CustomerController@send_sms_customer_list');
 Route::get('/send/customer/group/list', 'CustomerController@send_sms_customer_group');
+Route::post('/send-sms-multi', 'CustomerController@sendSmsMulti');
 
 // Customer File Upload
 
@@ -207,10 +211,13 @@ Route::get('/customer-sms/{id}', function ($id){
                     '<td>'.$app->customer_group->group_name.'</td>'.
                     '<td>'.$app->name.'</td>'.
                     '<td>'.$app->phone.'</td>'.
+                    '<td style="display: none;"><input type="text" name="number[]" value="'.$app->phone.'"></td>'.
                 '</tr>';
         }
         return response()->json($outputsms);
     }
+
+});
 
 });
 
