@@ -25,8 +25,11 @@
                             <div class="form-group">
                                 <label>Amount : </label>
                                 <input type="number" name="amount" required id="amount" class="form-control" placeholder="Amount">
-                                <input type="hidden" value="{{ Auth::user()->account_number }}" required name="user_account" class="form-control">
-                                <input type="hidden" value="{{ Auth::user()->id }}" required name="user_id" class="form-control">
+                                <input type="hidden" value="{{ Auth::user()->id }}"  name="user_id" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Transaction  ID </label>
+                                <input type="number" value="{{ Auth::user()->account_number }}"  name="user_account" class="form-control">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

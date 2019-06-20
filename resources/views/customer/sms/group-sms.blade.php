@@ -10,14 +10,14 @@
                 <i class="fas fa-table"></i>
                 All Group SMS</div>
             <br/>
-            <form action="{{ url('/send-sms-multi') }}" method="POST" name="groupSelect" onsubmit="return validateForm()">
-                @csrf
+{{--            <form action="{{ url('/send-sms-multi') }}" method="POST" name="groupSelect" onsubmit="return validateForm()">--}}
+{{--                @csrf--}}
                 <div class="col-md-5">
                     <label style="font-size: 24px;">Select Group</label>
                     <select class="form-control phoneNumber"  name="group_id" id="group_id">
-                        <option></option>
+                        <option> --- Select Your Group --- </option>
                         @foreach($all_group as $group)
-                            <option value="{{ $group->id }}">{{ $group->group_name }}</option>
+                            <option value="{{ $group->id }}">{{ $group->group_name }} <?php echo count($users)?></option>
                         @endforeach
                     </select>
                 </div>
@@ -42,12 +42,13 @@
                                     <td style="display: none;"><input type="number" name="number[]" value="{{ $user->phone }}"></td>
                                 </tr>
                                 @endforeach
+
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <button type="submit" name="btn" class="btn btn-success">Send SMS.....</button>
-            </form>
+{{--                <button type="submit" name="btn" class="btn btn-success">Send SMS.....</button>--}}
+{{--            </form>--}}
         </div>
     </div>
 {{--    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>--}}
@@ -86,12 +87,12 @@
 {{--    </script>--}}
 
     <script>
-        // function validateForm() {
-        //     var x = document.forms["groupSelect"]["group_id"].value;
-        //     if (x == "") {
-        //         alert("Group Must be Filled out");
-        //         return false;
-        //     }
-        // }
+        function validateForm() {
+            var x = document.forms["groupSelect"]["group_id"].value;
+            if (x == "") {
+                alert("Group Must be Filled out");
+                return false;
+            }
+        }
     </script>
 @endsection

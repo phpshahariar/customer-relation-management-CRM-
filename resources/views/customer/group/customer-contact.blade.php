@@ -78,6 +78,7 @@
                         <tbody id="show_by_customer">
                             @php($i = 0)
                             @foreach($show_contact as $contact)
+
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     @if(isset($contact->customer_group->group_name))
@@ -98,12 +99,9 @@
                                     @endif
                                 </tr>
                             @endforeach
+
                         </tbody>
                     </table>
-                    <form action="{{ url('/customer/group/mail') }}" method="post">
-                        @csrf
-                        <input type="submit" class="btn btn-danger" value="Group Mail Send">
-                    </form>
                 </div>
             </div>
         </div>

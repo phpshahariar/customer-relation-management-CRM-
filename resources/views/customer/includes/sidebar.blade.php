@@ -71,7 +71,7 @@
                 <div class="dropdown-menu" aria-labelledby="moneyDropdown">
                     <a class="dropdown-item" href="{{ url('/cashin/request') }}">CashIn</a>
                     <a class="dropdown-item" href="{{ url('/send/money') }}">Send Money</a>
-                    <a class="dropdown-item" href="#">Cash Out</a>
+                    <a class="dropdown-item" href="{{ url('/cash/out/money') }}">Cash Out</a>
                 </div>
             </li>
         @else

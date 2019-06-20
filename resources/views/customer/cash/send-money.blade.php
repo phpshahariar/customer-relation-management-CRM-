@@ -22,8 +22,13 @@
                             <div class="form-group">
                                 <input type="number" name="amount" required id="amount" class="form-control" placeholder="Amount">
                             </div>
+
                             <div class="form-group">
                                 <input type="number" name="account_number" required id="account_number" class="form-control" placeholder="account_number">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" name="user_id" class="form-control user_id" placeholder="user_id">
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -49,21 +54,61 @@
                         <thead>
                         <tr style="text-align: center;">
                             <th>SL NO</th>
+                            <th>Name</th>
                             <th>Send Account</th>
                             <span style="color: red"> {{ $errors->has('account_number') ? $errors->first('account_number') : ' ' }}</span>
                             <th>Send Amount</th>
                             <span style="color: red"> {{ $errors->has('amount') ? $errors->first('amount') : ' ' }}</span>
                             <th>Status</th>
-                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-
+                        @php($i = 0)
+                            @foreach($customer_money_send as $money_send)
+                              <tr style="text-align: center">
+                                <td>{{ $i++ }}</td>
+                                <td>{{ $money_send->customer_account->name }}</td>
+                                <td>{{ $money_send->account_number }}</td>
+                                <td>{{ number_format($money_send->amount,2) }}</td>
+                                  <td>
+                                      @if($money_send->status == 1)
+                                        <p class="badge badge-success">Success</p>
+                                      @else
+                                        <p class="badge badge-danger">Pending</p>
+                                      @endif
+                                  </td>
+                              </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous">
+    </script>
+
+    <script>
+        $(document).on('keyup','#account_number', function () {
+            var account_number = $(this).val();
+            $.ajax({
+                type:'GET',
+                url: "{{ url('/customer/user/id') }}",
+                data:{account_number:account_number},
+                success:function (data) {
+                    for (var i=0; i<data.length; i++) {
+                        $('.user_id').val(data[i].id);
+                    }
+                }
+            });
+        });
+    </script>
+
+
+
 
 @endsection

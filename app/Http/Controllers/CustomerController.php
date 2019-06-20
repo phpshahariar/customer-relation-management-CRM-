@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CashOut;
 use App\CustomerAccess;
 use App\CustomerCampaign;
 use App\CustomerCashIn;
@@ -12,8 +13,10 @@ use App\CustomerSendMoney;
 use App\CustomerSMS;
 use App\Exports\CustomersExport;
 use App\Exports\UsersExport;
+use App\GroupMailStore;
 use App\Imports\CustomersImport;
 use App\Imports\UsersImport;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
@@ -28,7 +31,10 @@ class CustomerController extends Controller
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
             ->where('status', 1)
             ->get();
-        return view('customer.mail.create-email', compact('customer_access'));
+        $show_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
+        $show_contact = CustomerContact::get();
+
+        return view('customer.mail.create-email', compact('customer_access', 'show_group', 'show_contact'));
     }
 
 
@@ -122,11 +128,17 @@ class CustomerController extends Controller
     public function upload_customer_data()
     {
         $show_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
-        $show_contact = CustomerContact::get();
+        $show_contact = CustomerContact::where('group_id', Auth()->user()->id)->get();
+
+        foreach ($show_contact as $contact) {
+            $total = $contact->count('name');
+
+        }
+
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
             ->where('status', 1)
             ->get();
-        return view('customer.group.customer-contact', compact('show_group', 'show_contact', 'customer_access'));
+        return view('customer.group.customer-contact', compact('show_group', 'show_contact', 'customer_access', 'total'));
     }
 
 
@@ -207,9 +219,10 @@ class CustomerController extends Controller
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
             ->where('status', 1)
             ->get();
-        $customer_money_send = CustomerSendMoney::where('account_number', Auth::user()->id)->get();
+        $customer_money_send = CustomerSendMoney::where('sender_id', Auth::user()->id)
+            ->get();
 
-        return view('customer.cash.send-money', compact('customer_access'));
+        return view('customer.cash.send-money', compact('customer_access', 'customer_money_send'));
     }
 
     public function send_money(Request $request)
@@ -217,14 +230,47 @@ class CustomerController extends Controller
         $this->validate($request, [
             'amount' => 'required',
             'account_number' => 'required',
+            'user_id' => 'required',
         ]);
 
         $customer_send_money = new CustomerSendMoney();
         $customer_send_money->amount = $request->amount;
+        $customer_send_money->user_id = $request->user_id;
+        $customer_send_money->sender_id = Auth::user()->id;
         $customer_send_money->account_number = $request->account_number;
         $customer_send_money->save();
         return redirect()->back()->with('message', 'Your Money has been Send Successfully. Please Wait Receiver Confirmation');
     }
+
+
+    public function customer_cashout_money(){
+        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+        $show_customer_cash_out = CashOut::where('user_id', Auth::user()->id)->get();
+        return view('customer.cash.cash-out', compact('customer_access', 'show_customer_cash_out'));
+
+    }
+
+    public function customer_cashout(Request $request){
+        $customer_cashout = new CashOut();
+        $customer_cashout->user_id = Auth::user()->id;
+        $customer_cashout->cash_out_option = $request->cash_out_option;
+        $customer_cashout->bank_name = $request->bank_name;
+        $customer_cashout->bank_account_number = $request->bank_account_number;
+        $customer_cashout->bank_amount = $request->bank_amount;
+        $customer_cashout->mobile_bank_name = $request->mobile_bank_name;
+        $customer_cashout->mobile_account_number = $request->mobile_account_number;
+        $customer_cashout->mobile_amount = $request->mobile_amount;
+        $customer_cashout->agent_account_number = $request->agent_account_number;
+        $customer_cashout->agent_amount = $request->agent_amount;
+        $customer_cashout->others = $request->others;
+        $customer_cashout->others_amount = $request->others_amount;
+        $customer_cashout->save();
+        return redirect()->back()->with('message', 'Your Cash Out Request Send To Admin, Please Wait After Confirmation');
+    }
+
+
 
     public function create_customer_sms()
     {
@@ -232,7 +278,9 @@ class CustomerController extends Controller
             ->where('status', 1)
             ->get();
 
-        return view('customer.sms.create', compact('customer_access'));
+        $all_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
+        $users = CustomerContact::paginate(5);
+        return view('customer.sms.create', compact('customer_access', 'all_group', 'users'));
     }
 
     public function sms_customer(Request $request)
@@ -352,7 +400,8 @@ class CustomerController extends Controller
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
             ->where('status', 1)
             ->get();
-        $users = CustomerContact::paginate(5);
+        $users = CustomerContact::where('group_id', Auth()->user()->id)->get();
+
         $all_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
 //        return $users;
         return view('customer.sms.group-sms', compact('customer_access', 'users', 'all_group'));
@@ -360,14 +409,24 @@ class CustomerController extends Controller
 
     public function group_mail(Request $request)
     {
+//
+
         $users = CustomerContact::all();
         $all_mail = $users->pluck('email')->toArray();
+
+        $save_mail = new GroupMailStore();
+        $save_mail->message = $request->message;
+        $save_mail->save();
+        Session::put('message', $save_mail->message);
+
         Mail::send('customer.mail.email', $all_mail, function ($message) use ($all_mail) {
             $message->to($all_mail)->subject('Hello group');
 //            $mail->notify(new GroupMail());
 //        Notification::send($users, new GroupMail());
 
         });
+
+
 
         return redirect()->back()->with('message', 'Group Mail Send Successfully');
 
@@ -382,7 +441,7 @@ class CustomerController extends Controller
         $fields = array(
             'userId' => urlencode('banglakings'),
             'password' => urlencode('bksoft2018'),
-            'smsText' => urlencode('Hello Bangla Kings Group SMS Get'),
+            'smsText' => urlencode($request->input('group_message')),
             'commaSeperatedReceiverNumbers' => $comma_separated,
         );
         $fields_string = '';
@@ -408,5 +467,16 @@ class CustomerController extends Controller
         }
         curl_close($ch);
         return redirect()->back()->with('message', 'Your Message Send Your Customer');
+    }
+
+    public function sendSmsView(Request $get){
+        $id = $get->id;
+        $viewSMS = CustomerContact::find($id);
+        return $viewSMS;
+    }
+
+    public function user_id(Request $request){
+        $account_id = User::where('account_number', $request->account_number)->get();
+        return $account_id;
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CustomerSendMoney extends Model
 {
-    public function customer_name(){
-        return $this->belongsTo('App\User', 'account_number', 'id');
+    public function customer_account(){
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 }

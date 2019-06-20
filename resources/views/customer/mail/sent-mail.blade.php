@@ -15,7 +15,7 @@
                             <th>SL NO</th>
                             <th>E-mail</th>
                             <th>Message</th>
-                            <th>Action</th>
+                            <th width="10%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -24,7 +24,7 @@
                                 <td>{{ $key+1 }}</td>
                                 <td>{!! substr($send->email,0,50) !!}......</td>
                                 <td>{!! substr($send->message,0,50) !!}.....</td>
-                                <td>
+                                <td width="10%">
                                     <a href="{{ url('/send/delete/'.$send->id) }}" onclick="return confirm('Are you Sure Delete This?')" class="badge badge-danger" value="">Delete</a>
                                 </td>
                             </tr>
