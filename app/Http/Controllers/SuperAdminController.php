@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AdminLogin;
 use App\Campaign;
 use App\CashIn;
+use App\CashOut;
 use App\CustomerAccess;
 use App\CustomerCampaign;
 use App\CustomerCashIn;
@@ -255,7 +256,6 @@ class SuperAdminController extends Controller
         $this->validate($request,[
             'user_id' => 'required',
             'money_transfer' => 'required',
-            'crm' => 'required',
             ]);
 
         $customer_access = new CustomerAccess();
@@ -268,16 +268,30 @@ class SuperAdminController extends Controller
 
     public function customer_permitted($id){
         $customer_permitted = CustomerAccess::find($id);
-        $customer_permitted->status = 0;
+        $customer_permitted->money_status = 0;
         $customer_permitted->save();
         return redirect()->back()->with('message', 'Customer Denied Successfully');
     }
 
     public function customer_denied($id){
         $customer_permitted = CustomerAccess::find($id);
-        $customer_permitted->status = 1;
+        $customer_permitted->money_status = 1;
         $customer_permitted->save();
         return redirect()->back()->with('message', 'Customer Permitted Successfully');
+    }
+
+    public function crm_customer_permitted($id){
+        $customer_permitted = CustomerAccess::find($id);
+        $customer_permitted->crm_status = 0;
+        $customer_permitted->save();
+        return redirect()->back()->with('message', 'Customer Denied Successfully');
+    }
+
+    public function crm_customer_denied($id){
+        $customer_permitted = CustomerAccess::find($id);
+        $customer_permitted->crm_status = 1;
+        $customer_permitted->save();
+        return redirect()->back()->with('message', 'Customer Denied Successfully');
     }
 
 
@@ -293,6 +307,35 @@ class SuperAdminController extends Controller
         return $mail;
     }
 
+    public function customer_cash_out(){
+        $show_customer_cash_out = CashOut::get();
+        return view('admin.customer.customer-cashout', compact('show_customer_cash_out'));
+    }
+
+    public function customer_cash_out_waiting($id){
+        $cash_out_processing = CashOut::find($id);
+        $cash_out_processing->status = 0;
+        $cash_out_processing->save();
+        return redirect()->back()->with('message', 'Cash Out Request Processing');
+    }
+    public function customer_cash_out_processing($id){
+        $cash_out_processing = CashOut::find($id);
+        $cash_out_processing->status = 1;
+        $cash_out_processing->save();
+        return redirect()->back()->with('message', 'Cash Out Request Success');
+    }
+    public function customer_cash_out_success($id){
+        $cash_out_processing = CashOut::find($id);
+        $cash_out_processing->status = 2;
+        $cash_out_processing->save();
+        return redirect()->back()->with('message', 'Cash Out Request Success');
+    }
+
+
+    //Customer Cash Out End
+
+
+
 
     public function reseller_campaign_data(Request $get){
         $id = $get->id;
@@ -304,6 +347,20 @@ class SuperAdminController extends Controller
         $id = $get->id;
         $mail = ResellerMail::find($id);
         return $mail;
+    }
+
+
+    // Campaign Low
+
+    public function campaign_low(){
+        return view('admin.low');
+    }
+
+
+    //Cash In Method information
+
+    public function cashin_method(){
+        return view('admin.cash.cashin-method');
     }
 
 

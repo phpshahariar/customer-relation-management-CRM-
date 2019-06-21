@@ -29,16 +29,17 @@
             <a class="dropdown-item" href="{{ url('/customer/mail/list') }}">Send Email List</a>
             <a class="dropdown-item" href="{{ url('/customer/cashin') }}">CashIn Request</a>
             <a class="dropdown-item" href="{{ url('/customer/access/power') }}">Access Power</a>
+            <a class="dropdown-item" href="{{ url('/customer/cash/out') }}">Customer Cash Out</a>
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{ url('/campaign/low') }}">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
+            <span>Campaign Low</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{ url('/cashin/method') }}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
+            <span>Cash In Method</span></a>
     </li>
 </ul>

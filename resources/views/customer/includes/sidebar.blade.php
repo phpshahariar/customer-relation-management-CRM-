@@ -62,11 +62,11 @@
 {{--        </div>--}}
     </li>
     @foreach($customer_access as $access)
-        @if($access->status == 1)
+        @if($access->money_status == 1)
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="moneyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-fw fa-money-bill"></i>
-                    <span>{{ $access->money_transfer }} <p class="badge badge-danger">New</p></span>
+                    <span>Money<p class="badge badge-danger">New</p></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="moneyDropdown">
                     <a class="dropdown-item" href="{{ url('/cashin/request') }}">CashIn</a>
@@ -77,12 +77,13 @@
         @else
         @endif
     @endforeach
+
     @foreach($customer_access as $access)
-        @if($access->status == 1)
+        @if($access->crm_status == 1)
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="crmDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-rainbow"></i>
-             <span>{{ $access->crm }} <p class="badge badge-danger">New</p></span>
+             <span>CRM <p class="badge badge-danger">New</p></span>
         </a>
         <div class="dropdown-menu" aria-labelledby="crmDropdown">
             <a class="dropdown-item" href="#">Need Requirement</a>

@@ -64,8 +64,17 @@ use App\CustomerContact;
     Route::post('/access/power', 'SuperAdminController@customer_access_save');
     Route::get('/access/permitted/{id}', 'SuperAdminController@customer_permitted');
     Route::get('/access/denied/{id}', 'SuperAdminController@customer_denied');
+    Route::get('/crm/access/permitted/{id}', 'SuperAdminController@crm_customer_permitted');
+    Route::get('/crm/access/denied/{id}', 'SuperAdminController@crm_customer_denied');
     Route::get('/view/campaign/data', 'SuperAdminController@customer_campaign_view');
     Route::get('/view/mail/send', 'SuperAdminController@customer_mail_view');
+    Route::get('/customer/cash/out', 'SuperAdminController@customer_cash_out');
+    Route::get('/cashout/processing/{id}', 'SuperAdminController@customer_cash_out_processing');
+    Route::get('/cashout/success/{id}', 'SuperAdminController@customer_cash_out_success');
+    Route::get('/cashout/waiting/{id}', 'SuperAdminController@customer_cash_out_waiting');
+
+    Route::get('/campaign/low', 'SuperAdminController@campaign_low');
+    Route::get('/cashin/method', 'SuperAdminController@cashin_method');
 
 
 // Reseller Point email//

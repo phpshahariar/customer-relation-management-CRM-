@@ -42,7 +42,7 @@
                             <div class="form-group" id="mobileBank">
                                 <label>Mobile Banking Option: </label>
                                 <select class="form-control" name="mobile_bank_name">
-                                    <option>Select Mobile Banking</option>
+                                    <option></option>
                                     <option value="bkash">Bkash</option>
                                     <option value="rocket">Rocket</option>
                                     <option value="nogod">Nogod</option>
@@ -88,22 +88,84 @@
                         <thead>
                         <tr style="text-align: center;">
                             <th width="10%">SL NO</th>
+                            <th>Bank Name</th>
                             <th>Bank Account</th>
+                            <th>Bank Amount</th>
+                            <th>Mobile Bank</th>
                             <th>Mobile Account</th>
-                            <th>Agent Account</th>
-                            <th>Amount/Price</th>
+                            <th>Mobile Amount</th>
+                            <th>Agent ID</th>
+                            <th>Agent Amount</th>
+                            <th>Others Option</th>
+                            <th>Others Amount</th>
                             <th width="15%">Status</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($show_customer_cash_out as $key => $customer_cash_out)
-                            <tr>
+                            <tr style="text-align: center;">
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $customer_cash_out->bank_name }}</td>
-                                <td>{{ $customer_cash_out->bank_account_number }}</td>
-                                <td>{{ $customer_cash_out->mobile_account_number }}</td>
-                                <td>{{ $customer_cash_out->agent_account_number }}</td>
-                                <td>{{ $customer_cash_out->others }}</td>
+                                <td>
+                                    @if(isset($customer_cash_out->bank_name))
+                                        {{ $customer_cash_out->bank_name }}
+                                    @else
+                                        <b>N/A</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($customer_cash_out->bank_account_number))
+                                        {{ $customer_cash_out->bank_account_number }}
+                                    @else
+                                        <b>N/A</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($customer_cash_out->bank_amount))
+                                        TK. {{ number_format($customer_cash_out->bank_amount,2) }}
+                                    @else
+                                        <b>N/A</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($customer_cash_out->mobile_bank_name))
+                                        {{ $customer_cash_out->mobile_bank_name }}
+                                    @else
+                                        <b>N/A</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($customer_cash_out->mobile_account_number))
+                                        {{ $customer_cash_out->mobile_account_number }}
+                                    @else
+                                        <b>N/A</b>
+                                    @endif
+                                </td>
+                                <td>TK. {{ number_format($customer_cash_out->mobile_amount,2) }}</td>
+                                <td>
+                                    @if(isset($customer_cash_out->agent_account_number))
+                                        {{ $customer_cash_out->agent_account_number }}
+                                    @else
+                                        <b>N/A</b>
+                                    @endif
+                                </td>
+                                <td>TK. {{ number_format($customer_cash_out->agent_amount,2) }}</td>
+                                <td>
+                                    @if(isset($customer_cash_out->others))
+                                        {{ $customer_cash_out->others }}
+                                    @else
+                                        <b>N/A</b>
+                                    @endif
+                                </td>
+                                <td>TK. {{ number_format($customer_cash_out->others_amount,2) }}</td>
+                                <td>
+                                    @if($customer_cash_out->status == 1 )
+                                        <p class="badge badge-warning">Processing...</p>
+                                     @elseif ($customer_cash_out->status == 2 )
+                                        <p class="badge badge-success">Success</p>
+                                     @else
+                                        <p class="badge badge-danger">Waiting</p>
+                                     @endif
+                                </td>
                             </tr>
                          @endforeach
                         </tbody>

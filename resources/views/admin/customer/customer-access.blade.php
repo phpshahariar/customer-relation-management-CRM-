@@ -35,7 +35,7 @@
                                         <label class="form-check-label" for="inlineCheckbox1">Money Transfer</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" required name="crm" type="checkbox" id="inlineCheckbox2" value="CRM">
+                                        <input class="form-check-input" name="crm" type="checkbox" id="inlineCheckbox2" value="CRM">
                                         <span style="color: red"> {{ $errors->has('crm') ? $errors->first('crm') : ' ' }}</span>
                                         <label class="form-check-label" for="inlineCheckbox2">CRM</label>
                                     </div>
@@ -67,8 +67,6 @@
                             <th>Customer Name</th>
                             <th>Access Power</th>
                             <th>Access Power</th>
-                            <th width="10%">Status</th>
-                            <th width="10%">Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -76,20 +74,20 @@
                             <tr style="text-align: center;">
                                 <td width="5%">{{ $key+1 }}</td>
                                 <td>{{ $info->customer_name->name }}</td>
-                                <td>{{ $info->money_transfer }}</td>
-                                <td>{{ $info->crm }}</td>
-                                <td width="10%">
-                                    @if($info->status ==1)
-                                        <p class="badge badge-primary">Accessed</p>
-                                    @else
-                                        <p class="badge badge-primary">Reject</p>
-                                    @endif
-                                </td>
-                                <td width="10%">
-                                    @if($info->status ==1)
+                                <td>
+                                    {{ $info->money_transfer }}<br>
+                                    @if($info->money_status ==1)
                                         <a href="{{ url('/access/permitted/'.$info->id) }}" class="badge badge-success">Permitted</a>
                                     @else
                                         <a href="{{ url('/access/denied/'.$info->id) }}" class="badge badge-warning">Denied</a>
+                                    @endif
+                                </td>
+                                <td>
+                                    {{ $info->crm }}<br>
+                                    @if($info->crm_status ==1)
+                                        <a href="{{ url('/crm/access/permitted/'.$info->id) }}" class="badge badge-success">Permitted</a>
+                                    @else
+                                        <a href="{{ url('/crm/access/denied/'.$info->id) }}" class="badge badge-warning">Denied</a>
                                     @endif
                                 </td>
                             </tr>

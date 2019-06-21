@@ -49,7 +49,8 @@ class HomeController extends Controller
         //return $totalCost;
 
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status',1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
 
         return view('customer.home.index', compact('customerCash', 'totalCost', 'customer_access'));

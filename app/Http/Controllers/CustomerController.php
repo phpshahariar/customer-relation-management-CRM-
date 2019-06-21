@@ -29,7 +29,8 @@ class CustomerController extends Controller
     public function create_mail()
     {
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
         $show_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
         $show_contact = CustomerContact::get();
@@ -71,7 +72,8 @@ class CustomerController extends Controller
     {
         $send_mail = CustomerMail::where('user_id', Auth::user()->id)->get();
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
         return view('customer.mail.save', compact('send_mail', 'customer_access'));
     }
@@ -80,7 +82,8 @@ class CustomerController extends Controller
     {
         $all_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
         return view('customer.group.group', compact('all_group', 'customer_access'));
     }
@@ -136,7 +139,8 @@ class CustomerController extends Controller
         }
 
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
         return view('customer.group.customer-contact', compact('show_group', 'show_contact', 'customer_access', 'total'));
     }
@@ -160,7 +164,8 @@ class CustomerController extends Controller
     public function create_customer_fb_marketing()
     {
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
         return view('customer.facebook.introduction-page', compact('customer_access'));
     }
@@ -183,7 +188,8 @@ class CustomerController extends Controller
     {
         $customer_campaign = CustomerCampaign::where('user_id', Auth::user()->id)->get();
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
         return view('customer.facebook.campaign-list', compact('customer_campaign', 'customer_access'));
     }
@@ -192,7 +198,8 @@ class CustomerController extends Controller
     {
         $customer_cash_in_info = CustomerCashIn::where('user_id', Auth::user()->id)->get();
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
         return view('customer.cash.cash-in', compact('customer_cash_in_info', 'customer_access'));
     }
@@ -217,7 +224,8 @@ class CustomerController extends Controller
     public function customer_send_money()
     {
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
         $customer_money_send = CustomerSendMoney::where('sender_id', Auth::user()->id)
             ->get();
@@ -245,7 +253,8 @@ class CustomerController extends Controller
 
     public function customer_cashout_money(){
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
         $show_customer_cash_out = CashOut::where('user_id', Auth::user()->id)->get();
         return view('customer.cash.cash-out', compact('customer_access', 'show_customer_cash_out'));
@@ -275,7 +284,8 @@ class CustomerController extends Controller
     public function create_customer_sms()
     {
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
 
         $all_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
@@ -389,7 +399,8 @@ class CustomerController extends Controller
     public function send_sms_customer_list()
     {
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
         $customer_sms_list = CustomerSMS::where('user_id', Auth::user()->id)->get();
         return view('customer.sms.send-list', compact('customer_access', 'customer_sms_list'));
@@ -398,7 +409,8 @@ class CustomerController extends Controller
     public function send_sms_customer_group()
     {
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('status', 1)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
             ->get();
         $users = CustomerContact::where('group_id', Auth()->user()->id)->get();
 
