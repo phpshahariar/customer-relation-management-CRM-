@@ -73,6 +73,7 @@
                             <th>Name</th>
                             <th>Phone</th>
                             <th width="20%">E-mail</th>
+                            <th width="5%">Status</th>
                         </tr>
                         </thead>
                         <tbody id="show_by_customer">
@@ -97,6 +98,11 @@
                                         <td width="20%">{{ $contact->email }}</td>
                                     @else
                                     @endif
+                                    <td>
+                                        <a href="{{ url('/customer/edit/info'.$contact->id) }}" class="badge badge-info">
+                                            Edit
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
 

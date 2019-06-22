@@ -52,9 +52,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">Settings</a>
                 <a class="dropdown-item" href="#">Activity Log</a>
-                @if (Route::has('register'))
-                    <a class="dropdown-item" href="{{ url('/reseller') }}">Register</a>
-                @endif
+
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#"
                    onclick="event.preventDefault();

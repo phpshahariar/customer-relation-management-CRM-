@@ -75,6 +75,14 @@ use App\CustomerContact;
 
     Route::get('/campaign/low', 'SuperAdminController@campaign_low');
     Route::get('/cashin/method', 'SuperAdminController@cashin_method');
+    Route::get('/add/method', 'SuperAdminController@add_method');
+    Route::post('/method/save', 'SuperAdminController@save_method');
+    Route::get('/edit/method/{id}', 'SuperAdminController@edit_method');
+    Route::post('/method/update', 'SuperAdminController@update_method');
+    Route::get('/active/method/{id}', 'SuperAdminController@active_method');
+    Route::get('/pending/method/{id}', 'SuperAdminController@pending_method');
+    Route::get('/customer/list', 'SuperAdminController@customer_list');
+    Route::get('/reseller/list', 'SuperAdminController@reseller_list');
 
 
 // Reseller Point email//
@@ -159,6 +167,11 @@ use App\CustomerContact;
     Route::post('/cash/out', 'CustomerController@customer_cashout');
     Route::post('/customer/send/money', 'CustomerController@send_money');
     Route::get('/customer/user/id', 'CustomerController@user_id');
+
+
+    Route::get('/select/payment/method', 'CustomerController@method_option');
+    Route::get('/customer/access', 'CustomerController@customer_access');
+    Route::post('/need/access/power', 'CustomerController@need_customer_access');
 
 
 //Reseller Api Route

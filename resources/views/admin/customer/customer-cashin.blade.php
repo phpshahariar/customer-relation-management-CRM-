@@ -12,23 +12,35 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr style="text-align: center;">
-                            <th width="5%">SL NO</th>
-                            <th>Customer Name</th>
-                            <th>Amount</th>
-                            <th width="10%">Status</th>
+                            <th>SL</th>
+                            <th>Method Name</th>
+                            <th>Method Description</th>
+                            <th>Transaction  ID</th>
+                            <th>Note</th>
+                            <th>Images</th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($customer_cash_in as $key => $info)
                             <tr style="text-align: center;">
-                                <td width="5%">{{ $key+1 }}</td>
-                                <td>{{ $info->customer_name->name }}</td>
-                                <td>Tk. {{ number_format($info->amount,2) }}</td>
+                                <td>{{ $key+1 }}</td>
+                                <td>{{ $info->customer_cash_in->method_name }}</td>
+                                <td>{!! substr($info->payment_method,0,80) !!}</td>
+                                <td>{!! $info->user_account !!}</td>
+                                <td>TK . {{ number_format($info->amount,2) }}</td>
+                                <td>
+                                    @if(isset($info->images))
+                                        <img src="{{ asset('/bank-images/'.$info->images) }}" height="50" width="80"/>
+                                    @else
+                                        <b>N/A</b>
+                                    @endif
+                                </td>
                                 <td width="10%">
                                     @if($info->status ==0)
                                         <a href="{{ url('/accept/cashin/request/'.$info->id) }}" class="badge badge-primary">Need Accept</a>
                                     @else
-                                        <a href="{{ url('/reject/cashin/request/'.$info->id) }}" class="badge badge-danger">Reject</a>
+                                        <p class="badge badge-danger">Accepted</p>
                                     @endif
                                 </td>
                             </tr>

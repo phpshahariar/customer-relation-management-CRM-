@@ -16,13 +16,14 @@ use App\Exports\UsersExport;
 use App\GroupMailStore;
 use App\Imports\CustomersImport;
 use App\Imports\UsersImport;
+use App\PaymentMethod;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use Session;
 use Auth;
-
+use Image;
 
 class CustomerController extends Controller
 {
@@ -201,12 +202,27 @@ class CustomerController extends Controller
             ->where('money_status', 1)
             ->orWhere('crm_status', 1)
             ->get();
-        return view('customer.cash.cash-in', compact('customer_cash_in_info', 'customer_access'));
+        $payment_method = PaymentMethod::where('status', 1)->get();
+        return view('customer.cash.cash-in', compact('customer_cash_in_info', 'customer_access', 'payment_method'));
     }
 
     public function customer_cashin_request(Request $request)
     {
         $customer_cash_in = new CustomerCashIn();
+
+        if ($request->hasFile('images')) {
+            $teamImage = $request->file('images');
+            $imageName = $teamImage->getClientOriginalName();
+            $fileName = time() . '_files_' . $imageName;
+            $directory = public_path('/bank-images/');
+            $teamImgUrl = $directory . $fileName;
+            Image::make($teamImage)->resize(350, 100)->save($teamImgUrl);
+            $customer_cash_in->images = $fileName;
+        }
+
+        $customer_cash_in->method_name = $request->method_name;
+        $customer_cash_in->payment_method = $request->payment_method;
+        $customer_cash_in->note = $request->note;
         $customer_cash_in->amount = $request->amount;
         $customer_cash_in->user_account = $request->user_account;
         $customer_cash_in->user_id = $request->user_id;
@@ -490,5 +506,28 @@ class CustomerController extends Controller
     public function user_id(Request $request){
         $account_id = User::where('account_number', $request->account_number)->get();
         return $account_id;
+    }
+
+    public function method_option(Request $request){
+        $method_show = PaymentMethod::where('id', $request->id)->get();
+        return $method_show;
+    }
+
+    public function customer_access(){
+        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
+            ->get();
+        return view('customer.customer-access', compact(  'customer_access'));
+    }
+
+    public function need_customer_access(Request $request){
+
+        $customer_access = new CustomerAccess();
+        $customer_access->user_id = Auth::user()->id;
+        $customer_access->money_transfer = $request->money_transfer;
+        $customer_access->crm = $request->crm;
+        $customer_access->save();
+        return redirect()->back()->with('message', 'Access Request Send Wait for Confirmation');
     }
 }

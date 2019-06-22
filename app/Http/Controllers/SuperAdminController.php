@@ -10,6 +10,7 @@ use App\CustomerAccess;
 use App\CustomerCampaign;
 use App\CustomerCashIn;
 use App\CustomerMail;
+use App\PaymentMethod;
 use App\Recharge;
 use App\Reseller;
 use App\ResellerMail;
@@ -246,25 +247,17 @@ class SuperAdminController extends Controller
 //        return redirect()->back()->with('message', 'Customer Campaign Deleted');
 //    }
 
+
     public function customer_access_power(){
-        $all_customers = User::get();
         $all_access = CustomerAccess::OrderBy('id', 'desc')->get();
-        return view('admin.customer.customer-access', compact('all_customers', 'all_access'));
+        return view('admin.customer.customer-access',compact('all_access'));
     }
 
-    public function customer_access_save(Request $request){
-        $this->validate($request,[
-            'user_id' => 'required',
-            'money_transfer' => 'required',
-            ]);
 
-        $customer_access = new CustomerAccess();
-        $customer_access->user_id = $request->user_id;
-        $customer_access->money_transfer = $request->money_transfer;
-        $customer_access->crm = $request->crm;
-        $customer_access->save();
-        return redirect()->back()->with('message', 'Customer Access Successfully');
-    }
+
+//    public function customer_access_save(Request $request){
+//
+//    }
 
     public function customer_permitted($id){
         $customer_permitted = CustomerAccess::find($id);
@@ -360,7 +353,64 @@ class SuperAdminController extends Controller
     //Cash In Method information
 
     public function cashin_method(){
-        return view('admin.cash.cashin-method');
+        $show_method = PaymentMethod::get();
+        return view('admin.cash.cashin-method', compact('show_method'));
+    }
+
+    public function add_method(){
+
+        return view('admin.cash.add-method');
+    }
+
+    public function save_method(Request $request){
+        $payment_method = new PaymentMethod();
+        $payment_method->method_name = $request->method_name;
+        $payment_method->method_description = $request->method_description;
+        $payment_method->save();
+        return redirect('cashin/method')->with('message', 'PaymentMethod Add Successfully');
+    }
+
+
+    public function edit_method($id){
+        $edit_method = PaymentMethod::find($id);
+        return view('admin.cash.edit-method', compact('edit_method'));
+    }
+
+    public function update_method(Request $request){
+        $this->validate($request,[
+            'method_name' => 'required',
+            'method_description' => 'required',
+        ]);
+
+        $update_method = PaymentMethod::find($request->id);
+        $update_method->method_name = $request->method_name;
+        $update_method->method_description = $request->method_description;
+        $update_method->update();
+        return redirect('cashin/method')->with('message', 'PaymentMethod Update Successfully');
+    }
+
+    public function active_method($id){
+        $active_method = PaymentMethod::find($id);
+        $active_method->status = 0;
+        $active_method->save();
+        return redirect()->back()->with('message', 'PaymentMethod Pending Successfully');
+    }
+
+    public function pending_method($id){
+        $active_method = PaymentMethod::find($id);
+        $active_method->status = 1;
+        $active_method->save();
+        return redirect()->back()->with('message', 'PaymentMethod Active Successfully');
+    }
+
+    public function customer_list(){
+        $customer_list = User::OrderBy('id', 'desc')->get();
+        return view('admin.customer.customer-list', compact('customer_list'));
+    }
+
+    public function reseller_list(){
+        $reseller_list= Reseller::OrderBy('id', 'desc')->get();
+        return view('admin.customer.reseller-list', compact('reseller_list'));
     }
 
 

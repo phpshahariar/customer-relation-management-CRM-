@@ -15,6 +15,7 @@
             <a class="dropdown-item" href="#">Send SMS List</a>
             <a class="dropdown-item" href="{{ url('/reseller/send/mail') }}">Send Email List</a>
             <a class="dropdown-item" href="{{ url('/reseller/recharge') }}">Re-Seller Recharge</a>
+            <a class="dropdown-item" href="{{ url('/reseller/list') }}">Reseller List</a>
             <a class="dropdown-item" href="#">Money Transfer</a>
         </div>
     </li>
@@ -29,6 +30,7 @@
             <a class="dropdown-item" href="{{ url('/customer/mail/list') }}">Send Email List</a>
             <a class="dropdown-item" href="{{ url('/customer/cashin') }}">CashIn Request</a>
             <a class="dropdown-item" href="{{ url('/customer/access/power') }}">Access Power</a>
+            <a class="dropdown-item" href="{{ url('/customer/list') }}">Customer List</a>
             <a class="dropdown-item" href="{{ url('/customer/cash/out') }}">Customer Cash Out</a>
         </div>
     </li>

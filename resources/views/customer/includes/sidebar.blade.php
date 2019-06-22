@@ -104,4 +104,13 @@
             <a class="dropdown-item" href="{{ url('/cashin/request') }}">CashIn Request</a>
         </div>
     </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="cashDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="far fa-money-bill-alt"></i>
+            <span>Customer Access</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="cashDropdown">
+            <a class="dropdown-item" href="{{ url('/customer/access') }}">Customer Access</a>
+        </div>
+    </li>
 </ul>

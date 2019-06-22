@@ -2,18 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="82150ec8-d0c3-4796-95b4-53d06476ad2d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/cash/cashin-method.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/customer/customer-cashout.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/low.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/cash/add-method.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/cash/edit-method.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/customer/customer-list.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/customer/reseller-list.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/customer/customer-access.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CRM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CRM.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/CashOut.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CashOut.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/CustomerCashIn.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/CustomerCashIn.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/cash/cashin-method.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/cash/cashin-method.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/customer/customer-access.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/customer/customer-access.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/customer/customer-cashin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/customer/customer-cashin.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/includes/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/includes/header.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/includes/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/includes/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/customer/cash/cash-out.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/cash/cash-out.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/customer/cash/cash-in.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/cash/cash-in.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/customer/group/customer-contact.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/group/customer-contact.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/customer/includes/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/includes/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/customer/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/customer/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,8 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="76" column="68" selection-start-line="76" selection-start-column="55" selection-end-line="76" selection-end-column="68" />
+            <state relative-caret-position="177">
+              <caret line="62" column="84" selection-start-line="62" selection-start-column="63" selection-end-line="62" selection-end-column="84" />
               <folding>
                 <element signature="n#style#0;n#td#4;n#tr#0;n#!!top" expanded="true" />
               </folding>
@@ -45,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CustomerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="284" column="5" lean-forward="true" selection-start-line="284" selection-start-column="5" selection-end-line="284" selection-end-column="5" />
+            <state relative-caret-position="237">
+              <caret line="520" column="57" lean-forward="true" selection-start-line="520" selection-start-column="57" selection-end-line="520" selection-end-column="57" />
               <folding>
                 <element signature="e#40#56#0#PHP" expanded="true" />
                 <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
@@ -62,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="362" column="48" selection-start-line="362" selection-start-column="48" selection-end-line="362" selection-end-column="48" />
+            <state relative-caret-position="322">
+              <caret line="251" column="57" selection-start-line="251" selection-start-column="57" selection-end-line="251" selection-end-column="57" />
               <folding>
                 <element signature="e#40#59#0#PHP" expanded="true" />
               </folding>
@@ -72,31 +83,33 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/Campaign/campaign-request.blade.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/customer/customer-access.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="49" column="10" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="49" selection-end-column="10" />
+            <state relative-caret-position="289">
+              <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/cash/cashin-method.blade.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/customer/customer-access.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+            <state relative-caret-position="441">
+              <caret line="83" column="67" selection-start-line="83" selection-start-column="67" selection-end-line="83" selection-end-column="67" />
               <folding>
-                <element signature="e#472#499#0#HTML" expanded="true" />
+                <element signature="e#824#851#0#HTML" expanded="true" />
+                <element signature="e#1044#1068#0#HTML" expanded="true" />
+                <element signature="e#1417#1435#0#HTML" expanded="true" />
+                <element signature="e#1920#1938#0#HTML" expanded="true" />
+                <element signature="e#6992#7016#0#HTML" expanded="true" />
+                <element signature="e#7380#7398#0#HTML" expanded="true" />
+                <element signature="e#7923#7941#0#HTML" expanded="true" />
+                <element signature="e#8468#8486#0#HTML" expanded="true" />
+                <element signature="e#9029#9047#0#HTML" expanded="true" />
+                <element signature="e#9561#9579#0#HTML" expanded="true" />
+                <element signature="e#10091#10109#0#HTML" expanded="true" />
+                <element signature="e#10654#10672#0#HTML" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/includes/sidebar.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="40" column="43" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -105,15 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>contact_list</find>
-      <find>contact/list</find>
-      <find>reseller_recharge</find>
-      <find>reseller/recharge</find>
-      <find>logout_reseller</find>
-      <find>save/gro</find>
-      <find>group-data</find>
-      <find>$totalCash</find>
-      <find>$customerCash</find>
       <find>group/mail</find>
       <find>/send/sms</find>
       <find>$show_group</find>
@@ -135,6 +139,15 @@
       <find>upload_customer_data</find>
       <find>send_sms_customer_list</find>
       <find>send/customer/sms/list</find>
+      <find>active_customer_group</find>
+      <find>active/customer/group</find>
+      <find>customer_cashin</find>
+      <find>cashin/request</find>
+      <find>send/mo</find>
+      <find>customer_send_money</find>
+      <find>user_id</find>
+      <find>customer/user/id</find>
+      <find>customer/access/power</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -143,17 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Imports/CustomersImport.php" />
-        <option value="$PROJECT_DIR$/app/CustomerContact.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_06_11_060631_create_customer_campaigns_table.php" />
-        <option value="$PROJECT_DIR$/resources/views/customer/facebook/introduction-page.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_06_11_071343_create_customer_cash_ins_table.php" />
-        <option value="$PROJECT_DIR$/app/CustomerCashIn.php" />
-        <option value="$PROJECT_DIR$/app/CustomerMail.php" />
-        <option value="$PROJECT_DIR$/app/CustomerCampaign.php" />
-        <option value="$PROJECT_DIR$/app/Imports/UsersImport.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/customer/customer-cashin.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2019_06_12_070417_create_customer_accesses_table.php" />
         <option value="$PROJECT_DIR$/app/CustomerAccess.php" />
         <option value="$PROJECT_DIR$/resources/views/customer/facebook/campaign-list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/re-sellar/Email/contact.blade.php" />
@@ -178,22 +180,33 @@
         <option value="$PROJECT_DIR$/resources/views/customer/cash/send-money.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/customer/mail/create-email.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/customer/sms/group-sms.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/customer/group/customer-contact.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/customer/cash/cash-in.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_06_20_090207_create_cash_outs_table.php" />
         <option value="$PROJECT_DIR$/resources/views/customer/cash/cash-out.blade.php" />
         <option value="$PROJECT_DIR$/app/CashOut.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/customer/customer-cashout.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/customer/customer-access.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
-        <option value="$PROJECT_DIR$/resources/views/customer/includes/sidebar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/low.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/database/migrations/2019_06_22_050405_create_payment_methods_table.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/cash/add-method.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/cash/edit-method.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/customer/customer-list.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/includes/sidebar.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/includes/header.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/customer/reseller-list.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/customer/group/customer-contact.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/customer/master.blade.php" />
+        <option value="$PROJECT_DIR$/config/app.php" />
+        <option value="$PROJECT_DIR$/resources/views/customer/cash/cash-in.blade.php" />
+        <option value="$PROJECT_DIR$/app/CustomerCashIn.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/cash/cashin-method.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/customer/customer-cashin.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/customer/includes/sidebar.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/CustomerController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/customer/customer-access.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/customer/customer-access.blade.php" />
       </list>
     </option>
   </component>
@@ -284,6 +297,10 @@
       <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
       <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
       <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
@@ -300,7 +317,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -325,6 +341,11 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Http" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CRM" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CRM" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CRM" type="b2602c69:ProjectViewProjectNode" />
@@ -360,15 +381,7 @@
               <item name="CRM" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-              <item name="Campaign" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CRM" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CRM" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="re-sellar" type="462c0819:PsiDirectoryNode" />
+              <item name="customer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CRM" type="b2602c69:ProjectViewProjectNode" />
@@ -379,25 +392,26 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/customer/mail" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/customer" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\CRM\resources\views\customer\sms" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\CRM\resources\views\customer\mail" />
       <recent name="C:\xampp\htdocs\CRM\resources\views\customer" />
+      <recent name="C:\xampp\htdocs\CRM\resources\views\customer\mail" />
       <recent name="C:\xampp\htdocs\CRM\app\Exports" />
       <recent name="C:\xampp\htdocs\CRM\resources\views\admin" />
       <recent name="C:\xampp\htdocs\CRM\resources\views\re-sellar\login" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\CRM\resources\views\customer\sms" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -448,18 +462,19 @@
       <workItem from="1560832416861" duration="13199000" />
       <workItem from="1560918457608" duration="10573000" />
       <workItem from="1561004278921" duration="22440000" />
-      <workItem from="1561089867300" duration="17544000" />
+      <workItem from="1561089867300" duration="18065000" />
+      <workItem from="1561177520654" duration="26708000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="368680000" />
+    <option name="totallyTimeSpent" value="395909000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2322239" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23600605" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -472,7 +487,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.6497545" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.29459903" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -505,87 +520,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_06_13_103808_create_customer_send_money_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/CustomerCampaign.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="5" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="10" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/re-sellar/sms/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="64" lean-forward="true" selection-start-line="17" selection-start-column="64" selection-end-line="17" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_05_27_065023_create_s_m_s_s_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="18" column="36" lean-forward="true" selection-start-line="17" selection-start-column="11" selection-end-line="18" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_06_15_051629_create_customer_s_m_s_s_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/re-sellar/email.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-408" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ResellerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
-          <folding>
-            <element signature="e#40#57#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="72" selection-start-line="72" selection-end-line="72" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/CustomerSendMoney.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="45" selection-start-line="9" selection-start-column="45" selection-end-line="9" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/sms/sms.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/sms/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="82" column="69" selection-start-line="82" selection-start-column="56" selection-end-line="82" selection-end-column="69" />
-          <folding>
-            <element signature="e#3135#3157#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/customer/mail/contact.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -628,13 +562,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
           <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/cash/send-money.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="78" column="39" lean-forward="true" selection-start-line="78" selection-start-column="39" selection-end-line="78" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -683,24 +610,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/group/customer-contact.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="75" column="29" lean-forward="true" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_06_20_090207_create_cash_outs_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="23" column="48" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/group/group.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="34" selection-start-line="38" selection-start-column="28" selection-end-line="41" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -711,27 +624,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/cash/cash-out.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="174" column="14" lean-forward="true" selection-start-line="80" selection-start-column="8" selection-end-line="174" selection-end-column="14" />
-          <folding>
-            <element signature="e#6501#6528#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/CustomerGroup.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/CustomerCashIn.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="5" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="10" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -740,21 +636,6 @@
         <state relative-caret-position="136">
           <caret line="8" column="33" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="33" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/customer/customer-cashout.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="95" column="24" lean-forward="true" selection-start-line="95" selection-start-column="24" selection-end-line="95" selection-end-column="24" />
-          <folding>
-            <element signature="n#style#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/customer/customer-cashin.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
@@ -768,34 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-559">
           <caret line="22" column="53" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/includes/sidebar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="76" column="13" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/customer/customer-access.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="72" column="44" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/cash/cash-in.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="83" column="10" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="83" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/facebook/campaign-list.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="45" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -816,10 +669,197 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/customer/customer-campaign.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-457">
+          <caret line="58" column="68" lean-forward="true" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/customer/customer-cashout.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1615">
+          <caret line="95" column="24" lean-forward="true" selection-start-line="95" selection-start-column="24" selection-end-line="95" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/Campaign/campaign-request.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-289">
+          <caret line="49" column="10" selection-start-line="4" selection-start-column="4" selection-end-line="49" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/email/mail-list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1154" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/mail/create-email.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="77" column="13" lean-forward="true" selection-start-line="71" selection-start-column="3" selection-end-line="77" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_06_22_050405_create_payment_methods_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/facebook/campaign-list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="37" column="45" selection-start-line="37" selection-start-column="45" selection-end-line="37" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/facebook/introduction-page.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-967" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/cash/add-method.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="46" lean-forward="true" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/cash/edit-method.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/customer/reseller-list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="e#907#934#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/includes/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/customer/customer-list.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-end-line="36" />
+          <folding>
+            <element signature="e#1014#1041#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/includes/sidebar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/group/group.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="75" column="36" lean-forward="true" selection-start-line="73" selection-start-column="32" selection-end-line="75" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/group/customer-contact.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="75" column="40" selection-start-line="75" selection-start-column="40" selection-end-line="75" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/cash/send-money.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="97" column="20" lean-forward="true" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="86" column="74" lean-forward="true" selection-start-line="86" selection-start-column="74" selection-end-line="86" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="233" column="59" selection-start-line="233" selection-start-column="59" selection-end-line="233" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/cash/cash-out.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="193" column="42" selection-start-line="193" selection-start-column="42" selection-end-line="193" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/CustomerCashIn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="71" selection-start-line="13" selection-start-column="71" selection-end-line="13" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/cash/cashin-method.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/customer/customer-cashin.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="42" column="78" selection-start-line="42" selection-start-column="78" selection-end-line="42" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/cash/cash-in.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="92" column="37" lean-forward="true" selection-start-line="92" selection-start-column="37" selection-end-line="92" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="62" column="84" selection-start-line="62" selection-start-column="63" selection-end-line="62" selection-end-column="84" />
+          <folding>
+            <element signature="n#style#0;n#td#4;n#tr#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/includes/sidebar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="112" column="52" lean-forward="true" selection-start-line="112" selection-start-column="52" selection-end-line="112" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CustomerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="284" column="5" lean-forward="true" selection-start-line="284" selection-start-column="5" selection-end-line="284" selection-end-column="5" />
+        <state relative-caret-position="237">
+          <caret line="520" column="57" lean-forward="true" selection-start-line="520" selection-start-column="57" selection-end-line="520" selection-end-column="57" />
           <folding>
             <element signature="e#40#56#0#PHP" expanded="true" />
             <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
@@ -831,60 +871,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/customer/mail/create-email.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="77" column="13" lean-forward="true" selection-start-line="75" selection-start-column="4" selection-end-line="77" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/includes/sidebar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="40" column="43" selection-start-line="40" selection-start-column="43" selection-end-line="40" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="76" column="68" selection-start-line="76" selection-start-column="55" selection-end-line="76" selection-end-column="68" />
-          <folding>
-            <element signature="n#style#0;n#td#4;n#tr#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/customer/customer-campaign.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="986">
-          <caret line="58" column="68" lean-forward="true" selection-start-line="58" selection-start-column="68" selection-end-line="58" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/SuperAdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="362" column="48" selection-start-line="362" selection-start-column="48" selection-end-line="362" selection-end-column="48" />
+        <state relative-caret-position="322">
+          <caret line="251" column="57" selection-start-line="251" selection-start-column="57" selection-end-line="251" selection-end-column="57" />
           <folding>
             <element signature="e#40#59#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/Campaign/campaign-request.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/customer/customer-access.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="49" column="10" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="49" selection-end-column="10" />
+        <state relative-caret-position="289">
+          <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/cash/cashin-method.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/customer/customer-access.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="4" column="54" selection-start-line="4" selection-start-column="54" selection-end-line="4" selection-end-column="54" />
+        <state relative-caret-position="441">
+          <caret line="83" column="67" selection-start-line="83" selection-start-column="67" selection-end-line="83" selection-end-column="67" />
           <folding>
-            <element signature="e#472#499#0#HTML" expanded="true" />
+            <element signature="e#824#851#0#HTML" expanded="true" />
+            <element signature="e#1044#1068#0#HTML" expanded="true" />
+            <element signature="e#1417#1435#0#HTML" expanded="true" />
+            <element signature="e#1920#1938#0#HTML" expanded="true" />
+            <element signature="e#6992#7016#0#HTML" expanded="true" />
+            <element signature="e#7380#7398#0#HTML" expanded="true" />
+            <element signature="e#7923#7941#0#HTML" expanded="true" />
+            <element signature="e#8468#8486#0#HTML" expanded="true" />
+            <element signature="e#9029#9047#0#HTML" expanded="true" />
+            <element signature="e#9561#9579#0#HTML" expanded="true" />
+            <element signature="e#10091#10109#0#HTML" expanded="true" />
+            <element signature="e#10654#10672#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
