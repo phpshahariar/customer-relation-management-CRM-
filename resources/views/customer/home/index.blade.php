@@ -1,3 +1,4 @@
+
 @extends('customer.master')
 
 @section('content')
@@ -5,11 +6,11 @@
     <div class="container-fluid">
 
         <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <h3 style="color: red;">Account Number is : {{ Auth::user()->account_number }}</h3>
-            </li>
-        </ol>
+{{--        <ol class="breadcrumb">--}}
+{{--            <li class="breadcrumb-item">--}}
+{{--                <h3 style="color: red;">Account Number is : {{ Auth::user()->account_number }}</h3>--}}
+{{--            </li>--}}
+{{--        </ol>--}}
 
         <!-- Icon Cards-->
         <div class="row">
@@ -70,9 +71,8 @@
                         @if($totalCost > 0)
                             <div class="mr-5 badge badge-success">Total : {{ number_format($totalCost,2) }} Tk.</div>
                                 @else
-                            <div class="mr-5 badge badge-warning">Total : {{ number_format($totalCost,2) }} Tk.</div>
                             <div class="mr-5 badge badge-info">
-                                insufficient balance
+                                Total : 0.00 TK.
                             </div>
                         @endif
                     </div>

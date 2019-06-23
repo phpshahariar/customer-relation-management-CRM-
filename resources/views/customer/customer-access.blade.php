@@ -12,9 +12,6 @@
                         @csrf
                             <div class="col-md-12">
                                 <div class="col-md-12 card-header">
-                                    @if(Session::get('message'))
-                                        <h5 style="text-align: center;" class="alert alert-success">{!! Session::get('message') !!}</h5>
-                                    @endif
                                     <div class="form-group">
                                         <label style="font-size: 24px;">Customer Access Power : </label>
                                         <br/>
@@ -36,7 +33,7 @@
                                         </div>
                                         <div class="col">
                                             <label> Your Email : </label>
-                                            <input type="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
+                                            <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -53,6 +50,7 @@
                                             <div class="col">
                                                 <label> Passport/NIT/DOB : </label>
                                                 <input type="text" required name="nationality" class="form-control" placeholder="Enter Your Nationality Number">
+                                                <p>Example : Passport no XXXXXXXXX</p>
                                             </div>
                                             <div class="col">
                                                 <label> Account Number : </label>
@@ -142,6 +140,9 @@
 
     <div class="container">
         <div class="card mb-3">
+            @if(Session::get('message'))
+                <h5 style="text-align: center;" class="alert alert-success">{!! Session::get('message') !!}</h5>
+            @endif
             <div class="card-header">
                 <i class="fas fa-table"></i>
                 Access Power</div>
@@ -151,34 +152,183 @@
                         <thead>
                         <tr style="text-align: center;">
                             <th width="5%">SL NO</th>
-                            <th>Customer Name</th>
-                            <th>Access Power</th>
-                            <th>Access Power</th>
+                            <th>CRM</th>
+                            <th>Money Transfere</th>
+                            <th>Name</th>
+                            <span style="color: red"> {{ $errors->has('full_name') ? $errors->first('full_name') : ' ' }}</span>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <span style="color: red"> {{ $errors->has('phone') ? $errors->first('phone') : ' ' }}</span>
+                            <th>Secondary Phone</th>
+                            <span style="color: red"> {{ $errors->has('second_phone') ? $errors->first('second_phone') : ' ' }}</span>
+                            <th>Nationality</th>
+                            <span style="color: red"> {{ $errors->has('nationality') ? $errors->first('nationality') : ' ' }}</span>
+                            <th>address</th>
+                            <span style="color: red"> {{ $errors->has('address') ? $errors->first('address') : ' ' }}</span>
+                            <th>country</th>
+                            <span style="color: red"> {{ $errors->has('country') ? $errors->first('country') : ' ' }}</span>
+                            <th>TIN</th>
+                            <th>Nominee</th>
+                            <th>Currency CD</th>
+                            <th>Currency SD</th>
+                            <th>Currency USD</th>
+                            <th>Currency BDT</th>
+                            <th>Currency AED</th>
+                            <th>Currency INR</th>
+                            <th>Currency EUR</th>
+                            <th>Money Status</th>
+                            <th>CRM Status</th>
                         </tr>
                         </thead>
                         <tbody>
-{{--                        @foreach($all_access as $key => $info)--}}
-{{--                            <tr style="text-align: center;">--}}
-{{--                                <td width="5%">{{ $key+1 }}</td>--}}
-{{--                                <td>{{ $info->customer_name->name }}</td>--}}
-{{--                                <td>--}}
-{{--                                    {{ $info->money_transfer }}<br>--}}
-{{--                                    @if($info->money_status ==1)--}}
-{{--                                        <a href="{{ url('/access/permitted/'.$info->id) }}" class="badge badge-success">Permitted</a>--}}
-{{--                                    @else--}}
-{{--                                        <a href="{{ url('/access/denied/'.$info->id) }}" class="badge badge-warning">Denied</a>--}}
-{{--                                    @endif--}}
-{{--                                </td>--}}
-{{--                                <td>--}}
-{{--                                    {{ $info->crm }}<br>--}}
-{{--                                    @if($info->crm_status ==1)--}}
-{{--                                        <a href="{{ url('/crm/access/permitted/'.$info->id) }}" class="badge badge-success">Permitted</a>--}}
-{{--                                    @else--}}
-{{--                                        <a href="{{ url('/crm/access/denied/'.$info->id) }}" class="badge badge-warning">Denied</a>--}}
-{{--                                    @endif--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
+                        @foreach($customer_access as $key => $info)
+                            <tr style="text-align: center;">
+                                <td width="5%">{{ $key+1 }}</td>
+                                <td>
+                                    @if(isset($info->crm))
+                                        {{ $info->crm }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->money_transfer))
+                                        {{ $info->money_transfer }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->full_name))
+                                        {{ $info->full_name }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->email))
+                                        {{ $info->email }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->phone))
+                                        {{ $info->phone }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->second_phone))
+                                        {{ $info->second_phone }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->nationality))
+                                        {{ $info->nationality }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->address))
+                                        {{ substr($info->address,0,60)}}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->country))
+                                        {{ $info->country }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->tin_number))
+                                        {{ $info->tin_number }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->nominee))
+                                        {{ $info->nominee }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->cd))
+                                        {{ $info->cd }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->sd))
+                                        {{ $info->sd }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->usd))
+                                        {{ $info->usd }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->bdt))
+                                        {{ $info->bdt }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->eur))
+                                        {{ $info->eur }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->inr))
+                                        {{ $info->inr }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(isset($info->aed))
+                                        {{ $info->aed }}
+                                    @else
+                                        <b style="color: red;">NA</b>
+                                    @endif
+                                </td>
+
+                                <td>
+                                        @if($info->money_status ==1)
+                                            <span class="badge badge-success">Permitted</span>
+                                        @else
+                                            <span class="badge badge-warning">Pending</span>
+                                        @endif
+                                </td>
+                                <td>
+                                    @if($info->crm_status ==1)
+                                        <span class="badge badge-success">Permitted</span>
+                                    @else
+                                        <span class="badge badge-warning">Pending</span>
+                                    @endif
+
+                                </td>
+
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

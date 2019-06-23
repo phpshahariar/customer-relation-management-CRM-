@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AdminLogin;
 use App\Campaign;
+use App\CampaignLow;
 use App\CashIn;
 use App\CashOut;
 use App\CustomerAccess;
@@ -346,7 +347,38 @@ class SuperAdminController extends Controller
     // Campaign Low
 
     public function campaign_low(){
-        return view('admin.low');
+        $show_low = CampaignLow::get();
+        return view('admin.low', compact('show_low'));
+    }
+
+    public function campaign_low_save(Request $request){
+        $this->validate($request,[
+            'campaign_low' => 'required',
+        ]);
+        $campaign_low = new CampaignLow();
+        $campaign_low->campaign_low = $request->campaign_low;
+        $campaign_low->save();
+        return redirect()->back()->with('message', 'Campaign Low Add Successfully');
+    }
+
+    public function campaign_low_active($id){
+        $active_low = CampaignLow::find($id);
+        $active_low->status = 0;
+        $active_low->save();
+        return redirect()->back()->with('message', 'Campaugn Low Active');
+    }
+
+    public function campaign_low_not_active($id){
+        $not_active_low = CampaignLow::find($id);
+        $not_active_low->status = 1;
+        $not_active_low->save();
+        return redirect()->back()->with('message', 'Campaugn Low Not Active');
+    }
+
+    public function campaign_low_delete($id){
+        $delete_low = CampaignLow::find($id);
+        $delete_low->delete();
+        return redirect()->back()->with('message', 'Campaugn has been Deleted');
     }
 
 

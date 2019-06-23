@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CampaignLow;
 use App\CashOut;
 use App\CustomerAccess;
 use App\CustomerCampaign;
@@ -35,8 +36,27 @@ class CustomerController extends Controller
             ->get();
         $show_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
         $show_contact = CustomerContact::get();
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
 
-        return view('customer.mail.create-email', compact('customer_access', 'show_group', 'show_contact'));
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        return view('customer.mail.create-email', compact('customer_access', 'show_group', 'show_contact','totalCost'));
     }
 
 
@@ -76,7 +96,29 @@ class CustomerController extends Controller
             ->where('money_status', 1)
             ->orWhere('crm_status', 1)
             ->get();
-        return view('customer.mail.save', compact('send_mail', 'customer_access'));
+
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        return view('customer.mail.save', compact('send_mail', 'customer_access', 'totalCost'));
     }
 
     public function customer_group()
@@ -86,7 +128,29 @@ class CustomerController extends Controller
             ->where('money_status', 1)
             ->orWhere('crm_status', 1)
             ->get();
-        return view('customer.group.group', compact('all_group', 'customer_access'));
+
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        return view('customer.group.group', compact('all_group', 'customer_access', 'totalCost'));
     }
 
     public function save_customer_group(Request $request)
@@ -134,16 +198,37 @@ class CustomerController extends Controller
         $show_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
         $show_contact = CustomerContact::where('group_id', Auth()->user()->id)->get();
 
-        foreach ($show_contact as $contact) {
-            $total = $contact->count('name');
-
-        }
+//        foreach ($show_contact as $contact) {
+//            $total = $contact->count('name');
+//
+//        }
 
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
             ->where('money_status', 1)
             ->orWhere('crm_status', 1)
             ->get();
-        return view('customer.group.customer-contact', compact('show_group', 'show_contact', 'customer_access', 'total'));
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        return view('customer.group.customer-contact', compact('show_group', 'show_contact', 'customer_access','totalCost'));
     }
 
 
@@ -168,7 +253,30 @@ class CustomerController extends Controller
             ->where('money_status', 1)
             ->orWhere('crm_status', 1)
             ->get();
-        return view('customer.facebook.introduction-page', compact('customer_access'));
+
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        $show_low = CampaignLow::where('status', 1)->take(1)->get();
+        return view('customer.facebook.introduction-page', compact('customer_access', 'totalCost', 'show_low'));
     }
 
 
@@ -187,12 +295,35 @@ class CustomerController extends Controller
 
     public function customer_campaign_manage()
     {
-        $customer_campaign = CustomerCampaign::where('user_id', Auth::user()->id)->get();
+//        $customer_campaign = CustomerCampaign::where('user_id', Auth::user()->id)->get();
+//        return $customer_campaign;
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
             ->where('money_status', 1)
             ->orWhere('crm_status', 1)
             ->get();
-        return view('customer.facebook.campaign-list', compact('customer_campaign', 'customer_access'));
+
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        return view('customer.facebook.campaign-list', compact('customer_campaign_request', 'customer_access','totalCost'));
     }
 
     public function customer_cashin()
@@ -203,7 +334,29 @@ class CustomerController extends Controller
             ->orWhere('crm_status', 1)
             ->get();
         $payment_method = PaymentMethod::where('status', 1)->get();
-        return view('customer.cash.cash-in', compact('customer_cash_in_info', 'customer_access', 'payment_method'));
+
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        return view('customer.cash.cash-in', compact('customer_cash_in_info', 'customer_access', 'payment_method', 'totalCost'));
     }
 
     public function customer_cashin_request(Request $request)
@@ -246,7 +399,28 @@ class CustomerController extends Controller
         $customer_money_send = CustomerSendMoney::where('sender_id', Auth::user()->id)
             ->get();
 
-        return view('customer.cash.send-money', compact('customer_access', 'customer_money_send'));
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+
+        return view('customer.cash.send-money', compact('customer_access', 'customer_money_send','totalCost'));
     }
 
     public function send_money(Request $request)
@@ -273,7 +447,30 @@ class CustomerController extends Controller
             ->orWhere('crm_status', 1)
             ->get();
         $show_customer_cash_out = CashOut::where('user_id', Auth::user()->id)->get();
-        return view('customer.cash.cash-out', compact('customer_access', 'show_customer_cash_out'));
+
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+
+        return view('customer.cash.cash-out', compact('customer_access', 'show_customer_cash_out','totalCost'));
 
     }
 
@@ -306,7 +503,29 @@ class CustomerController extends Controller
 
         $all_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
         $users = CustomerContact::paginate(5);
-        return view('customer.sms.create', compact('customer_access', 'all_group', 'users'));
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+
+        return view('customer.sms.create', compact('customer_access', 'all_group', 'users','totalCost'));
     }
 
     public function sms_customer(Request $request)
@@ -419,7 +638,29 @@ class CustomerController extends Controller
             ->orWhere('crm_status', 1)
             ->get();
         $customer_sms_list = CustomerSMS::where('user_id', Auth::user()->id)->get();
-        return view('customer.sms.send-list', compact('customer_access', 'customer_sms_list'));
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+
+        return view('customer.sms.send-list', compact('customer_access', 'customer_sms_list','totalCost'));
     }
 
     public function send_sms_customer_group()
@@ -432,7 +673,29 @@ class CustomerController extends Controller
 
         $all_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
 //        return $users;
-        return view('customer.sms.group-sms', compact('customer_access', 'users', 'all_group'));
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+
+        return view('customer.sms.group-sms', compact('customer_access', 'users', 'all_group','totalCost'));
     }
 
     public function group_mail(Request $request)
@@ -514,20 +777,133 @@ class CustomerController extends Controller
     }
 
     public function customer_access(){
-        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
-            ->where('money_status', 1)
-            ->orWhere('crm_status', 1)
+        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)->get();
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
             ->get();
-        return view('customer.customer-access', compact(  'customer_access'));
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+
+        return view('customer.customer-access', compact(  'customer_access','totalCost'));
     }
 
     public function need_customer_access(Request $request){
+
+        $this->validate($request,[
+            'full_name' => 'required',
+            'phone' => 'required|max:15|min:11|unique:customer_accesses',
+            'second_phone' => 'required|max:15|min:11|unique:customer_accesses',
+            'nationality' => 'required|unique:customer_accesses',
+            'address' => 'required',
+            'country' => 'required',
+        ]);
 
         $customer_access = new CustomerAccess();
         $customer_access->user_id = Auth::user()->id;
         $customer_access->money_transfer = $request->money_transfer;
         $customer_access->crm = $request->crm;
+        $customer_access->full_name = $request->full_name;
+        $customer_access->email = Auth::user()->email;
+        $customer_access->phone = $request->phone;
+        $customer_access->second_phone = $request->second_phone;
+        $customer_access->nationality = $request->nationality;
+        $customer_access->ac_number = $request->ac_number;
+        $customer_access->address = $request->address;
+        $customer_access->country = $request->country;
+        $customer_access->tin_number = $request->tin_number;
+        $customer_access->nominee = $request->nominee;
+        $customer_access->cd = $request->cd;
+        $customer_access->sd = $request->sd;
+        $customer_access->usd = $request->usd;
+        $customer_access->bdt = $request->bdt;
+        $customer_access->eur = $request->eur;
+        $customer_access->inr = $request->inr;
+        $customer_access->aed = $request->aed;
         $customer_access->save();
         return redirect()->back()->with('message', 'Access Request Send Wait for Confirmation');
+    }
+
+    public function customer_setting(){
+        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)->get();
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        return view('customer.home.settings', compact('customer_access', 'totalCost'));
+    }
+
+    public function edit_profile($id){
+        $edit_settings = CustomerAccess::find($id);
+        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)->get();
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        return view('customer.home.edit-profile', compact('edit_settings','customer_access','totalCost'));
+    }
+
+    public function update_profile(Request $request){
+        $update_setting = CustomerAccess::find($request->id);
+        $update_setting->full_name = $request->full_name;
+        $update_setting->email = $request->email;
+        $update_setting->phone = $request->phone;
+        $update_setting->second_phone = $request->second_phone;
+        $update_setting->nationality = $request->nationality;
+        $update_setting->ac_number = $request->ac_number;
+        $update_setting->address = $request->address;
+        $update_setting->tin_number = $request->tin_number;
+        $update_setting->nominee = $request->nominee;
+        $update_setting->update();
+        return redirect('/setting/option')->with('message', 'Your Profile has been updated');
     }
 }

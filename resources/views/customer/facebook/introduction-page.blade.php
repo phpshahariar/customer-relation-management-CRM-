@@ -18,12 +18,11 @@
                         <div class="col-md-6">
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                    <p>
-                                        Best Booking SystemBest Booking SystemBest Booking SystemBest Booking SystemBest Booking SystemBest
-                                        Booking SystemBest Booking SystemBest Booking SystemBest Booking SystemBest Booking SystemBest
-                                        Booking SystemBest Booking SystemBest
-                                        Booking SystemBest Booking SystemBest Booking SystemBest Booking SystemBest Booking System
-                                    </p>
+                                    @foreach($show_low as $low)
+                                        <p>
+                                            {!! $low->campaign_low !!}
+                                        </p>
+                                    @endforeach
                                 </div>
                                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                     <form action="{{ url('/add/customer/campaign') }}" method="POST">
@@ -53,7 +52,11 @@
                                             <label>Filtering</label>
                                             <textarea type="text" class="form-control" name="filtering" id="filtering" placeholder="Filtering....."></textarea>
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-block">SubmiT</button>
+                                        @if($totalCost > 0 )
+                                            <button type="submit" class="btn btn-primary btn-block">SubmiT</button>
+                                        @else
+                                            <button type="button" class="btn btn-danger btn-block disabled">Insufficient Balance</button>
+                                        @endif
                                     </form>
                                 </div>
                             </div>

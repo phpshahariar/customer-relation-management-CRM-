@@ -42,13 +42,27 @@
                     <thead>
                     <tr style="text-align: center">
                         <th>SL</th>
-                        <th style="width: 220px;">Campaign Low</th>
-                        <th>Status</th>
-                        <th width="8%">Action</th>
+                        <th>Campaign Low</th>
+                        <th width="20%">Status</th>
+                        <th width="20%">Action</th>
                     </tr>
                     </thead>
                     <tbody>
-
+                        @foreach($show_low as $key => $low)
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td>{!! substr($low->campaign_low,0,330) !!} ....</td>
+                                <td style="text-align: center;">{!! $low->status ==1 ? 'Active' : 'Not Active'!!}</td>
+                                <td style="text-align: center;">
+                                    @if($low->status ==1)
+                                    <a href="{{ url('/active/low/'.$low->id) }}" class="badge badge-primary">Active</a>
+                                    @else
+                                    <a href="{{ url('/not/active/low/'.$low->id) }}" class="badge badge-warning">Not Active</a>
+                                    @endif
+                                    <a href="{{ url('/delete/low/'.$low->id) }}" class="badge badge-danger" onclick="return confirm('Are You Sure Delete This Low!?')">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

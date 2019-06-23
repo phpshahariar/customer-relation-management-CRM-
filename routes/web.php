@@ -74,6 +74,12 @@ use App\CustomerContact;
     Route::get('/cashout/waiting/{id}', 'SuperAdminController@customer_cash_out_waiting');
 
     Route::get('/campaign/low', 'SuperAdminController@campaign_low');
+    Route::post('/save/campaign/low', 'SuperAdminController@campaign_low_save');
+    Route::get('/active/low/{id}', 'SuperAdminController@campaign_low_active');
+    Route::get('/not/active/low/{id}', 'SuperAdminController@campaign_low_not_active');
+    Route::get('/delete/low/{id}', 'SuperAdminController@campaign_low_delete');
+
+
     Route::get('/cashin/method', 'SuperAdminController@cashin_method');
     Route::get('/add/method', 'SuperAdminController@add_method');
     Route::post('/method/save', 'SuperAdminController@save_method');
@@ -172,6 +178,9 @@ use App\CustomerContact;
     Route::get('/select/payment/method', 'CustomerController@method_option');
     Route::get('/customer/access', 'CustomerController@customer_access');
     Route::post('/need/access/power', 'CustomerController@need_customer_access');
+    Route::get('/setting/option', 'CustomerController@customer_setting');
+    Route::get('/edit/profile/{id}', 'CustomerController@edit_profile');
+    Route::post('/update/setting', 'CustomerController@update_profile');
 
 
 //Reseller Api Route

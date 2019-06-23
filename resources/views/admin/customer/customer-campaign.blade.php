@@ -100,7 +100,7 @@
                             $(".sstart_date").text("Start_Date : " + response.start_date);
                             $(".eend_date").text("End_Date : " + response.end_date);
                             $(".page_link").text("Page Link : " + response.link);
-                            $(".filtering_data").text("Filtering Tag  : " + response.filtering);
+                            $(".filtering_data").text("Filtering Tag  : " + response.filtering );
                             $(".price").text("Boosting Price : " + response.amount + "TK");
                         }
                     }

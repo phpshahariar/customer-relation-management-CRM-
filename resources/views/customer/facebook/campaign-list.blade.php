@@ -22,7 +22,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach($customer_campaign as $key => $info)
+                            @foreach($customer_campaign_request as $key => $info)
                                 <tr>
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $info->start_date }}</td>

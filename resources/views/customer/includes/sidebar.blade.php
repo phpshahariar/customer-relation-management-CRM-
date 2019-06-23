@@ -75,6 +75,10 @@
                 </div>
             </li>
         @else
+            <p style="color: red; margin-left: 18px;">
+                <i class="fas fa-fw fa-money-bill"></i>
+                <span>Money Transfer</span>
+            </p>
         @endif
     @endforeach
 
@@ -93,6 +97,10 @@
         </div>
     </li>
         @else
+            <p style="color: red; margin-left: 18px;">
+                <i class="fas fa-fw fa-rainbow"></i>
+                <span>CRM</span>
+            </p>
         @endif
     @endforeach
     <li class="nav-item dropdown">

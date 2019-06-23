@@ -32,7 +32,11 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Send</button>
+                                @if($totalCost > 0)
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                                @else
+                                    <button type="button" class="btn btn-primary disabled">Insufficient Balance</button>
+                                @endif
                             </div>
                         </form>
                     </div>
@@ -69,7 +73,7 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $money_send->customer_account->name }}</td>
                                 <td>{{ $money_send->account_number }}</td>
-                                <td>{{ number_format($money_send->amount,2) }}</td>
+                                <td>TK. {{ number_format($money_send->amount,2) }}</td>
                                   <td>
                                       @if($money_send->status == 1)
                                         <p class="badge badge-success">Success</p>
