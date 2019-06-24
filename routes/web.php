@@ -182,6 +182,16 @@ use App\CustomerContact;
     Route::get('/edit/profile/{id}', 'CustomerController@edit_profile');
     Route::post('/update/setting', 'CustomerController@update_profile');
 
+    // Customer Registration
+
+    Route::get('/customer/registration', 'CustomerController@customer_registration');
+
+
+    // Customer Chating
+
+    Route::post('/chating', 'CRMController@customer_chating');
+    Route::get('/registration', 'CRMController@registration');
+
 
 //Reseller Api Route
 

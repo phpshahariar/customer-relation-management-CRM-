@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CampaignLow;
 use App\CashOut;
+use App\Chat;
 use App\CustomerAccess;
 use App\CustomerCampaign;
 use App\CustomerCashIn;
@@ -905,5 +906,33 @@ class CustomerController extends Controller
         $update_setting->nominee = $request->nominee;
         $update_setting->update();
         return redirect('/setting/option')->with('message', 'Your Profile has been updated');
+    }
+
+
+    public function customer_registration(){
+        $show_history = Chat::all();
+
+        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
+            ->where('status',1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign){
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash){
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)->get();
+        return view('customer.reg.registration', compact('show_history', 'totalCost','customer_access'));
     }
 }

@@ -90,8 +90,8 @@
              <span>CRM <p class="badge badge-danger">New</p></span>
         </a>
         <div class="dropdown-menu" aria-labelledby="crmDropdown">
-            <a class="dropdown-item" href="#">Need Requirement</a>
-            <a class="dropdown-item" href="#">Need Requirement</a>
+            <a class="dropdown-item" href="{{ url('/customer/registration') }}">Customer Service</a>
+            <a class="dropdown-item" href="{{ url('/registration') }}">Customer Registration</a>
             <a class="dropdown-item" href="#">Need Requirement</a>
             <a class="dropdown-item" href="#">Need Requirement</a>
         </div>
