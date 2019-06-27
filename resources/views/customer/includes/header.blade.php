@@ -12,12 +12,12 @@
     @if($totalCost > 0)
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <div class="mr-5 badge badge-success">
-            <h5>Total : {{ number_format($totalCost,2) }} Tk.</h5>
+            <h5>Total : {{ number_format($totalCashOut,2) }} Tk.</h5>
         </div>
     @else
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <div class="mr-5 badge badge-warning">
-            <h5>Total : {{ number_format($totalCost,2) }} Tk.</h5>
+            <h5>Total : 00.00 Tk.</h5>
         </div>
     @endif
     <!-- Navbar Search -->

@@ -70,11 +70,11 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr style="text-align: center">
-                        <th>SL</th>
+                        <th>Date</th>
                         <th>Method Name</th>
-                        <th>Method Description</th>
+                        <th>Notes</th>
                         <th>Transaction  ID</th>
-                        <th>Note</th>
+                        <th>Amount</th>
                         <th>Images</th>
                         <th>Status</th>
                     </tr>
@@ -82,9 +82,15 @@
                     <tbody>
                     @foreach($customer_cash_in_info as $key => $cashIn)
                         <tr style="text-align: center">
-                            <td>{{ $key+1 }}</td>
+                            <td>{{ $cashIn->created_at }}</td>
                             <td>{{ $cashIn->customer_cash_in->method_name }}</td>
-                            <td>{!! substr($cashIn->payment_method,0,80) !!}</td>
+                            <td>
+                                @if(isset($cashIn->note))
+                                    {!! substr($cashIn->note,0,80) !!}
+                                @else
+                                    <b>N/A</b>
+                                @endif
+                            </td>
                             <td>{!! $cashIn->user_account !!}</td>
                             <td>TK . {{ number_format($cashIn->amount,2) }}</td>
                             <td>

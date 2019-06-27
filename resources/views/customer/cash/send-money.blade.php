@@ -32,7 +32,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                @if($totalCost > 0)
+                                @if($totalCashOut > 0)
                                     <button type="submit" class="btn btn-primary">Send</button>
                                 @else
                                     <button type="button" class="btn btn-primary disabled">Insufficient Balance</button>

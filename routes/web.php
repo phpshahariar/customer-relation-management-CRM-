@@ -135,6 +135,7 @@ use App\CustomerContact;
     Route::get('/create/mail', 'CustomerController@create_mail');
     Route::post('/email/send', 'CustomerController@send_mail');
     Route::get('/send/list', 'CustomerController@send_list');
+    Route::get('/delete/email/{id}', 'CustomerController@delete_item');
     Route::post('/customer/group/mail', 'CustomerController@group_mail');
     Route::get('/create/customer/group', 'CustomerController@customer_group');
     Route::post('/save/customer/group', 'CustomerController@save_customer_group');
@@ -142,6 +143,7 @@ use App\CustomerContact;
     Route::get('/pending/customer/group/{id}', 'CustomerController@pending_customer_group');
     Route::get('/delete/customer/group/{id}', 'CustomerController@delete_customer_group');
     Route::get('/contact/customer/list', 'CustomerController@upload_customer_data');
+    Route::post('/single/data/add', 'CustomerController@single_customer_data');
     Route::get('/create/customer/sms', 'CustomerController@create_customer_sms');
     Route::post('/group/sms/send', 'CustomerController@group_customer_sms');
     Route::post('/send/customer/sms', 'CustomerController@sms_customer');
@@ -149,12 +151,19 @@ use App\CustomerContact;
     Route::get('/send/customer/group/list', 'CustomerController@send_sms_customer_group');
     Route::post('/send-sms-multi', 'CustomerController@sendSmsMulti');
     Route::get('/view/sms/data', 'CustomerController@sendSmsView');
+    Route::get('/sms/system', 'CustomerController@sendSystem');
+    Route::get('/email/system', 'CustomerController@emailSystem');
+    Route::get('/campaign/system', 'CustomerController@campaignSystem');
+    Route::get('/cash/system', 'CustomerController@cashSystem');
+    Route::get('/contact/system', 'CustomerController@contactSystem');
 
 // Customer File Upload
 
     Route::post('import-customer', 'CustomerController@customer_import')->name('import-customer');
     Route::get('export-customer', 'CustomerController@customer_export')->name('export-customer');
     Route::get('/phoneNumber/sms', 'CustomerController@phoneNumberSms');
+    Route::get('/customer/edit/info/{id}', 'CustomerController@editCustomerData');
+    Route::post('/update/customer/data', 'CustomerController@updateCustomerData');
 
 
 // Customer facebook marketing
@@ -191,6 +200,11 @@ use App\CustomerContact;
 
     Route::post('/chating', 'CRMController@customer_chating');
     Route::get('/registration', 'CRMController@registration');
+    Route::post('/save/customer/information', 'CRMController@registration_save');
+    Route::get('/customer/reg/info', 'CRMController@registration_info');
+    Route::post('/customer/service/sms', 'CRMController@customer_service_sms');
+    Route::post('/email/send', 'CRMController@customer_service_email');
+    Route::post('/alert/send', 'CRMController@customer_service_alert');
 
 
 //Reseller Api Route
@@ -236,6 +250,26 @@ use App\CustomerContact;
         }
 
     });
+
+Route::get('/customer-single-data/{id}', function ($id) {
+    $output = '';
+    $i = 0;
+    $apps = App\SingleData::with('customer_group')->where('group_id', $id)->get();
+    if ($apps) {
+        foreach ($apps as $key => $app) {
+            $output .= '<tr>' .
+                '<td>' . $i++ . '</td>' .
+                '<td>' . $app->customer_group->group_name . '</td>' .
+                '<td>' . $app->name . '</td>' .
+                '<td>' . $app->phone . '</td>' .
+                '<td>' . $app->email . '</td>' .
+                '</tr>';
+        }
+
+        return response()->json($output);
+    }
+
+});
 
     Route::get('/customer-sms/{id}', function ($id) {
         $outputsms = '';

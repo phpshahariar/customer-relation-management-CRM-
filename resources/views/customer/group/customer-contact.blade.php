@@ -3,12 +3,15 @@
 @section('content')
     <div class="container">
         @if(Session::get('message'))
-            <h4 class="alert alert-success">{{ Session::get('message') }}</h4>
+            <p class="alert alert-success">{{ Session::get('message') }}</p>
         @endif
         <div class="card-body">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                 Upload
+            </button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#singleUpload">
+                Single Upload
             </button>
             <br/>
             <br/>
@@ -58,6 +61,57 @@
                     </div>
                 </div>
             </div>
+{{--            Single Upload--}}
+
+            <div class="modal fade" id="singleUpload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{ Session::get('name') }} Single Information</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ url('/single/data/add') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Group Name : </label>
+                                    <select class="form-control" required name="group_id" id="group_id">
+                                        <option>--- Select Group ---</option>
+                                        @foreach($show_group as $group)
+                                            <option value="{{ $group->id }}">{{ $group->group_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text"  class="form-control" required name="name">
+{{--                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">--}}
+                                </div>
+                                <div class="form-group">
+                                    <label>Number</label>
+                                    <input type="number" class="form-control" required name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" required name="email">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{{--            SingleUpload End--}}
+
+
+
+
         </div>
         <div class="card mb-3">
             <div class="card-header">
@@ -99,13 +153,38 @@
                                     @else
                                     @endif
                                     <td>
-                                        <a href="{{ url('/customer/edit/info'.$contact->id) }}" class="badge badge-info">
+                                        <a href="{{ url('/customer/edit/info/'.$contact->id) }}" class="badge badge-info">
                                             Edit
                                         </a>
                                     </td>
                                 </tr>
                             @endforeach
-
+                        @foreach($new_show as $new)
+                            <tr>
+                                <td>{{ $i++ }}</td>
+                                @if(isset($new->customer_group->group_name))
+                                    <td>{{ $new->customer_group->group_name }}</td>
+                                @else
+                                @endif
+                                @if(isset($new->name))
+                                    <td>{{ $new->name }}</td>
+                                @else
+                                @endif
+                                @if(isset($new->phone))
+                                    <td>{{ $new->phone }}</td>
+                                @else
+                                @endif
+                                @if(isset($new->email))
+                                    <td width="20%">{{ $new->email }}</td>
+                                @else
+                                @endif
+                                <td>
+                                    <a href="{{ url('/customer/edit/info'.$new->id) }}" class="badge badge-info">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -121,6 +200,22 @@
                 var id = $(this).val();
                 $.ajax({
                     url: "{{url('/customer-data')}}/" + id,
+                    type: "GET",
+                    data: {id: id},
+                    success:function (data) {
+                        $('#show_by_customer').html(data);
+                    }
+                });
+            });
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#group_id').on('change', function () {
+                var id = $(this).val();
+                $.ajax({
+                    url: "{{url('/customer-single-data')}}/" + id,
                     type: "GET",
                     data: {id: id},
                     success:function (data) {

@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Enter Your Message : </label>
-                                        <textarea name="message"  rows="5" class="form-control" placeholder="Enter Your Message"></textarea>
+                                        <textarea name="message"  id="editor2" class="form-control" placeholder="Enter Your Message"></textarea>
                                         <span style="color: red"> {{ $errors->has('message') ? $errors->first('message') : ' ' }}</span>
                                     </div>
                                     <div class="form-group">
@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Enter Your Message : </label>
-                                        <textarea name="group_message"  rows="5" class="form-control" placeholder="Enter Your Message"></textarea>
+                                        <textarea name="group_message"  id="editor1" class="form-control" placeholder="Enter Your Message"></textarea>
                                     </div>
 
                                     <div class="form-group">
@@ -98,6 +98,10 @@
     <script src="//cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
     <script>
         CKEDITOR.replace( 'editor1' );
+    </script>
+
+    <script>
+        CKEDITOR.replace( 'editor2' );
     </script>
 
     <script>

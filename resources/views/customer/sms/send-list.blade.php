@@ -24,7 +24,6 @@
                                 <td>{!! substr($send->number,0,80) !!}......</td>
                                 <td>{!! substr($send->message,0,50) !!}.....</td>
                                 <td style="text-align: center;">
-                                    <a href="{!! url('view/sms/data') !!}" data-id="{!! $send->id !!}" id="view" class="badge badge-success">View</a>
                                     <a href="{{ url('/send/sms/delete/'.$send->id) }}" onclick="return confirm('Are you Sure Delete This?')" class="badge badge-danger" value="">Delete</a>
                                 </td>
                             </tr>

@@ -17,7 +17,7 @@
                     <select class="form-control phoneNumber"  name="group_id" id="group_id">
                         <option> --- Select Your Group --- </option>
                         @foreach($all_group as $group)
-                            <option value="{{ $group->id }}">{{ $group->group_name }} <?php echo count($users)?></option>
+                            <option value="{{ $group->id }}">{{ $group->group_name }}</option>
                         @endforeach
                     </select>
                 </div>
