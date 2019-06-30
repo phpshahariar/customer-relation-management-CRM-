@@ -44,4 +44,9 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Cash In Method</span></a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('/category/page') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Category Page</span></a>
+    </li>
 </ul>

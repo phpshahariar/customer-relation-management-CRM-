@@ -16,7 +16,8 @@ use App\CustomerContact;
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', function () {
-        return view('auth.login');
+        $pages = App\CategoryPage::where('status', 1)->get();
+        return view('auth.login', compact('pages'));
     });
     Route::get('/super/admin', function () {
         return view('admin');
@@ -89,6 +90,12 @@ use App\CustomerContact;
     Route::get('/pending/method/{id}', 'SuperAdminController@pending_method');
     Route::get('/customer/list', 'SuperAdminController@customer_list');
     Route::get('/reseller/list', 'SuperAdminController@reseller_list');
+    Route::get('/category/page', 'SuperAdminController@category_page');
+    Route::post('/save/page', 'SuperAdminController@category_page_save');
+    Route::get('/active/status/{id}', 'SuperAdminController@category_page_active');
+    Route::get('/inactive/status/{id}', 'SuperAdminController@category_page_inactive');
+    Route::get('/delete/page/{id}', 'SuperAdminController@category_page_delete');
+
 
 
 // Reseller Point email//
@@ -156,7 +163,7 @@ use App\CustomerContact;
     Route::get('/campaign/system', 'CustomerController@campaignSystem');
     Route::get('/cash/system', 'CustomerController@cashSystem');
     Route::get('/contact/system', 'CustomerController@contactSystem');
-
+    Route::get('/page/description/{id}', 'CustomerController@category_page_description');
 // Customer File Upload
 
     Route::post('import-customer', 'CustomerController@customer_import')->name('import-customer');

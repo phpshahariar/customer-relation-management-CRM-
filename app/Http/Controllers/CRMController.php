@@ -22,6 +22,7 @@ class CRMController extends Controller
         $customer_chating = new Chat();
         $customer_chating->chating = $request->chating;
         $customer_chating->user_id = Auth::user()->id;
+        $customer_chating->phone_number = Auth::user()->phone_number;
         $customer_chating->save();
         return redirect()->back();
     }
@@ -64,6 +65,9 @@ class CRMController extends Controller
             'notes'  => 'required',
             'customer_by'  => 'required',
         ]);
+
+
+
         $reg_customer = new ChatRegister();
         $reg_customer->user_id = Auth::user()->id;
         $reg_customer->created_by = Auth::user()->name;

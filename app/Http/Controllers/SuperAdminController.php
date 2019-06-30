@@ -7,6 +7,7 @@ use App\Campaign;
 use App\CampaignLow;
 use App\CashIn;
 use App\CashOut;
+use App\CategoryPage;
 use App\CustomerAccess;
 use App\CustomerCampaign;
 use App\CustomerCashIn;
@@ -444,6 +445,46 @@ class SuperAdminController extends Controller
         $reseller_list= Reseller::OrderBy('id', 'desc')->get();
         return view('admin.customer.reseller-list', compact('reseller_list'));
     }
+
+
+    public function category_page(){
+        $show_category_page = CategoryPage::orderBy('id', 'desc')->take(3)->get();
+        return view('admin.customer.category-page', compact('show_category_page'));
+    }
+
+    public function category_page_save(Request $request){
+        $this->validate($request,[
+            'name' => 'required|max:255',
+            'description' => 'required',
+        ]);
+        $category_page_save = new CategoryPage();
+        $category_page_save->name = $request->name;
+        $category_page_save->description = $request->description;
+        $category_page_save->save();
+        return redirect()->back()->with('message', 'Category Page Add Successfully');
+    }
+
+    public function category_page_active($id){
+        $active_page = CategoryPage::find($id);
+        $active_page->status = 0;
+        $active_page->save();
+        return redirect()->back()->with('message', 'Cagtegory Page Inactivated');
+    }
+
+    public function category_page_inactive($id){
+        $active_page = CategoryPage::find($id);
+        $active_page->status = 1;
+        $active_page->save();
+        return redirect()->back()->with('message', 'Cagtegory Page Activated');
+    }
+
+    public function category_page_delete($id){
+        $delete_page = CategoryPage::find($id);
+        $delete_page->delete();
+        return redirect()->back()->with('message', 'Cagtegory Page Deleted');
+    }
+
+
 
 
 }

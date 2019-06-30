@@ -20,7 +20,8 @@
                         <form action="{{ url('/customer/send/money') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <input type="number" name="amount" required id="amount" class="form-control" placeholder="Amount">
+                                <input type="number" name="amount" required id="amount" class="form-control input" value="">
+                                <input type="number" name="main_amount"  id="main_amount" class="form-control input" value="{{$totalCashOut}}">
                             </div>
 
                             <div class="form-group">
@@ -35,7 +36,7 @@
                                 @if($totalCashOut > 0)
                                     <button type="submit" class="btn btn-primary">Send</button>
                                 @else
-                                    <button type="button" class="btn btn-primary disabled">Insufficient Balance</button>
+                                    <button type="button" id="btnDisable" class="btn btn-primary disabled">Insufficient Balance</button>
                                 @endif
                             </div>
                         </form>
@@ -96,6 +97,8 @@
             crossorigin="anonymous">
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
     <script>
         $(document).on('keyup','#account_number', function () {
             var account_number = $(this).val();
@@ -110,6 +113,30 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        $('.input').on('input', function () {
+            var value = $(this).val();
+            var data = $('#main_amount').val();
+            if ((value !== '') && (value.indexOf('.') === -1)) {
+                $(this).val(Math.max(Math.min(value, data), -data));
+                if (data < value) {
+                    // alert('you have reached a limit');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'SORRY',
+                        text: 'SORRY Insufficient Balance!',
+                    })
+                }
+            }
+        });
+
+        // $( "#myinput2" ).on('input', function() {
+        //     if ($(this).val().length>=3) {
+        //         alert('you have reached a limit of 3');
+        //     }
+        // });
     </script>
 
 

@@ -9,7 +9,7 @@
             <h5 style="color: white;">A/C : {{ Auth::user()->account_number }}</h5>
         </div>
 
-    @if($totalCost > 0)
+    @if($totalCashOut > 0)
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <div class="mr-5 badge badge-success">
             <h5>Total : {{ number_format($totalCashOut,2) }} Tk.</h5>

@@ -68,11 +68,11 @@
                         <div class="card-body-icon">
                             <i class="fas fa-fw fa-life-ring"></i>
                         </div>
-                        @if($totalMobileCash)
-                            <div class="mr-5 badge badge-success">Total : {{ number_format($totalMobileCash,2) }} Tk.</div>
-                        @elseif($totalCashOut)
+                        @if($totalCashOut > 0)
+                            <div class="mr-5 badge badge-success">Total : {{ number_format($totalCashOut,2) }} Tk.</div>
+                        @else
                             <div class="mr-5 badge badge-success">
-                                Total : {{ number_format($totalCashOut,2) }} Tk.
+                                Total : 0.00 Tk.
                             </div>
                         @endif
                     </div>

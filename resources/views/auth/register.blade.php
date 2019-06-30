@@ -40,10 +40,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('User Role') }}</label>
+                            <label for="role" style="display: none;" class="col-md-4 col-form-label text-md-right">{{ __('User Role') }}</label>
 
                             <div class="col-md-6">
-                                <input id="role" type="text" readonly  class="form-control @error('role') is-invalid @enderror" name="role" value="customer" required autocomplete="role">
+                                <input id="role" type="hidden"  class="form-control @error('role') is-invalid @enderror" name="role" value="customer" required autocomplete="role">
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -54,10 +54,24 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Account Number') }}</label>
+                            <label for="role" style="display: none;" class="col-md-4 col-form-label text-md-right">{{ __('Account Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="account_number" type="number" readonly  class="form-control @error('account_number') is-invalid @enderror" name="account_number" value="<?php echo mt_rand(15, 5000000);?>" required>
+                                <input id="account_number" type="hidden" readonly  class="form-control @error('account_number') is-invalid @enderror" name="account_number" value="<?php echo mt_rand(15, 5000000);?>" required>
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number"  required>
 
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">

@@ -26,6 +26,11 @@
                 <a class="navbar-brand" style="font-size: 34px; color: #ffffff;" href="{{ url('/') }}">
                     Customer RelationShip
                 </a>
+                @foreach($pages as $page)
+                    <a class="navbar-brand btn btn-warning" style="font-size: 18px; color: black;" href="{{ url('/page/description/'.$page->id) }}">
+                        {{ $page->name }}
+                    </a>
+                @endforeach
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

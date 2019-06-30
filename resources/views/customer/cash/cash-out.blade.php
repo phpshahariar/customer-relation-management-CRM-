@@ -35,9 +35,6 @@
                                 <br/>
                                 <label>Bank Account Number : </label>
                                 <input type="number" name="bank_account_number" class="form-control" placeholder="Enter Your Bank Account Number...">
-                                <br/>
-                                <label>Bank Amount : </label>
-                                <input type="number" name="bank_amount" class="form-control" placeholder="Enter Your Amount...">
                             </div>
                             <div class="form-group" id="mobileBank">
                                 <label>Mobile Banking Option: </label>
@@ -50,24 +47,18 @@
                                 <br/>
                                 <label>Mobile Account Number : </label>
                                 <input type="number" name="mobile_account_number" class="form-control" placeholder="Enter Your Mobile Account Number...">
-                                <br/>
-                                <label>Amount : </label>
-                                <input type="number" name="mobile_amount" class="form-control" placeholder="Enter Your Amount...">
                             </div>
                             <div class="form-group" id="agentShow">
                                 <label>Agent ID : </label>
                                 <input type="number" name="agent_account_number" class="form-control" placeholder="Enter Your User ID...">
-                                <br/>
-                                <label>Amount : </label>
-                                <input type="number" name="agent_amount" class="form-control" placeholder="Enter Your Amount...">
+
                             </div>
                             <div class="form-group" id="otherShow">
                                 <label>Others Option For Cash Out : </label>
                                 <textarea class="form-control" rows="5" name="others" placeholder="Enter Your Others Cash Out Options........"></textarea>
-                                <br/>
-                                <label>Amount : </label>
-                                <input type="number" name="others_amount" class="form-control" placeholder="Enter Your Amount...">
                             </div>
+                            <label>Amount : </label>
+                            <input type="number" name="amount" class="form-control" placeholder="Enter Your Amount...">
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 @if($totalCashOut > 0)
@@ -94,14 +85,11 @@
                             <th width="10%">SL NO</th>
                             <th>Bank Name</th>
                             <th>Bank Account</th>
-                            <th>Bank Amount</th>
                             <th>Mobile Bank</th>
                             <th>Mobile Account</th>
-                            <th>Mobile Amount</th>
                             <th>Agent ID</th>
-                            <th>Agent Amount</th>
                             <th>Others Option</th>
-                            <th>Others Amount</th>
+                            <th>Amount</th>
                             <th width="15%">Status</th>
                         </tr>
                         </thead>
@@ -124,13 +112,6 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if(isset($customer_cash_out->bank_amount))
-                                        TK. {{ number_format($customer_cash_out->bank_amount,2) }}
-                                    @else
-                                        <b>N/A</b>
-                                    @endif
-                                </td>
-                                <td>
                                     @if(isset($customer_cash_out->mobile_bank_name))
                                         {{ $customer_cash_out->mobile_bank_name }}
                                     @else
@@ -144,7 +125,6 @@
                                         <b>N/A</b>
                                     @endif
                                 </td>
-                                <td>TK. {{ number_format($customer_cash_out->mobile_amount,2) }}</td>
                                 <td>
                                     @if(isset($customer_cash_out->agent_account_number))
                                         {{ $customer_cash_out->agent_account_number }}
@@ -152,7 +132,6 @@
                                         <b>N/A</b>
                                     @endif
                                 </td>
-                                <td>TK. {{ number_format($customer_cash_out->agent_amount,2) }}</td>
                                 <td>
                                     @if(isset($customer_cash_out->others))
                                         {{ $customer_cash_out->others }}
@@ -160,7 +139,7 @@
                                         <b>N/A</b>
                                     @endif
                                 </td>
-                                <td>TK. {{ number_format($customer_cash_out->others_amount,2) }}</td>
+                                <td>TK. {{ number_format($customer_cash_out->amount,2) }}</td>
                                 <td>
                                     @if($customer_cash_out->status == 1 )
                                         <p class="badge badge-warning">Processing...</p>
