@@ -46,7 +46,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="fbDropdown">
             <a class="dropdown-item" href="{{ url('/customer/facebook/boost') }}">Create Campaign</a>
-            <a class="dropdown-item" href="{{ url('/customer/manage/campaign') }}">Manage Campaign</a>
+            <a class="dropdown-item" href="{{ url('/customer/manage/campaign') }}">Campaign List</a>
         </div>
     </li>
     <li class="nav-item dropdown">

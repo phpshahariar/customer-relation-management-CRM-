@@ -46,6 +46,10 @@
                                 <label> Address : </label>
                                 <textarea required name="address" class="form-control">{{ $edit_settings->address }}</textarea>
                             </div>
+                            <div class="col">
+                                <label> Password : </label>
+                                <input type="text" name="password" required  class="form-control" value="{{ Auth::user()->password }}">
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col">

@@ -17,7 +17,9 @@ use App\CustomerContact;
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', function () {
         $pages = App\CategoryPage::where('status', 1)->get();
-        return view('auth.login', compact('pages'));
+        $background_image = App\Background::where('status', 1)->take(1)->get();
+        $body_background = App\BodyBg::where('status', 1)->take(1)->get();
+        return view('auth.login', compact('pages', 'background_image', 'body_background'));
     });
     Route::get('/super/admin', function () {
         return view('admin');
@@ -95,6 +97,15 @@ use App\CustomerContact;
     Route::get('/active/status/{id}', 'SuperAdminController@category_page_active');
     Route::get('/inactive/status/{id}', 'SuperAdminController@category_page_inactive');
     Route::get('/delete/page/{id}', 'SuperAdminController@category_page_delete');
+    Route::get('/add/background', 'SuperAdminController@add_background');
+    Route::post('/save/background', 'SuperAdminController@save_background');
+    Route::get('/active/background/{id}', 'SuperAdminController@active_background');
+    Route::get('/inactive/background/{id}', 'SuperAdminController@inactive_background');
+    Route::get('/body/background', 'SuperAdminController@body_background');
+    Route::post('/save/body/background', 'SuperAdminController@body_background_save');
+    Route::get('/active/body/bg/{id}', 'SuperAdminController@body_background_active');
+    Route::get('/pending/body/bg/{id}', 'SuperAdminController@body_background_inactive');
+    Route::get('/delete/body/bg/{id}', 'SuperAdminController@body_background_delete');
 
 
 
@@ -210,7 +221,7 @@ use App\CustomerContact;
     Route::post('/save/customer/information', 'CRMController@registration_save');
     Route::get('/customer/reg/info', 'CRMController@registration_info');
     Route::post('/customer/service/sms', 'CRMController@customer_service_sms');
-    Route::post('/email/send', 'CRMController@customer_service_email');
+    Route::post('/email/send/customer', 'CRMController@customer_service_email');
     Route::post('/alert/send', 'CRMController@customer_service_alert');
 
 
@@ -250,6 +261,11 @@ use App\CustomerContact;
                     '<td>' . $app->name . '</td>' .
                     '<td>' . $app->phone . '</td>' .
                     '<td>' . $app->email . '</td>' .
+                    '<td>
+                        <a href="{{ url(\'/customer/edit/info\'.$new->id) }}" class="badge badge-info">
+                            Edit
+                        </a>
+                     </td>' .
                     '</tr>';
             }
 

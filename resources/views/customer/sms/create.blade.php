@@ -23,8 +23,8 @@
                                         <span style="color: red"> {{ $errors->has('sms') ? $errors->first('sms') : ' ' }}</span>
                                     </div>
                                     <div class="form-group">
-                                        <label>Enter Your Message : </label>
-                                        <textarea name="message"  id="editor2" class="form-control" placeholder="Enter Your Message"></textarea>
+                                        <label>Enter Your Message : <p id="charNumTwo" style="font-weight: bold;">20 character</p></label>
+                                        <textarea name="message" onkeyup="countChars(this);"  class="form-control" placeholder="Enter Your Message"></textarea>
                                         <span style="color: red"> {{ $errors->has('message') ? $errors->first('message') : ' ' }}</span>
                                     </div>
                                     <div class="form-group">
@@ -79,8 +79,8 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Enter Your Message : </label>
-                                        <textarea name="group_message"  id="editor1" class="form-control" placeholder="Enter Your Message"></textarea>
+                                        <label>Enter Your Message : <p id="charNum" style="font-weight: bold;">20 character</p></label>
+                                        <textarea name="group_message" onkeyup="countChars(this);" class="form-control" placeholder="Enter Your Message"></textarea>
                                     </div>
 
                                     <div class="form-group">
@@ -94,6 +94,30 @@
             </div>
         </div>
     </div>
+    <script>
+        function countChars(obj) {
+            var maxLength = 20;
+            var strLength = obj.value.length;
+            var charRemain = (maxLength - strLength);
+            if (charRemain < 0) {
+                document.getElementById('charNum').innerHTML = '<span style="color:red;">You have exceeded the limit of '+maxLength+ '  characters </span>';
+            }else {
+                document.getElementById('charNum').innerHTML = charRemain + '  characters remaining ';
+            }
+        }
+    </script>
+    <script>
+        function countChars(obj) {
+            var maxLength = 20;
+            var strLength = obj.value.length;
+            var charRemain = (maxLength - strLength);
+            if (charRemain < 0) {
+                document.getElementById('charNumTwo').innerHTML = '<span style="color:red;">You have exceeded the limit of '+maxLength+ '  characters </span>';
+            }else {
+                document.getElementById('charNumTwo').innerHTML = charRemain + '  characters remaining ';
+            }
+        }
+    </script>
     <script src="{{ asset('/assets/') }}/vendor/jquery/jquery.min.js"></script>
     <script src="//cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
     <script>

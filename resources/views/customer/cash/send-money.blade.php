@@ -21,7 +21,7 @@
                             @csrf
                             <div class="form-group">
                                 <input type="number" name="amount" required id="amount" class="form-control input" value="">
-                                <input type="number" name="main_amount"  id="main_amount" class="form-control input" value="{{$totalCashOut}}">
+                                <input type="hidden" name="main_amount"  id="main_amount" class="form-control input" value="{{$totalCashOut}}">
                             </div>
 
                             <div class="form-group">

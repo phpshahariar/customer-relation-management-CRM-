@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\AdminLogin;
+use App\Background;
+use App\BodyBg;
 use App\Campaign;
 use App\CampaignLow;
 use App\CashIn;
@@ -20,6 +22,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Session;
 use DB;
+use Image;
 class SuperAdminController extends Controller
 {
 
@@ -484,7 +487,81 @@ class SuperAdminController extends Controller
         return redirect()->back()->with('message', 'Cagtegory Page Deleted');
     }
 
+    public function add_background(){
+        $show_background = Background::get();
+        return view('admin.customer.add-background', compact('show_background'));
+    }
 
+    public function save_background(Request $request){
+        $background_image = new Background();
+        if ($request->hasFile('image')){
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+            $fileName = time().'_background_'.$imageName;
+            $directory = public_path('/background-images/');
+            $imgUrl = $directory.$fileName;
+            Image::make($image)->save($imgUrl);
+            $background_image->image = $fileName;
+        }
 
+        $background_image->description = $request->description;
+        $background_image->save();
+        return redirect()->back()->with('message', 'Background Images Add Successfully');
+    }
+
+    public function active_background($id){
+        $active_background = Background::find($id);
+        $active_background->status = 0;
+        $active_background->save();
+        return redirect()->back()->with('message', 'Background Image Inactivated');
+    }
+
+    public function inactive_background($id){
+        $active_background = Background::find($id);
+        $active_background->status = 1;
+        $active_background->save();
+        return redirect()->back()->with('message', 'Background Image Activated');
+    }
+
+    public function body_background(){
+        $show_body_image = BodyBg::get();
+        return view('admin.customer.body-bg', compact('show_body_image'));
+    }
+
+    public function body_background_save(Request $request){
+        $bg_images = new BodyBg();
+        if ($request->hasFile('image')){
+            $images = $request->file('image');
+            $imgName = $images->getClientOriginalName();
+            $fileName = time().'_bg-image_'.$imgName;
+            $directory = public_path('/bg-images/');
+            $imgUrl = $directory.$fileName;
+            Image::make($images)->save($imgUrl);
+            $bg_images->image = $fileName;
+        }
+        $bg_images->save();
+        return redirect()->back()->with('message', 'Body Background Images Add Successfully');
+
+    }
+
+    public function body_background_active($id){
+        $active_body_bg = BodyBg::find($id);
+        $active_body_bg->status =0;
+        $active_body_bg->save();
+        return redirect()->back()->with('message', 'Background Image Inactive');
+    }
+
+    public function body_background_inactive($id){
+        $active_body_bg = BodyBg::find($id);
+        $active_body_bg->status =1;
+        $active_body_bg->save();
+        return redirect()->back()->with('message', 'Background Image Active');
+    }
+
+    public function body_background_delete($id){
+        $delete_body_bg = BodyBg::find($id);
+        $delete_body_bg->delete();
+        return redirect()->back()->with('message', 'Body Background Image Delete');
+    }
 
 }

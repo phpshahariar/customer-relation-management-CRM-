@@ -18,7 +18,11 @@
             <select class="form-control" required name="group_id" id="group_id">
                 <option> --- Select Group --- </option>
                 @foreach($show_group as $group)
-                    <option value="{{ $group->id }}">{{ $group->group_name }}</option>
+                    <?php
+                        $data = App\CustomerContact::where('group_id', $group->id)->get();
+                        $wordCount = $data->count();
+                    ?>
+                    <option value="{{ $group->id }}">{{ $group->group_name }} ( {{ $wordCount }} )</option>
                 @endforeach
             </select>
 
@@ -152,11 +156,7 @@
                                         <td width="20%">{{ $contact->email }}</td>
                                     @else
                                     @endif
-                                    <td>
-                                        <a href="{{ url('/customer/edit/info/'.$contact->id) }}" class="badge badge-info">
-                                            Edit
-                                        </a>
-                                    </td>
+
                                 </tr>
                             @endforeach
                         @foreach($new_show as $new)

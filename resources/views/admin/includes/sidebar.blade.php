@@ -32,6 +32,8 @@
             <a class="dropdown-item" href="{{ url('/customer/access/power') }}">Access Power</a>
             <a class="dropdown-item" href="{{ url('/customer/list') }}">Customer List</a>
             <a class="dropdown-item" href="{{ url('/customer/cash/out') }}">Customer Cash Out</a>
+            <a class="dropdown-item" href="{{ url('/add/background') }}">Add Background</a>
+            <a class="dropdown-item" href="{{ url('/body/background') }}">Body Background</a>
         </div>
     </li>
     <li class="nav-item">

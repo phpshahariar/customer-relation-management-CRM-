@@ -58,7 +58,8 @@
                                 <textarea class="form-control" rows="5" name="others" placeholder="Enter Your Others Cash Out Options........"></textarea>
                             </div>
                             <label>Amount : </label>
-                            <input type="number" name="amount" class="form-control" placeholder="Enter Your Amount...">
+                            <input type="number" name="amount" id="input" class="form-control" placeholder="Enter Your Amount...">
+                            <input type="hidden" name="main_amount" id="main_amount" value="{{ $totalCashOut }}" class="form-control" placeholder="Enter Your Amount...">
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                                 @if($totalCashOut > 0)
@@ -162,6 +163,7 @@
 {{--    JQuery Functions--}}
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     
     <script>
         $(document).ready(function () {
@@ -213,6 +215,30 @@
                 return false;
             }
         }
+    </script>
+
+    <script>
+        $('#input').on('input', function () {
+            var value = $(this).val();
+            var data = $('#main_amount').val();
+            if ((value !== '') && (value.indexOf('.') === -1)) {
+                $(this).val(Math.max(Math.min(value, data), -data));
+                if (data < value) {
+                    // alert('you have reached a limit');
+                    Swal.fire({
+                        type: 'error',
+                        title: 'SORRY',
+                        text: 'SORRY Insufficient Balance!',
+                    })
+                }
+            }
+        });
+
+        // $( "#myinput2" ).on('input', function() {
+        //     if ($(this).val().length>=3) {
+        //         alert('you have reached a limit of 3');
+        //     }
+        // });
     </script>
 
 @endsection

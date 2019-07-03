@@ -11,6 +11,7 @@ use App\CustomerCampaign;
 use App\CustomerCashIn;
 use App\CustomerContact;
 use App\CustomerGroup;
+use App\CustomerGroupSMS;
 use App\CustomerMail;
 use App\CustomerSendMoney;
 use App\CustomerSMS;
@@ -84,7 +85,8 @@ class CustomerController extends Controller
             ->orWhere('crm_status', 1)
             ->get();
         $show_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
-        $show_contact = CustomerContact::get();
+        $show_contact = CustomerContact::where('group_id', 'id')->get();
+        return $show_contact;
         $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
             ->where('status',1)
             ->get();
@@ -131,11 +133,13 @@ class CustomerController extends Controller
 
         $send_mail = new CustomerMail();
         $send_mail->email = $request->email;
+        $send_mail->subject = $request->subject;
         $send_mail->message = $request->message;
         $send_mail->user_account = $request->user_account;
         $send_mail->user_id = $request->user_id;
         $send_mail->save();
         Session::put('message', $send_mail->message);
+        Session::put('subject', $send_mail->subject);
         Session::put('user_account', $send_mail->user_account);
         Session::put('user_id', $send_mail->user_id);
 
@@ -281,7 +285,8 @@ class CustomerController extends Controller
     public function upload_customer_data()
     {
         $show_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
-        $show_contact = CustomerContact::where('group_id', Auth()->user()->id)->get();
+        $show_contact = CustomerContact::get();
+//        return count($show_contact);
         $new_show = SingleData::where('group_id', Auth()->user()->id)->get();
 
 //        foreach ($show_contact as $contact) {
@@ -1079,7 +1084,11 @@ class CustomerController extends Controller
 
         $totalCost = $customerCash - $customerCampaign;
 
-        return view('customer.sms.send-list', compact('customer_access', 'customer_sms_list','totalCost', 'totalCashOut'));
+        $sms_group_list = CustomerGroupSMS::where('user_id', Auth::user()->id)
+            ->get();
+
+
+        return view('customer.sms.send-list', compact('customer_access', 'customer_sms_list','totalCost', 'totalCashOut', 'sms_group_list'));
     }
 
     public function send_sms_customer_group()
@@ -1134,9 +1143,11 @@ class CustomerController extends Controller
         $all_mail = $users->pluck('email')->toArray();
 
         $save_mail = new GroupMailStore();
+        $save_mail->subject = $request->subject;
         $save_mail->message = $request->message;
         $save_mail->save();
         Session::put('message', $save_mail->message);
+        Session::put('subject', $save_mail->subject);
 
         Mail::send('customer.mail.email', $all_mail, function ($message) use ($all_mail) {
             $message->to($all_mail)->subject('Hello group');
@@ -1153,6 +1164,14 @@ class CustomerController extends Controller
 
     public function sendSmsMulti(Request $request)
     {
+        $group_sms_save = new CustomerGroupSMS();
+        $group_sms_save->group_id = $request->group_id;
+        $group_sms_save->user_id = Auth::user()->id;
+        $group_sms_save->group_message = $request->group_message;
+        $group_sms_save->save();
+
+
+
         $url = 'http://banglakingssoft.powersms.net.bd/httpapi/sendsms';
 
         $comma_separated = implode(",", $request->number);

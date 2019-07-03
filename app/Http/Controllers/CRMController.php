@@ -146,7 +146,7 @@ class CRMController extends Controller
             Session::put('user_id', $service_email->user_id);
         }
 
-        Mail::send('customer.mail.mail-view', $explode, function ($message) use ($explode) {
+        Mail::send('customer.mail.page', $explode, function ($message) use ($explode) {
             $message->to($explode);
             $message->subject('Hello Service mail');
         });

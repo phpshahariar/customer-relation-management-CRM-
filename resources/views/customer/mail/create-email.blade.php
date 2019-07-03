@@ -25,6 +25,11 @@
                                         <span style="color: red"> {{ $errors->has('email') ? $errors->first('email') : ' ' }}</span>
                                     </div>
                                     <div class="form-group">
+                                        <label>Subject : </label>
+                                        <input type="text" required name="subject" class="form-control" placeholder="Enter Your Subject....">
+                                        <span style="color: red"> {{ $errors->has('subject') ? $errors->first('subject') : ' ' }}</span>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Your Message : </label>
                                         <textarea name="message" required id="editor1" class="form-control" placeholder="Enter Your Message"></textarea>
                                         <span style="color: red"> {{ $errors->has('message') ? $errors->first('message') : ' ' }}</span>
@@ -49,17 +54,23 @@
                                     <select class="form-control" required name="group_id" id="group_id">
                                         <option> --- Select Group --- </option>
                                         @foreach($show_group as $group)
-                                            <option value="{{ $group->id }}">{{ $group->group_name }}<?php echo count($show_group);?></option>
+                                            <option value="{{ $group->id }}">{{ $group->group_name }} {{ count($show_contact) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <form action="{{ url('/customer/group/mail') }}" method="post">
                                     @csrf
                                     <div class="form-group">
+                                        <label>Subject : </label>
+                                        <input type="text" required name="subject" class="form-control" placeholder="Enter Your Subject....">
+                                        <span style="color: red"> {{ $errors->has('subject') ? $errors->first('subject') : ' ' }}</span>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Your Message : </label>
                                         <textarea name="message" required id="editor2" class="form-control" placeholder="Enter Your Message"></textarea>
                                         <span style="color: red"> {{ $errors->has('message') ? $errors->first('message') : ' ' }}</span>
                                     </div>
+
                                     <input type="submit" class="btn btn-danger btn-block" value="Group Mail Send">
                                 </form>
                         </div>

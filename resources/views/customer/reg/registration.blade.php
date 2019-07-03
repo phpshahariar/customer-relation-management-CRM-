@@ -43,7 +43,7 @@
                 <div class="col-md-6">
                     <form action="{{ url('/chating') }}" method="post">
                         @csrf
-                            <div class="col-md-12 tab-content" >
+                            <div class="col-md-12 tab-content" id="history">
                                 @foreach($show_history as $history)
                                     <p>{!! $history->chating !!}<br/>{!! $history->created_at !!}[{!! Auth::user()->name !!}]</p>
                                 @endforeach
@@ -379,8 +379,6 @@
                     $('.note').val(data[i].notes);
                     $('.created_at').val(data[i].created_at);
                     $('.createdBy').val(data[i].created_by);
-                    $('#chatHistory').val(data[i].chating);
-                    $('#id').val(data[i].id);
 
                 }
             }
