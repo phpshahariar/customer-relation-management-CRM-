@@ -26,12 +26,7 @@
                 <a class="navbar-brand" style="font-size: 34px; color: #ffffff;" href="{{ url('/') }}">
                     Customer RelationShip
                 </a>
-                @foreach($pages as $page)
-                    <a class="navbar-brand btn btn-warning" style="font-size: 18px; color: black;" href="{{ url('/page/description/'.$page->id) }}">
-                        {{ $page->name }}
-                    </a>
-                @endforeach
-                <form method="POST" action="{{ route('login') }}" style="margin-top: 50px;">
+                <form method="POST" action="{{ route('login') }}" style="margin-top: 50px; margin-left: 170px;">
                     @csrf
                     <table class="table table-borderless" style="margin-left: 50px;">
                         <tr>
@@ -95,23 +90,7 @@
 {{--                                </li>--}}
 {{--                            @endif--}}
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
                         @endguest
                     </ul>
                 </div>
@@ -230,7 +209,13 @@
                     </div>
                 </div>
             </div>
+            @foreach($pages as $page)
+                <a style="font-size: 18px; color: white; margin-left: 20px;" href="{{ url('/page/description/'.$page->id) }}">
+                    {{ $page->name }}
+                </a>
+            @endforeach
         </main>
+
     </div>
 {{--<main class="py-4">--}}
 {{--    @yield('content')--}}

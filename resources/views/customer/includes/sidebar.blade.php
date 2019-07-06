@@ -50,9 +50,9 @@
         </div>
     </li>
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="voiceDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link" href="{{ url('/voice/mail') }}" id="voiceMail" role="button">
             <i class="fas fa-fw fa-mail-bulk"></i>
-            <span style="color: red">Voice Mail</span>
+            <span style="color: red"> Voice Mail</span>
         </a>
 {{--        <div class="dropdown-menu" aria-labelledby="voiceDropdown">--}}
 {{--            <a class="dropdown-item" href="#">Create</a>--}}
@@ -91,7 +91,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="crmDropdown">
             <a class="dropdown-item" href="{{ url('/customer/registration') }}">Customer Service</a>
-            <a class="dropdown-item" href="{{ url('/registration') }}">Customer Registration</a>
+            <a class="dropdown-item" href="{{ url('/crm/list') }}">Customer List</a>
             <a class="dropdown-item" href="#">Need Requirement</a>
             <a class="dropdown-item" href="#">Need Requirement</a>
         </div>

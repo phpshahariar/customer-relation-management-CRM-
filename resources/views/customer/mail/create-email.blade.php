@@ -48,13 +48,28 @@
                             <div class="card-header">
                                 <h2>Group Mail</h2>
                             </div>
+
+{{--                            @php--}}
+{{--                                $sum = 0--}}
+{{--                            @endphp--}}
+{{--                            @foreach($fee as $show)--}}
+{{--                                @php--}}
+{{--                                    $sum = ($sum + ($show->price));--}}
+{{--                                @endphp--}}
+{{--                            @endforeach--}}
+
+
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Select Group : </label>
                                     <select class="form-control" required name="group_id" id="group_id">
                                         <option> --- Select Group --- </option>
                                         @foreach($show_group as $group)
-                                            <option value="{{ $group->id }}">{{ $group->group_name }} {{ count($show_contact) }}</option>
+                                            <?php
+                                                $data = App\CustomerContact::where('group_id', $group->id)->get()->count();
+
+                                            ?>
+                                            <option value="{{ $group->id }}">{{ $group->group_name }} ({{$data}})</option>
                                         @endforeach
                                     </select>
                                 </div>

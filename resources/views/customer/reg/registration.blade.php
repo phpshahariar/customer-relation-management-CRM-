@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-dark">
             <a class="btn btn-danger" href="{{ url('/home') }}">Back</a>
-            <input type="text" name="phone_number"  class="form-control phone_number" style="width: 300px; margin-left: 400px;" placeholder="Searching....">
+            <input type="text" name="phone_number"  class="form-control phone_number phone_number_chat" style="width: 300px; margin-left: 400px;" placeholder="Searching....">
         </nav>
 {{--        <table>--}}
 {{--            <tr>--}}
@@ -43,16 +43,14 @@
                 <div class="col-md-6">
                     <form action="{{ url('/chating') }}" method="post">
                         @csrf
-                            <div class="col-md-12 tab-content" id="history">
-                                @foreach($show_history as $history)
-                                    <p>{!! $history->chating !!}<br/>{!! $history->created_at !!}[{!! Auth::user()->name !!}]</p>
-                                @endforeach
+                            <div class="col-md-12 tab-content">
+                                <div class="content_text"></div>
                             </div>
                             <br/>
                             <br/>
-                            <textarea class="form-control" rows="4" name="chating" placeholder="Input Your Text...."></textarea>
-                            <input type="hidden" name="phone_number" class="form-control" value="{{ Auth::user()->phone_number }}">
-                            <span style="color: red"> {{ $errors->has('chating') ? $errors->first('chating') : ' ' }}</span>
+
+{{--                            <input type="hidden" name="phone_number" class="form-control" value="{{ Auth::user()->phone_number }}">--}}
+{{--                            <span style="color: red"> {{ $errors->has('chating') ? $errors->first('chating') : ' ' }}</span>--}}
                             <nav class="navbar navbar-expand-lg navbar-dark bg-light" style="margin-top: 10px;">
                                 <div class="collapse navbar-collapse" id="navbarNav">
                                     <ul class="navbar-nav mx-auto">
@@ -78,7 +76,7 @@
                     </form>
                 </div>
                 <div class="col-md-6">
-                    <form action="{{url('/save/customer/information')}}" method="post" id="updateData">
+                    <form action="{{url('save/customer/information')}}" method="post" id="updateData">
                         @csrf
                         <div class="col-md-12">
                             <div class="card">
@@ -89,6 +87,7 @@
                                             <td >
                                                 <label>Name</label>
                                                 <input type="text"  name="name" class="form-control name" placeholder="Enter Name....">
+                                                <input type="hidden"  name="customer_id" class="form-control customer_id">
                                                 <span style="color: red"> {{ $errors->has('district') ? $errors->first('district') : ' ' }}</span>
                                             </td>
                                             <td>
@@ -154,7 +153,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-
+                                <textarea class="form-control" rows="4" name="chating" placeholder="Input Your Text...."></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-success btn-block" name="btn" value="SubmiT">
@@ -273,91 +272,8 @@
 {{--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
 
-{{--    <script>--}}
-{{--        $(document).ready(function () {--}}
-{{--            $(".phone").click(function () {--}}
-{{--                addRow();--}}
-{{--            });--}}
-{{--            --}}
-{{--            function addRow() {--}}
-{{--                var add = '<tr>\n' +--}}
-{{--                    '                                <td id="more">\n' +--}}
-{{--                    '                                    <label>Phone</label>\n' +--}}
-{{--                    '                                    <input type="number" name="phone" class="form-control phoneNumber" placeholder="Enter Phone number....">\n' +--}}
-{{--                    '                                </td>\n' +--}}
-{{--                    '                                <td>\n' +--}}
-{{--                    '                                    <label></label>\n' +--}}
-{{--                    '                                    <button type="button" class="btn btn-danger remove" style="margin-top: 30px;">Remove</button>\n' +--}}
-{{--                    '                                </td>\n' +--}}
-{{--                    '                            </tr>'--}}
-
-{{--                $("#more").append(add);--}}
-{{--            }--}}
-
-{{--        $(".moreEmail").click(function () {--}}
-{{--           addEmail();--}}
-{{--        });--}}
-
-{{--            function addEmail() {--}}
-{{--                var moreEmail = '<tr>\n' +--}}
-{{--                    '                                <td id="emailMore">\n' +--}}
-{{--                    '                                    <label>E-mail</label>\n' +--}}
-{{--                    '                                    <input type="email" name="email" class="form-control"  placeholder="Enter Email....">\n' +--}}
-{{--                    '                                </td>\n' +--}}
-{{--                    '                                <td>\n' +--}}
-{{--                    '                                    <label></label>\n' +--}}
-{{--                    '                                    <button type="button" id="email" class="btn btn-danger emailRemove" style="margin-top: 30px;">Remove</button>\n' +--}}
-{{--                    '                                </td>\n' +--}}
-{{--                    '                            </tr>'--}}
-
-{{--                $("#emailMore").append(moreEmail);--}}
-{{--            }--}}
-
-{{--            $(".addService").click(function () {--}}
-{{--                moreService();--}}
-{{--            });--}}
-{{--            function moreService() {--}}
-{{--                var service = '<tr>\n' +--}}
-{{--                    '                                <td id="moreService">\n' +--}}
-{{--                    '                                    <label>Service</label>\n' +--}}
-{{--                    '                                    <input type="text" name="service" class="form-control " placeholder="Enter Service....">\n' +--}}
-{{--                    '                                </td>\n' +--}}
-{{--                    '                                <td>\n' +--}}
-{{--                    '                                    <label></label>\n' +--}}
-{{--                    '                                    <button type="button" class="btn btn-danger removeService" style="margin-top: 30px;">Remove</button>\n' +--}}
-{{--                    '                                </td>\n' +--}}
-{{--                    '                            </tr>'--}}
-
-{{--                $("#moreService").append(service);--}}
-{{--            }--}}
-{{--        });--}}
-{{--    </script>--}}
-
-{{--    <script>--}}
-{{--        $(document).click(function () {--}}
-{{--            $(".remove").click(function () {--}}
-{{--                $(this).parent().parent().remove();--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--    <script>--}}
-{{--        $(document).click(function () {--}}
-{{--            $(".emailRemove").click(function () {--}}
-{{--                $(this).parent().parent().remove();--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--    <script>--}}
-{{--        $(document).click(function () {--}}
-{{--            $(".removeService").click(function () {--}}
-{{--                $(this).parent().parent().remove();--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
-
-<script>
+<script type="text/javascript">
     $('.phone_number').keyup(function () {
         var phone = $(this).val();
         $.ajax({
@@ -365,24 +281,39 @@
             url: "{{ url('customer/reg/info') }}",
             data:{phone:phone},
             success:function (data) {
-                console.log(data);
-                for (var i=0; i<data.length; i++) {
-                    $('.customerBy').val(data[i].customer_by);
-                    $('.name').val(data[i].name);
-                    $('.company').val(data[i].company_name);
-                    $('#phone').val(data[i].phone);
-                    $('.email').val(data[i].email_address);
-                    $('.district').val(data[i].district);
-                    $('.area').val(data[i].area);
-                    $('.address').val(data[i].address);
-                    $('.service').val(data[i].service);
-                    $('.note').val(data[i].notes);
-                    $('.created_at').val(data[i].created_at);
-                    $('.createdBy').val(data[i].created_by);
+                // console.log(data);
+                $('.customer_id').val(data.id);
+                $('.customerBy').val(data.customer_by);
+                $('.name').val(data.name);
+                $('.company').val(data.company_name);
+                $('#phone').val(data.phone);
+                $('.email').val(data.email_address);
+                $('.district').val(data.district);
+                $('.area').val(data.area);
+                $('.address').val(data.address);
+                $('.service').val(data.service);
+                $('.note').val(data.notes);
+                $('.created_at').val(data.created_at);
+                $('.createdBy').val(data.created_by);
+                $('#history').text(data.chating);
+            }
+        });
+    });
 
-                }
+    $('.phone_number_chat').keyup(function () {
+        var phone = $(this).val();
+        var bk = '';
+        $.ajax({
+            type:'GET',
+            url: "{{ url('customer/chat/info') }}",
+            data:{phone:phone},
+            success:function (data) {
+                $('.content_text').html(data);
+
+
             }
         });
     });
 </script>
+</body>
 </html>

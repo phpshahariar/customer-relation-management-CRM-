@@ -14,10 +14,12 @@ use App\CustomerAccess;
 use App\CustomerCampaign;
 use App\CustomerCashIn;
 use App\CustomerMail;
+use App\EmailFee;
 use App\PaymentMethod;
 use App\Recharge;
 use App\Reseller;
 use App\ResellerMail;
+use App\SetrviceFee;
 use App\User;
 use Illuminate\Http\Request;
 use Session;
@@ -562,6 +564,46 @@ class SuperAdminController extends Controller
         $delete_body_bg = BodyBg::find($id);
         $delete_body_bg->delete();
         return redirect()->back()->with('message', 'Body Background Image Delete');
+    }
+
+    public function sms_mail_money(){
+        $fees = SetrviceFee::all();
+        $email_fee = EmailFee::all();
+        return view('admin.customer.service-fee', compact('fees', 'email_fee'));
+    }
+
+    public function sms_money_edit($id){
+        $edit_sms = SetrviceFee::find($id);
+        return view('admin.customer.edit-sms', compact('edit_sms'));
+    }
+
+    public function sms_money_update(Request $request){
+        $update_sms_price = SetrviceFee::find($request->id);
+        $update_sms_price->serviceFee = $request->serviceFee;
+        $update_sms_price->price = $request->price;
+        $update_sms_price->update();
+        return redirect('/sms/mail/money')->with('message', 'Service Fee Updated');
+    }
+
+    public function email_money_edit($id){
+        $edit_email = EmailFee::find($id);
+        return view('admin.customer.email-edit', compact('edit_email'));
+    }
+
+    public function email_money_update(Request $request){
+        $update_email_price = EmailFee::find($request->id);
+        $update_email_price->servicename = $request->servicename;
+        $update_email_price->price = $request->price;
+        $update_email_price->update();
+        return redirect('/sms/mail/money')->with('message', 'Service Fee Updated');
+    }
+
+    public function sms_mail_money_save(Request $request){
+        $service_fee = new SetrviceFee();
+        $service_fee->serviceFee =$request->serviceFee;
+        $service_fee->price =$request->price;
+        $service_fee->save();
+        return redirect()->back()->with('message', 'Service Fee Added');
     }
 
 }

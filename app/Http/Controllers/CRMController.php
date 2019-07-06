@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Alert;
+use App\CashOut;
 use App\Chat;
 use App\ChatRegister;
 use App\CustomerAccess;
@@ -13,10 +14,12 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 use Session;
+
 class CRMController extends Controller
 {
-    public function customer_chating(Request $request){
-        $this->validate($request,[
+    public function customer_chating(Request $request)
+    {
+        $this->validate($request, [
             'chating' => 'required',
         ]);
         $customer_chating = new Chat();
@@ -27,21 +30,22 @@ class CRMController extends Controller
         return redirect()->back();
     }
 
-    public function registration(){
-        $customer_cash_request = CustomerCashIn::where('user_id',Auth::user()->id)
-            ->where('status',1)
+    public function registration()
+    {
+        $customer_cash_request = CustomerCashIn::where('user_id', Auth::user()->id)
+            ->where('status', 1)
             ->get();
         $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
             ->where('status', 1)
             ->get();
 
         $customerCampaign = 0;
-        foreach ($customer_campaign_request as $customer_campaign){
+        foreach ($customer_campaign_request as $customer_campaign) {
             $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
         }
 
         $customerCash = 0;
-        foreach ($customer_cash_request as $customer_cash){
+        foreach ($customer_cash_request as $customer_cash) {
             $customerCash = ($customerCash + ($customer_cash->amount));
 
         }
@@ -49,49 +53,101 @@ class CRMController extends Controller
         $totalCost = $customerCash - $customerCampaign;
 
         $customer_access = CustomerAccess::where('user_id', Auth::user()->id)->get();
-        return view('customer.reg.registration', compact('totalCost','customer_access'));
+        return view('customer.reg.registration', compact('totalCost', 'customer_access'));
     }
 
-    public function registration_save(Request $request){
-        $this->validate($request,[
-            'name'  => 'required|max:255',
-            'company_name'  => 'required',
-            'phone'  => 'required|numeric|unique:chat_registers',
-            'email_address'  => 'required|email',
-            'district'  => 'required',
-            'area'  => 'required',
-            'address'  => 'required',
-            'service'  => 'required',
-            'notes'  => 'required',
-            'customer_by'  => 'required',
-        ]);
+    public function crm_list(){
+        $customer_cash_request = CustomerCashIn::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign) {
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash) {
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+        $show_customer_cash_out = CashOut::where('user_id', Auth::user()->id)
+            ->where('status', 2)
+            ->get();
+        $cashOutMoney = 0;
+        foreach ($show_customer_cash_out as $customer_cash_out) {
+            $cashOutMoney = ($cashOutMoney + ($customer_cash_out->amount));
+        }
+
+        $totalCashOut = $customerCash - $cashOutMoney;
 
 
-
-        $reg_customer = new ChatRegister();
-        $reg_customer->user_id = Auth::user()->id;
-        $reg_customer->created_by = Auth::user()->name;
-        $reg_customer->name = $request->name;
-        $reg_customer->company_name = $request->company_name;
-        $reg_customer->phone = $request->phone;
-        $reg_customer->email_address = $request->email_address;
-        $reg_customer->district = $request->district;
-        $reg_customer->area = $request->area;
-        $reg_customer->address = $request->address;
-        $reg_customer->service = $request->service;
-        $reg_customer->notes = $request->notes;
-        $reg_customer->customer_by = $request->customer_by;
-        $reg_customer->chating = $request->chating;
-        $reg_customer->save();
-        return redirect()->back()->with('message', 'New Customer Add Successfully');
+        $totalCost = $customerCash - $customerCampaign;
+        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)->get();
+        $show_crm = ChatRegister::all();
+        return view('customer.reg.customer-info', compact('show_crm','totalCost', 'customer_access', 'totalCashOut'));
     }
 
-    public function registration_info(Request $request){
-        $reg_customer_info = ChatRegister::where('phone', $request->phone)->get();
+    public function customerChatInfo(Request $request){
+        $chats = Chat::where('phone', $request->phone)->get();
+        return view('customer.reg.chats', compact('chats'));
+    }
+
+    public function registration_save(Request $request)
+    {
+//        $this->validate($request,[
+//            'name'  => 'required|max:255',
+//            'company_name'  => 'required',
+//            'phone'  => 'required|numeric',
+//            'email_address'  => 'required|email',
+//            'district'  => 'required',
+//            'area'  => 'required',
+//            'address'  => 'required',
+//            'service'  => 'required',
+//            'notes'  => 'required',
+//            'customer_by'  => 'required',
+//        ]);
+
+        $customer_id = $request->customer_id;
+        if ($customer_id != null) {
+            $chat = new Chat();
+            $chat->user_id = Auth::user()->id;
+            $chat->phone = $request->phone;
+            $chat->chating = $request->chating;
+            $chat->save();
+            return redirect()->back()->with('message', 'Customer Info Update');
+        } else {
+            $reg_customer = new ChatRegister();
+            $reg_customer->user_id = Auth::user()->id;
+            $reg_customer->created_by = Auth::user()->name;
+            $reg_customer->name = $request->name;
+            $reg_customer->company_name = $request->company_name;
+            $reg_customer->phone = $request->phone;
+            $reg_customer->email_address = $request->email_address;
+            $reg_customer->district = $request->district;
+            $reg_customer->area = $request->area;
+            $reg_customer->address = $request->address;
+            $reg_customer->service = $request->service;
+            $reg_customer->notes = $request->notes;
+            $reg_customer->customer_by = $request->customer_by;
+            $reg_customer->chating = $request->chating;
+            $reg_customer->save();
+            return redirect()->back()->with('message', 'New Customer Add Successfully');
+        }
+    }
+
+    public function registration_info(Request $request)
+    {
+        $reg_customer_info = ChatRegister::where('phone', $request->phone)->first();
         return $reg_customer_info;
     }
 
-    public function customer_service_sms(Request $request){
+    public function customer_service_sms(Request $request)
+    {
         $url = 'http://banglakingssoft.powersms.net.bd/httpapi/sendsms';
         $fields = array(
             'userId' => urlencode('banglakings'),
@@ -129,7 +185,8 @@ class CRMController extends Controller
         return redirect()->back()->with('message', 'Your Message Send Your Customer');
     }
 
-    public function customer_service_email(Request $request){
+    public function customer_service_email(Request $request)
+    {
         $this->validate($request, [
             'email' => 'required',
             'message' => 'required'
@@ -141,7 +198,7 @@ class CRMController extends Controller
         $service_email->user_id = Auth::user()->id;
         $service_email->email = $request->email;
         $service_email->message = $request->message;
-        if ($service_email->save()){
+        if ($service_email->save()) {
             Session::put('message', $service_email->message);
             Session::put('user_id', $service_email->user_id);
         }
@@ -154,10 +211,11 @@ class CRMController extends Controller
         return redirect()->back()->with('message', 'Service Email Send Successfully');
     }
 
-    public function customer_service_alert(Request $request){
-        $this->validate($request,[
-            'alert_date'  => 'required',
-            'message'  => 'required',
+    public function customer_service_alert(Request $request)
+    {
+        $this->validate($request, [
+            'alert_date' => 'required',
+            'message' => 'required',
         ]);
 
         $service_alert = new Alert();

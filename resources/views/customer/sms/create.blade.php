@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Enter Your Message : <p id="charNumTwo" style="font-weight: bold;">20 character</p></label>
-                                        <textarea name="message" onkeyup="countChars(this);"  class="form-control" placeholder="Enter Your Message"></textarea>
+                                        <textarea name="message" onkeyup="charsCount(this);"  class="form-control" placeholder="Enter Your Message"></textarea>
                                         <span style="color: red"> {{ $errors->has('message') ? $errors->first('message') : ' ' }}</span>
                                     </div>
                                     <div class="form-group">
@@ -49,7 +49,11 @@
                                         <select class="form-control phoneNumber"  name="group_id" id="group_id">
                                             <option> -- Select Group -- </option>
                                             @foreach($all_group as $group)
-                                                <option value="{{ $group->id }}">{{ $group->group_name }}</option>
+                                                <?php
+                                                    $data = App\CustomerContact::where('group_id', $group->id)->get();
+                                                    $wordCount = $data->count();
+                                                ?>
+                                                <option value="{{ $group->id }}">{{ $group->group_name }} ({{$wordCount}})</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -107,7 +111,7 @@
         }
     </script>
     <script>
-        function countChars(obj) {
+        function charsCount(obj) {
             var maxLength = 20;
             var strLength = obj.value.length;
             var charRemain = (maxLength - strLength);

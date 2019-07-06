@@ -106,6 +106,12 @@ use App\CustomerContact;
     Route::get('/active/body/bg/{id}', 'SuperAdminController@body_background_active');
     Route::get('/pending/body/bg/{id}', 'SuperAdminController@body_background_inactive');
     Route::get('/delete/body/bg/{id}', 'SuperAdminController@body_background_delete');
+    Route::get('/sms/mail/money', 'SuperAdminController@sms_mail_money');
+    Route::post('/save/service/fee', 'SuperAdminController@sms_mail_money_save');
+    Route::get('/edit/sms/service/{id}', 'SuperAdminController@sms_money_edit');
+    Route::post('/update/sms/fee', 'SuperAdminController@sms_money_update');
+    Route::get('/edit/email/service/{id}', 'SuperAdminController@email_money_edit');
+    Route::post('/update/email/fee', 'SuperAdminController@email_money_update');
 
 
 
@@ -170,6 +176,9 @@ use App\CustomerContact;
     Route::post('/send-sms-multi', 'CustomerController@sendSmsMulti');
     Route::get('/view/sms/data', 'CustomerController@sendSmsView');
     Route::get('/sms/system', 'CustomerController@sendSystem');
+
+    Route::get('/voice/mail', 'CustomerController@voiceSmsSystem');
+    
     Route::get('/email/system', 'CustomerController@emailSystem');
     Route::get('/campaign/system', 'CustomerController@campaignSystem');
     Route::get('/cash/system', 'CustomerController@cashSystem');
@@ -217,9 +226,11 @@ use App\CustomerContact;
     // Customer Chating
 
     Route::post('/chating', 'CRMController@customer_chating');
+    Route::get('/crm/list', 'CRMController@crm_list');
     Route::get('/registration', 'CRMController@registration');
     Route::post('/save/customer/information', 'CRMController@registration_save');
     Route::get('/customer/reg/info', 'CRMController@registration_info');
+    Route::get('/customer/chat/info', 'CRMController@customerChatInfo');
     Route::post('/customer/service/sms', 'CRMController@customer_service_sms');
     Route::post('/email/send/customer', 'CRMController@customer_service_email');
     Route::post('/alert/send', 'CRMController@customer_service_alert');
