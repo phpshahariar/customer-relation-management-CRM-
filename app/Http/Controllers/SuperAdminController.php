@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AdminLogin;
 use App\Background;
 use App\BodyBg;
+use App\Boost;
 use App\Campaign;
 use App\CampaignLow;
 use App\CashIn;
@@ -14,6 +15,7 @@ use App\CustomerAccess;
 use App\CustomerCampaign;
 use App\CustomerCashIn;
 use App\CustomerMail;
+use App\CustomerSendMoney;
 use App\EmailFee;
 use App\PaymentMethod;
 use App\Recharge;
@@ -224,6 +226,26 @@ class SuperAdminController extends Controller
         $customer_cashin_reject->status = 0;
         $customer_cashin_reject->save();
         return redirect()->back()->with('message', 'CashIn Request Pending');
+    }
+
+
+    public function customer_send_money(){
+        $customer_send_money = CustomerSendMoney::orderBy('id', 'desc')->get();
+        return view('admin.customer.send-list', compact('customer_send_money'));
+    }
+
+    public function customer_send_money_unblock($id){
+        $customer_block = CustomerSendMoney::find($id);
+        $customer_block->block_status = 0;
+        $customer_block->save();
+        return redirect()->back()->with('message', 'Customer Block');
+    }
+
+    public function customer_send_money_block($id){
+        $customer_block = CustomerSendMoney::find($id);
+        $customer_block->block_status = 1;
+        $customer_block->save();
+        return redirect()->back()->with('message', 'Customer Unblock');
     }
 
 
@@ -569,7 +591,8 @@ class SuperAdminController extends Controller
     public function sms_mail_money(){
         $fees = SetrviceFee::all();
         $email_fee = EmailFee::all();
-        return view('admin.customer.service-fee', compact('fees', 'email_fee'));
+        $boost_fee = Boost::all();
+        return view('admin.customer.service-fee', compact('boost_fee','fees', 'email_fee'));
     }
 
     public function sms_money_edit($id){

@@ -121,7 +121,9 @@ class CRMController extends Controller
             $chat->save();
             return redirect()->back()->with('message', 'Customer Info Update');
         } else {
+
             $reg_customer = new ChatRegister();
+
             $reg_customer->user_id = Auth::user()->id;
             $reg_customer->created_by = Auth::user()->name;
             $reg_customer->name = $request->name;
@@ -136,6 +138,10 @@ class CRMController extends Controller
             $reg_customer->customer_by = $request->customer_by;
             $reg_customer->chating = $request->chating;
             $reg_customer->save();
+
+            Session::put('name', $reg_customer->name);
+
+
             return redirect()->back()->with('message', 'New Customer Add Successfully');
         }
     }
@@ -219,10 +225,147 @@ class CRMController extends Controller
         ]);
 
         $service_alert = new Alert();
+
         $service_alert->user_id = Auth::user()->id;
         $service_alert->alert_date = $request->alert_date;
         $service_alert->message = $request->message;
+
+        return $service_alert;
         $service_alert->save();
+
         return redirect()->back()->with('message', 'Alert Create Successfully');
     }
+
+    public function crm_profile($id){
+
+        $profile = ChatRegister::find($id);
+
+        $customer_cash_request = CustomerCashIn::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign) {
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash) {
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+        $show_customer_cash_out = CashOut::where('user_id', Auth::user()->id)
+            ->where('status', 2)
+            ->get();
+        $cashOutMoney = 0;
+        foreach ($show_customer_cash_out as $customer_cash_out) {
+            $cashOutMoney = ($cashOutMoney + ($customer_cash_out->amount));
+        }
+
+        $totalCashOut = $customerCash - $cashOutMoney;
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)->get();
+        $show_crm = ChatRegister::all();
+        return view('customer.reg.profile', compact('profile','show_crm','totalCost', 'customer_access', 'totalCashOut'));
+    }
+
+    public function customer_service_alert_list(){
+
+
+        $customer_cash_request = CustomerCashIn::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign) {
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash) {
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+        $show_customer_cash_out = CashOut::where('user_id', Auth::user()->id)
+            ->where('status', 2)
+            ->get();
+        $cashOutMoney = 0;
+        foreach ($show_customer_cash_out as $customer_cash_out) {
+            $cashOutMoney = ($cashOutMoney + ($customer_cash_out->amount));
+        }
+
+        $totalCashOut = $customerCash - $cashOutMoney;
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)->get();
+        $show_crm = ChatRegister::all();
+        $alert_list = Alert::where('user_id', Auth::user()->id)->get();
+        return view('customer.reg.alert', compact('alert_list',
+            'show_crm','totalCost', 'customer_access', 'totalCashOut'));
+    }
+
+    public function customer_service_alert_clear($id){
+        $alert_clear = Alert::find($id);
+        $alert_clear->status = 0;
+        $alert_clear->save();
+        return redirect()->back()->with('message', 'Alert Create Successfully');
+    }
+
+    public function customer_service_alert_pending($id){
+        $alert_clear_pending = Alert::find($id);
+        $alert_clear_pending->status = 1;
+        $alert_clear_pending->save();
+        return redirect()->back()->with('message', 'Alert Create Successfully');
+    }
+
+//    public function crm_profile_alert($id){
+//
+//        $customer_cash_request = CustomerCashIn::where('user_id', Auth::user()->id)
+//            ->where('status', 1)
+//            ->get();
+//        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+//            ->where('status', 1)
+//            ->get();
+//
+//        $customerCampaign = 0;
+//        foreach ($customer_campaign_request as $customer_campaign) {
+//            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+//        }
+//
+//        $customerCash = 0;
+//        foreach ($customer_cash_request as $customer_cash) {
+//            $customerCash = ($customerCash + ($customer_cash->amount));
+//
+//        }
+//
+//        $show_customer_cash_out = CashOut::where('user_id', Auth::user()->id)
+//            ->where('status', 2)
+//            ->get();
+//        $cashOutMoney = 0;
+//        foreach ($show_customer_cash_out as $customer_cash_out) {
+//            $cashOutMoney = ($cashOutMoney + ($customer_cash_out->amount));
+//        }
+//
+//        $totalCashOut = $customerCash - $cashOutMoney;
+//
+//
+//        $totalCost = $customerCash - $customerCampaign;
+//        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)->get();
+//        $show_crm = ChatRegister::all();
+//        $alert_list = Alert::where('user_id', Auth::user()->id)->get();
+//        $profile = ChatRegister::find($id);
+//        return view('customer.reg.profiles', compact('profile','alert_list',
+//            'show_crm','totalCost', 'customer_access', 'totalCashOut'));
+//    }
 }

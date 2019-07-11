@@ -75,6 +75,9 @@ use App\CustomerContact;
     Route::get('/cashout/processing/{id}', 'SuperAdminController@customer_cash_out_processing');
     Route::get('/cashout/success/{id}', 'SuperAdminController@customer_cash_out_success');
     Route::get('/cashout/waiting/{id}', 'SuperAdminController@customer_cash_out_waiting');
+    Route::get('/customer/send/money', 'SuperAdminController@customer_send_money');
+    Route::get('/customer/unblock/{id}', 'SuperAdminController@customer_send_money_unblock');
+    Route::get('/customer/block/{id}', 'SuperAdminController@customer_send_money_block');
 
     Route::get('/campaign/low', 'SuperAdminController@campaign_low');
     Route::post('/save/campaign/low', 'SuperAdminController@campaign_low_save');
@@ -217,6 +220,7 @@ use App\CustomerContact;
     Route::get('/setting/option', 'CustomerController@customer_setting');
     Route::get('/edit/profile/{id}', 'CustomerController@edit_profile');
     Route::post('/update/setting', 'CustomerController@update_profile');
+    Route::get('/send/customer/group/boost', 'CustomerController@customer_boost');
 
     // Customer Registration
 
@@ -227,6 +231,8 @@ use App\CustomerContact;
 
     Route::post('/chating', 'CRMController@customer_chating');
     Route::get('/crm/list', 'CRMController@crm_list');
+    Route::get('/get/profile/{id}', 'CRMController@crm_profile');
+//    Route::get('/get/profile/{id}', 'CRMController@crm_profile_alert');
     Route::get('/registration', 'CRMController@registration');
     Route::post('/save/customer/information', 'CRMController@registration_save');
     Route::get('/customer/reg/info', 'CRMController@registration_info');
@@ -234,6 +240,9 @@ use App\CustomerContact;
     Route::post('/customer/service/sms', 'CRMController@customer_service_sms');
     Route::post('/email/send/customer', 'CRMController@customer_service_email');
     Route::post('/alert/send', 'CRMController@customer_service_alert');
+    Route::get('/alert/list', 'CRMController@customer_service_alert_list');
+    Route::get('/clear/alert/{id}', 'CRMController@customer_service_alert_clear');
+    Route::get('/pending/alert/{id}', 'CRMController@customer_service_alert_pending');
 
 
 //Reseller Api Route

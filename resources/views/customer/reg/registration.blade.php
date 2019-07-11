@@ -15,6 +15,25 @@
             <a class="btn btn-danger" href="{{ url('/home') }}">Back</a>
             <input type="text" name="phone_number"  class="form-control phone_number phone_number_chat" style="width: 300px; margin-left: 400px;" placeholder="Searching....">
         </nav>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-light" style="margin-top: 10px;">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item active">
+                        <a class="btn btn-info" style="margin-left: 30px;" data-toggle="modal" data-target="#smsModal" href="#">SMS</a>
+                    </li>
+                    <li class="nav-item" style="margin-left: 30px;">
+                        <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#emailModal">Email</a>
+                    </li>
+                    <li class="nav-item" style="margin-left: 30px;">
+                        <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#alertModal">Alert</a>
+                    </li>
+                    {{--                                            <li class="nav-item" style="margin-left: 30px;">--}}
+                    {{--                                                <a class="btn btn-warning" href="#" data-toggle="modal" data-target="#priorityModal">Priority</a>--}}
+                    {{--                                            </li>--}}
+                </ul>
+            </div>
+        </nav>
 {{--        <table>--}}
 {{--            <tr>--}}
 {{--                <td>--}}
@@ -51,27 +70,6 @@
 
 {{--                            <input type="hidden" name="phone_number" class="form-control" value="{{ Auth::user()->phone_number }}">--}}
 {{--                            <span style="color: red"> {{ $errors->has('chating') ? $errors->first('chating') : ' ' }}</span>--}}
-                            <nav class="navbar navbar-expand-lg navbar-dark bg-light" style="margin-top: 10px;">
-                                <div class="collapse navbar-collapse" id="navbarNav">
-                                    <ul class="navbar-nav mx-auto">
-                                        <li class="nav-item active">
-                                            <input type="submit" name="btn" class="btn btn-success" value="Send" style="width: 100px;">
-                                        </li>
-                                        <li class="nav-item active">
-                                            <a class="btn btn-info" style="margin-left: 30px;" data-toggle="modal" data-target="#smsModal" href="#">SMS</a>
-                                        </li>
-                                        <li class="nav-item" style="margin-left: 30px;">
-                                            <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#emailModal">Email</a>
-                                        </li>
-                                        <li class="nav-item" style="margin-left: 30px;">
-                                            <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#alertModal">Alert</a>
-                                        </li>
-                                        {{--                                            <li class="nav-item" style="margin-left: 30px;">--}}
-                                        {{--                                                <a class="btn btn-warning" href="#" data-toggle="modal" data-target="#priorityModal">Priority</a>--}}
-                                        {{--                                            </li>--}}
-                                    </ul>
-                                </div>
-                            </nav>
                             <br/>
                     </form>
                 </div>

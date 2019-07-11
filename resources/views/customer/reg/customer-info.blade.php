@@ -19,6 +19,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -28,6 +29,9 @@
                                     <td>{{ $show->name }}</td>
                                     <td>{{ $show->email_address }}</td>
                                     <td>{{ $show->phone }}</td>
+                                    <td style="text-align: center;">
+                                        <a href="{{ url('/get/profile/'.$show->id) }}" target="_blank" class="badge badge-success">Profile</a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -16,7 +16,7 @@
                             <th>Method Name</th>
                             <th>Method Description</th>
                             <th>Transaction  ID</th>
-                            <th>Note</th>
+                            <th>Amount</th>
                             <th>Images</th>
                             <th>Status</th>
                         </tr>

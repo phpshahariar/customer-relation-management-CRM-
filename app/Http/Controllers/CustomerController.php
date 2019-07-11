@@ -169,7 +169,8 @@ class CustomerController extends Controller
 
 
 
-        return view('customer.mail.create-email', compact('grandTotal','data','customer_access', 'show_group', 'show_contact', 'totalCost', 'totalCashOut'));
+        return view('customer.mail.create-email', compact('grandTotal','data','customer_access',
+            'show_group', 'show_contact', 'totalCost', 'totalCashOut'));
     }
 
 
@@ -776,9 +777,61 @@ class CustomerController extends Controller
         $customer_cash_in->amount = $request->amount;
         $customer_cash_in->user_account = $request->user_account;
         $customer_cash_in->user_id = $request->user_id;
+        $customer_cash_in->ac_number = $request->ac_number;
         $customer_cash_in->save();
+        Session::put('user_account', $customer_cash_in->user_account);
+        Session::put('ac_number', $customer_cash_in->ac_number);
+        Session::put('method_name', $customer_cash_in->method_name);
+        Session::put('amount', $customer_cash_in->amount);
+
+        $url = 'http://banglakingssoft.powersms.net.bd/httpapi/sendsms';
+        $fields = array(
+            'userId' => urlencode('banglakings'),
+            'password' => urlencode('bksoft2018'),
+            'smsText' => urlencode(view('customer.cash.notifi')),
+            'commaSeperatedReceiverNumbers' => '01708808380',
+        );
+
+        $fields_string = '';
+        foreach ($fields as $key => $value) {
+            $fields_string .= $key . '=' . $value . '&';
+
+        }
+        rtrim($fields_string, '&');
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        // If you have proxy
+        // $proxy = '<proxy-ip>:<proxy-port>';
+        // curl_setopt($ch, CURLOPT_PROXY, $proxy);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_POST, count($fields));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FAILONERROR, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($ch);
+        if ($result === false) {
+            echo sprintf('<span>%s</span>CURL error:', curl_error($ch));
+
+        } else {
+            echo sprintf("<p style='color:green;'>SUCCESS!</p>");
+        }
+        curl_close($ch);
+
+        $email = 'info@banglakings.com';
+        Mail::send('customer.cash.notifi',  ['user_account' => $request->user_account, 'amount' => $request->amount, 'user_id' => $request->user_id], function ($msg) use ($email, $request)
+        {
+            $msg->from('customerrelations863@gmail.com', 'CashIn');
+            $msg->subject('Send Form My CRM');
+            $msg->to($email);
+        });
+
+
         return redirect()->back()->with('message', 'Your Request Send To Admin');
     }
+
+
+
 
     public function customer_cashin_delete($id)
     {
@@ -843,6 +896,7 @@ class CustomerController extends Controller
         $customer_send_money->amount = $request->amount;
         $customer_send_money->user_id = $request->user_id;
         $customer_send_money->sender_id = Auth::user()->id;
+        $customer_send_money->sender_number = Auth::user()->account_number;
         $customer_send_money->account_number = $request->account_number;
         $customer_send_money->save();
         return redirect()->back()->with('message', 'Your Money has been Send Successfully. Please Wait Receiver Confirmation');
@@ -1576,5 +1630,78 @@ class CustomerController extends Controller
         $show_crm = ChatRegister::all();
         return view('customer.sms.voice-sms', compact('show_crm','totalCost', 'customer_access', 'totalCashOut'));
 
+    }
+
+
+    public function customer_boost(){
+        $customer_access = CustomerAccess::where('user_id', Auth::user()->id)
+            ->where('money_status', 1)
+            ->orWhere('crm_status', 1)
+            ->get();
+        $show_group = CustomerGroup::where('user_id', Auth::user()->id)->get();
+
+        $data = 0;
+        foreach ($show_group as $group){
+            $data = CustomerContact::where('group_id', $group->id)->get()->count();
+        }
+
+
+        $show_contact = CustomerContact::get();
+
+
+        $service_fee = SetrviceFee::get();
+
+        $service = 0;
+        foreach ($service_fee as $service_rate) {
+            $service = $service_rate->price;
+        }
+
+        $totalServiceFee =  $service*$data;
+
+        $customer_cash_request = CustomerCashIn::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+        $customer_campaign_request = CustomerCampaign::where('user_id', Auth::user()->id)
+            ->where('status', 1)
+            ->get();
+
+
+        $customerCampaign = 0;
+        foreach ($customer_campaign_request as $customer_campaign) {
+            $customerCampaign = ($customerCampaign + ($customer_campaign->amount));
+        }
+
+        $customerCash = 0;
+        foreach ($customer_cash_request as $customer_cash) {
+            $customerCash = ($customerCash + ($customer_cash->amount));
+
+        }
+
+        $show_customer_cash_out = CashOut::where('user_id', Auth::user()->id)
+            ->where('status', 2)
+            ->get();
+        $cashOutMoney = 0;
+        foreach ($show_customer_cash_out as $customer_cash_out) {
+            $cashOutMoney = ($cashOutMoney + ($customer_cash_out->amount));
+        }
+
+        $totalCashOut = $customerCash - $cashOutMoney;
+
+
+        $totalCost = $customerCash - $customerCampaign;
+        $grandTotal = $totalCashOut - $totalServiceFee;
+
+//        $fee = SetrviceFee::get();
+//        $sum = 0;
+//        foreach ($fee as $service_fee){
+//            $sum = ($sum + ($service_fee->price));
+//        }
+
+//        return $sum;
+
+
+
+        return view('customer.sms.create-boost', compact('service','grandTotal','data','customer_access',
+            'show_group', 'show_contact', 'totalCost', 'totalCashOut'));
     }
 }

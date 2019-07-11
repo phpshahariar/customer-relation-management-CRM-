@@ -39,8 +39,13 @@
                 <div class="col-md-6">
                     <div class="card mb-3">
                         <div class="card-header">
-                            <i class="fas fa-table"></i>
-                            All Group SMS</div>
+                            <form class="form-inline" style="margin-left: 20px;">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <input type="text" name="search" class="form-control" id="inputPassword2" placeholder="Searching....">
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2">Search</button>
+                            </form>
+                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

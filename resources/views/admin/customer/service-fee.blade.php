@@ -15,6 +15,7 @@
                             <th>SL</th>
                             <th>Service</th>
                             <th>SMS Fee</th>
+                            <th>Boost Fee</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -24,6 +25,9 @@
                                     <td>{{ $key+1 }}</td>
                                     <td>{{ $service->serviceFee }}</td>
                                     <td>TK.{{ number_format($service->price,2) }}</td>
+                                    @foreach($boost_fee as $fee)
+                                        <td>TK.{{ number_format($fee->price,2) }}</td>
+                                    @endforeach
                                     <td>
                                         <a href="{{ url('/edit/sms/service/'.$service->id) }}" class="btn btn-primary">Edit</a>
                                     </td>
@@ -46,6 +50,7 @@
                             <th>SL</th>
                             <th>Service</th>
                             <th>Email Fee</th>
+                            <th>Boost Fee</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -55,6 +60,9 @@
                                 <td>{{ $key+1 }}</td>
                                 <td>{{ $email->servicename }}</td>
                                 <td>TK.{{ number_format($email->price,2) }}</td>
+                                @foreach($boost_fee as $fee)
+                                    <td>TK.{{ number_format($fee->price,2) }}</td>
+                                @endforeach
                                 <td>
                                     <a href="{{ url('/edit/email/service/'.$email->id) }}" class="btn btn-primary">Edit</a>
                                 </td>

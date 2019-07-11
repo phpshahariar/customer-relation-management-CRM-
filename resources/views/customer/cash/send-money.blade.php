@@ -20,16 +20,21 @@
                         <form action="{{ url('/customer/send/money') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <input type="number" name="amount" required id="amount" class="form-control input" value="">
+                                <input type="number" name="amount" required id="amount" class="form-control input" placeholder="Enter Your Amount">
                                 <input type="hidden" name="main_amount"  id="main_amount" class="form-control input" value="{{$totalCashOut}}">
+                                <input type="hidden" name="transaction_id"  id="transaction_id" class="form-control input" value="{{ mt_rand(8, 600000000) }}">
                             </div>
 
                             <div class="form-group">
                                 <input type="number" name="account_number" required id="account_number" class="form-control" placeholder="account_number">
                             </div>
+
+                            <div class="form-group">
+                                <input type="hidden" name="sender_number" required id="sender_number" class="form-control" value="{{ Auth::user()->account_number }}">
+                            </div>
+
                             <div class="form-group">
                                 <input type="hidden" name="user_id" class="form-control user_id" placeholder="user_id">
-
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -59,8 +64,9 @@
                         <thead>
                         <tr style="text-align: center;">
                             <th>SL NO</th>
-                            <th>Name</th>
                             <th>Send Account</th>
+                            <span style="color: red"> {{ $errors->has('account_number') ? $errors->first('account_number') : ' ' }}</span>
+                            <th>Receiver Account</th>
                             <span style="color: red"> {{ $errors->has('account_number') ? $errors->first('account_number') : ' ' }}</span>
                             <th>Send Amount</th>
                             <span style="color: red"> {{ $errors->has('amount') ? $errors->first('amount') : ' ' }}</span>
@@ -71,8 +77,8 @@
                         @php($i = 0)
                             @foreach($customer_money_send as $money_send)
                               <tr style="text-align: center">
-                                <td>{{ $i++ }}</td>
-                                <td>{{ $money_send->customer_account->name }}</td>
+                                <td>{{ $money_send->transaction_id }}</td>
+                                <td>{{ $money_send->sender_number }}</td>
                                 <td>{{ $money_send->account_number }}</td>
                                 <td>TK. {{ number_format($money_send->amount,2) }}</td>
                                   <td>
@@ -80,6 +86,11 @@
                                         <p class="badge badge-success">Success</p>
                                       @else
                                         <p class="badge badge-danger">Pending</p>
+                                      @endif
+                                      @if($money_send->block_status == 1)
+                                         <p class="badge badge-danger">Block</p>
+                                      @else
+                                         <p class="badge badge-warning">Unblock</p>
                                       @endif
                                   </td>
                               </tr>

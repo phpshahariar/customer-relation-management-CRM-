@@ -43,6 +43,9 @@
                                 <input type="number"  name="user_account" class="form-control" placeholder="Enter Your Transaction ID...">
                             </div>
                             <div class="form-group">
+                                <input type="hidden"  name="ac_number" class="form-control" value="{{ Auth::user()->account_number }}">
+                            </div>
+                            <div class="form-group">
                                 <label>Amount : </label>
                                 <input type="number" name="amount" required id="amount" class="form-control" placeholder="Amount">
                                 <input type="hidden" value="{{ Auth::user()->id }}"  name="user_id" class="form-control">

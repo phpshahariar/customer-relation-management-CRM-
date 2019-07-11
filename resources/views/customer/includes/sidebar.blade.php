@@ -14,7 +14,8 @@
             <a class="dropdown-item" href="{!! url('/create/customer/sms') !!}">Create</a>
             <a class="dropdown-item" href="#">Inbox</a>
             <a class="dropdown-item" href="{!! url('/send/customer/sms/list') !!}">Send</a>
-            <a class="dropdown-item" href="{!! url('/send/customer/group/list') !!}">Group SMS</a>
+            <a class="dropdown-item" href="{!! url('/send/customer/group/list') !!}">Group List</a>
+            <a class="dropdown-item" href="{!! url('/send/customer/group/boost') !!}">Boost</a>
         </div>
     </li>
     <li class="nav-item dropdown">
@@ -92,7 +93,7 @@
         <div class="dropdown-menu" aria-labelledby="crmDropdown">
             <a class="dropdown-item" href="{{ url('/customer/registration') }}">Customer Service</a>
             <a class="dropdown-item" href="{{ url('/crm/list') }}">Customer List</a>
-            <a class="dropdown-item" href="#">Need Requirement</a>
+            <a class="dropdown-item" href="{{ url('/alert/list') }}">Alert List</a>
             <a class="dropdown-item" href="#">Need Requirement</a>
         </div>
     </li>

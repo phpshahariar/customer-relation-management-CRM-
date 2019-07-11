@@ -23,9 +23,14 @@
                                         <span style="color: red"> {{ $errors->has('sms') ? $errors->first('sms') : ' ' }}</span>
                                     </div>
                                     <div class="form-group">
-                                        <label>Enter Your Message : <p id="charNumTwo" style="font-weight: bold;">20 character</p></label>
-                                        <textarea name="message" onkeyup="charsCount(this);"  class="form-control" placeholder="Enter Your Message"></textarea>
-                                        <span style="color: red"> {{ $errors->has('message') ? $errors->first('message') : ' ' }}</span>
+                                        <form name="myform">
+                                            <textarea name="limitedtextarea" placeholder="Enter Your Message" class="form-control" rows="5" onKeyDown="limitText(this.form.limitedtextarea,this.form.countdown,160);"
+                                                      onKeyUp="limitText(this.form.limitedtextarea,this.form.countdown,160);">
+                                            </textarea>
+                                            <br>
+                                            <font size="2">(Maximum characters: 160)<br>
+                                                You have <input readonly type="text" name="countdown" size="3" value="160"> characters left.</font>
+                                        </form>
                                     </div>
                                     <div class="form-group">
                                         <input type="submit" name="btn" class="btn btn-success btn-block" value="Send" >
@@ -83,8 +88,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Enter Your Message : <p id="charNum" style="font-weight: bold;">20 character</p></label>
-                                        <textarea name="group_message" onkeyup="countChars(this);" class="form-control" placeholder="Enter Your Message"></textarea>
+                                        <form name="myform">
+                                            <textarea name="limitedtextarea" placeholder="Enter Your Message" class="form-control" rows="5" onKeyDown="limitText(this.form.limitedtextarea,this.form.countdown,160);"
+                                                      onKeyUp="limitText(this.form.limitedtextarea,this.form.countdown,160);">
+                                            </textarea>
+                                            <br>
+                                            <font size="2">(Maximum characters: 160)<br>
+                                                You have <input readonly type="text" name="countdown" size="3" value="160"> characters left.</font>
+                                        </form>
                                     </div>
 
                                     <div class="form-group">
@@ -98,18 +109,32 @@
             </div>
         </div>
     </div>
-    <script>
-        function countChars(obj) {
-            var maxLength = 20;
-            var strLength = obj.value.length;
-            var charRemain = (maxLength - strLength);
-            if (charRemain < 0) {
-                document.getElementById('charNum').innerHTML = '<span style="color:red;">You have exceeded the limit of '+maxLength+ '  characters </span>';
-            }else {
-                document.getElementById('charNum').innerHTML = charRemain + '  characters remaining ';
+{{--    <script>--}}
+{{--        function countChars(obj) {--}}
+{{--            var maxLength = 20;--}}
+{{--            var strLength = obj.value.length;--}}
+{{--            var charRemain = (maxLength - strLength);--}}
+{{--            if (charRemain < 0) {--}}
+{{--                document.getElementById('charNum').innerHTML = '<span style="color:red;">You have exceeded the limit of '+maxLength+ '  characters </span>';--}}
+{{--            }else {--}}
+{{--                document.getElementById('charNum').innerHTML = charRemain + '  characters remaining ';--}}
+{{--            }--}}
+{{--        }--}}
+{{--    </script>--}}
+
+    <script language="javascript" type="text/javascript">
+        function limitText(limitField, limitCount, limitNum) {
+            if (limitField.value.length > limitNum) {
+                limitField.value = limitField.value.substring(0, limitNum);
+            } else {
+                limitCount.value = limitNum - limitField.value.length;
             }
         }
     </script>
+
+
+
+
     <script>
         function charsCount(obj) {
             var maxLength = 20;
